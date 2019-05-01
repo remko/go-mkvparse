@@ -7,6 +7,7 @@ import (
 )
 
 type MyParser struct {
+	DefaultHandler
 }
 
 func (p *MyParser) HandleMasterBegin(id ElementID, info ElementInfo) (bool, error) {

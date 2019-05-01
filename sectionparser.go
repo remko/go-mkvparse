@@ -1,112 +1,53 @@
 package mkvparse
 
 import (
-	"encoding/binary"
-	"errors"
-	"io"
 	"os"
 	"time"
 )
 
-var abortErr = errors.New("abort")
-
 type sectionsHandler struct {
-	sections            map[ElementID]bool
-	seenSections        map[int64]bool
-	segmentInfo         ElementInfo
-	index               map[ElementID]int64
-	delegateHandler     Handler
-	inSeekHead          bool
-	currentSeekPosition int64
-	currentSeekID       ElementID
+	DefaultHandler
+
+	sections        map[ElementID]bool
+	delegateHandler Handler
 }
 
 func (p *sectionsHandler) HandleMasterBegin(id ElementID, info ElementInfo) (bool, error) {
-	if id == SegmentElement {
-		p.segmentInfo = info
-		return p.delegateHandler.HandleMasterBegin(id, info)
-	} else if info.Level <= 1 {
-		if id == SeekHeadElement {
-			p.index = make(map[ElementID]int64)
-			p.inSeekHead = true
-			return true, nil
-		} else if p.sections[id] && !p.seenSections[info.Offset] {
-			return p.delegateHandler.HandleMasterBegin(id, info)
-		} else {
-			return false, nil
-		}
-	} else if p.inSeekHead {
-		return true, nil
-	} else {
+	_, ok := p.sections[id]
+	if ok {
 		return p.delegateHandler.HandleMasterBegin(id, info)
 	}
+
+	return false, nil
 }
 
 func (p *sectionsHandler) HandleMasterEnd(id ElementID, info ElementInfo) error {
-	if id == SegmentElement {
-		return p.delegateHandler.HandleMasterEnd(id, info)
-	} else if info.Level <= 1 {
-		if id == SeekHeadElement {
-			return abortErr
-		} else if p.sections[id] && !p.seenSections[info.Offset] {
-			p.seenSections[info.Offset] = true
-			return p.delegateHandler.HandleMasterEnd(id, info)
-		}
-	} else if p.inSeekHead {
-		if id == SeekElement {
-			p.index[p.currentSeekID] = p.segmentInfo.Offset + p.currentSeekPosition
-		}
-		return nil
-	} else {
+	_, ok := p.sections[id]
+	if ok {
 		return p.delegateHandler.HandleMasterEnd(id, info)
 	}
+
 	return nil
 }
 
 func (p *sectionsHandler) HandleString(id ElementID, value string, info ElementInfo) error {
-	if p.inSeekHead {
-		return nil
-	} else {
-		return p.delegateHandler.HandleString(id, value, info)
-	}
+	return p.delegateHandler.HandleString(id, value, info)
 }
 
 func (p *sectionsHandler) HandleInteger(id ElementID, value int64, info ElementInfo) error {
-	if p.inSeekHead {
-		if id == SeekPositionElement {
-			p.currentSeekPosition = value
-		}
-		return nil
-	} else {
-		return p.delegateHandler.HandleInteger(id, value, info)
-	}
+	return p.delegateHandler.HandleInteger(id, value, info)
 }
 
 func (p *sectionsHandler) HandleFloat(id ElementID, value float64, info ElementInfo) error {
-	if p.inSeekHead {
-		return nil
-	} else {
-		return p.delegateHandler.HandleFloat(id, value, info)
-	}
+	return p.delegateHandler.HandleFloat(id, value, info)
 }
 
 func (p *sectionsHandler) HandleDate(id ElementID, value time.Time, info ElementInfo) error {
-	if p.inSeekHead {
-		return nil
-	} else {
-		return p.delegateHandler.HandleDate(id, value, info)
-	}
+	return p.delegateHandler.HandleDate(id, value, info)
 }
 
 func (p *sectionsHandler) HandleBinary(id ElementID, value []byte, info ElementInfo) error {
-	if p.inSeekHead {
-		if id == SeekIDElement {
-			p.currentSeekID = ElementID(binary.BigEndian.Uint64(pad(value, 8)))
-		}
-		return nil
-	} else {
-		return p.delegateHandler.HandleBinary(id, value, info)
-	}
+	return p.delegateHandler.HandleBinary(id, value, info)
 }
 
 // Parses only the given sections of `file`.
@@ -114,33 +55,25 @@ func (p *sectionsHandler) HandleBinary(id ElementID, value []byte, info ElementI
 // When present, uses the seek index to avoid having to parse the entire file
 func ParseSections(file *os.File, sections []ElementID, handler Handler) error {
 	sectionsHandler := sectionsHandler{
-		sections:        make(map[ElementID]bool),
-		seenSections:    make(map[int64]bool),
+		sections:        map[ElementID]bool{},
 		delegateHandler: handler,
 	}
+
+	tmp := map[ElementID]bool{}
+
 	for _, section := range sections {
-		sectionsHandler.sections[section] = true
+		tmp[section] = true
 	}
 
-	// First pass
-	err := Parse(file, &sectionsHandler)
-	if err == abortErr {
-		// Second pass
-		for _, section := range sections {
-			sectionOffset, ok := sectionsHandler.index[section]
-			if ok && !sectionsHandler.seenSections[sectionOffset] {
-				if _, err := file.Seek(sectionOffset, io.SeekStart); err != nil {
-					return err
-				}
-				if _, err = parseElement(file, sectionOffset, 1, handler); err != nil {
-					return err
-				}
-				sectionsHandler.seenSections[sectionOffset] = true
-			}
+	for k, _ := range tmp {
+		sectionsHandler.sections[k] = true
+
+		parents := ParentsForElementID(k)
+
+		for _, p := range parents {
+			sectionsHandler.sections[p] = true
 		}
-		return handler.HandleMasterEnd(SegmentElement, sectionsHandler.segmentInfo)
-	} else if err != nil {
-		return err
 	}
-	return nil
+
+	return Parse(file, &sectionsHandler)
 }

@@ -8,6 +8,7 @@ import (
 )
 
 type myTitleParser struct {
+	DefaultHandler
 }
 
 func (p *myTitleParser) HandleMasterBegin(id ElementID, info ElementInfo) (bool, error) {
@@ -42,15 +43,18 @@ func (p *myTitleParser) HandleBinary(id ElementID, value []byte, info ElementInf
 }
 
 func ExampleParseSections() {
-	handler := myTitleParser{}
 	file, err := os.Open("example.mkv")
 	if err != nil {
 		log.Fatalf("%v", err)
 	}
 	defer file.Close()
+
+	handler := myTitleParser{}
+
 	if err = ParseSections(file, []ElementID{InfoElement}, &handler); err != nil {
 		log.Fatalf("%v", err)
 	}
+
 	// Output:
 	// Title: Awesome Movie
 }

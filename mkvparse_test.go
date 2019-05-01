@@ -2,6 +2,8 @@ package mkvparse
 
 import (
 	"bytes"
+	"fmt"
+	"io"
 	"testing"
 	"time"
 )
@@ -64,10 +66,13 @@ type MasterBeginEvent struct{}
 type MasterEndEvent struct{}
 
 type ParseHandler struct {
+	DefaultHandler
+
 	events []ParseEvent
 }
 
 func (p *ParseHandler) HandleMasterBegin(id ElementID, info ElementInfo) (bool, error) {
+	fmt.Printf("%s\n", NameForElementID(id))
 	p.events = append(p.events, ParseEvent{id, info, MasterBeginEvent{}})
 	return true, nil
 }
@@ -102,6 +107,15 @@ func (p *ParseHandler) HandleBinary(id ElementID, value []byte, info ElementInfo
 	return nil
 }
 
+func (p *ParseHandler) HandleParseError(reader io.Reader, err *ParseError) *ParseError {
+	_, ok := err.Err.(*InvalidElementError)
+	if ok {
+		return nil
+	}
+
+	return err
+}
+
 type ParseTest struct {
 	data  []byte
 	event ParseEvent
@@ -122,19 +136,21 @@ func TestParseElement(t *testing.T) {
 			},
 		},
 	}
+
 	for name, test := range tests {
 		reader := bytes.NewReader(test.data)
+
 		handler := ParseHandler{}
-		count, err := parseElement(reader, 0, 0, &handler)
+
+		err := Parse(reader, &handler)
 		if err != nil {
 			t.Errorf("%s: %v", name, err)
 		}
-		if count != int64(len(test.data)) {
-			t.Errorf("%s: %d != %d. Data: %v", name, count, len(test.data), test.data)
-		}
+
 		if len(handler.events) != 1 {
 			t.Errorf("%s: Invalid event count: %d", name, len(handler.events))
 		}
+
 		if test.event != handler.events[0] {
 			t.Errorf("%s: Invalid event: %v != %v", name, test.event, handler.events[0])
 		}
