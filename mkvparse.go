@@ -142,7 +142,7 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 			} else if size == 8 {
 				value = math.Float64frombits(binary.BigEndian.Uint64(data))
 			} else {
-				return -1, fmt.Errorf("Unexpected float size: %d", size)
+				return -1, fmt.Errorf("unexpected float size: %d", size)
 			}
 			handler.HandleFloat(id, value, info)
 		case dateType:

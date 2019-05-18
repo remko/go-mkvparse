@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-var abortErr = errors.New("abort")
+var errAbort = errors.New("abort")
 
 type sectionsHandler struct {
 	sections            map[ElementID]bool
@@ -47,7 +47,7 @@ func (p *sectionsHandler) HandleMasterEnd(id ElementID, info ElementInfo) error 
 		return p.delegateHandler.HandleMasterEnd(id, info)
 	} else if info.Level <= 1 {
 		if id == SeekHeadElement {
-			return abortErr
+			return errAbort
 		} else if p.sections[id] && !p.seenSections[info.Offset] {
 			p.seenSections[info.Offset] = true
 			return p.delegateHandler.HandleMasterEnd(id, info)
@@ -124,7 +124,7 @@ func ParseSections(file *os.File, sections []ElementID, handler Handler) error {
 
 	// First pass
 	err := Parse(file, &sectionsHandler)
-	if err == abortErr {
+	if err == errAbort {
 		// Second pass
 		for _, section := range sections {
 			sectionOffset, ok := sectionsHandler.index[section]
