@@ -73,7 +73,7 @@ func run() error {
 	}
 	defer file.Close()
 	h := handler{}
-	if err := mkvparse.ParseSections(file, []mkvparse.ElementID{mkvparse.AttachmentsElement}, &h); err != nil {
+	if err := mkvparse.ParseSections(file, &h, mkvparse.AttachmentsElement); err != nil {
 		return err
 	}
 	if len(h.cover) == 0 {

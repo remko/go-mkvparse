@@ -77,7 +77,7 @@ func main() {
 	handler := MyParser{
 		tags: make(map[string]string),
 	}
-	err = mkvparse.ParseSections(file, []mkvparse.ElementID{mkvparse.InfoElement, mkvparse.TagsElement}, &handler)
+	err = mkvparse.ParseSections(file, &handler, mkvparse.InfoElement, mkvparse.TagsElement)
 	if err != nil {
 		fmt.Printf("%v", err)
 		os.Exit(-1)

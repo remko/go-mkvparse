@@ -125,7 +125,7 @@ func parseFile(path string) (*MediaFile, error) {
 			duration: -1,
 		},
 	}
-	err = mkvparse.ParseSections(file, []mkvparse.ElementID{mkvparse.InfoElement, mkvparse.TagsElement, mkvparse.TracksElement, mkvparse.AttachmentsElement}, &handler)
+	err = mkvparse.ParseSections(file, &handler, mkvparse.InfoElement, mkvparse.TagsElement, mkvparse.TracksElement, mkvparse.AttachmentsElement)
 	if err != nil {
 		return nil, err
 	}

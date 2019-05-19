@@ -48,7 +48,7 @@ func ExampleParseSections() {
 		log.Fatalf("%v", err)
 	}
 	defer file.Close()
-	if err = ParseSections(file, []ElementID{InfoElement}, &handler); err != nil {
+	if err = ParseSections(file, &handler, InfoElement); err != nil {
 		log.Fatalf("%v", err)
 	}
 	// Output:
