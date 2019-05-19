@@ -1,6 +1,7 @@
 //go:generate go run generate.go
 
-// Provides push-style parser functions for parsing Matroska (`.mkv`, `.mka`) files.
+// Package mkvparse provides push-style parser functions for parsing Matroska
+// (`.mkv`, `.mka`) files.
 package mkvparse
 
 import (
@@ -16,7 +17,11 @@ import (
 // Types
 ////////////////////////////////////////////////////////////////////////////////
 
+// ElementID represents the EBML ID of an element.
+// The supported EBML IDs are documented in the Matroska specification:
+// https://www.matroska.org/technical/specs/index.html
 type ElementID int64
+
 type elementType int
 
 const (
@@ -31,13 +36,15 @@ const (
 	masterType
 )
 
+// ElementInfo contains information about an element encountered in
+// the stream, and is passed to the handler by the parser on parse events.
 type ElementInfo struct {
 	Offset int64
 	Size   int64
 	Level  int
 }
 
-// Interface for handling parse events
+// Handler declares an interface for handling parse events
 type Handler interface {
 	// Return `true` to descend into the element, `false` to skip this element's children.
 	HandleMasterBegin(ElementID, ElementInfo) (bool, error)

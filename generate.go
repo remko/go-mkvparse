@@ -58,7 +58,7 @@ package mkvparse
 // Supported ElementIDs
 const (
 	{{- range .Elements }}
-	{{ .Name }}Element = {{ .ID -}}
+	{{ .Name }}Element ElementID = {{ .ID -}}
 	{{end }}
 )
 
