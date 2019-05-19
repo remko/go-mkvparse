@@ -1,4 +1,5 @@
 specdata.xml
-mkvinfo
-mkvtags
-mkvdir2mrss
+examples/mkvinfo/mkvinfo
+examples/mkvcover/mkvcover
+examples/mkvtags/mkvtags
+examples/mkvdir2mrss/mkvdir2mrss
