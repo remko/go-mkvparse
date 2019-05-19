@@ -94,6 +94,7 @@ const (
 	MaxBlockAdditionIDElement = 0x55EE
 	NameElement = 0x536E
 	LanguageElement = 0x22B59C
+	LanguageIETFElement = 0x22B59D
 	CodecIDElement = 0x86
 	CodecPrivateElement = 0x63A2
 	CodecNameElement = 0x258688
@@ -153,6 +154,12 @@ const (
 	WhitePointChromaticityYElement = 0x55D8
 	LuminanceMaxElement = 0x55D9
 	LuminanceMinElement = 0x55DA
+	ProjectionElement = 0x7670
+	ProjectionTypeElement = 0x7671
+	ProjectionPrivateElement = 0x7672
+	ProjectionPoseYawElement = 0x7673
+	ProjectionPosePitchElement = 0x7674
+	ProjectionPoseRollElement = 0x7675
 	AudioElement = 0xE1
 	SamplingFrequencyElement = 0xB5
 	OutputSamplingFrequencyElement = 0x78B5
@@ -182,6 +189,8 @@ const (
 	ContentEncryptionElement = 0x5035
 	ContentEncAlgoElement = 0x47E1
 	ContentEncKeyIDElement = 0x47E2
+	ContentEncAESSettingsElement = 0x47E7
+	AESSettingsCipherModeElement = 0x47E8
 	ContentSignatureElement = 0x47E3
 	ContentSigKeyIDElement = 0x47E4
 	ContentSigAlgoElement = 0x47E5
@@ -232,6 +241,7 @@ const (
 	ChapterDisplayElement = 0x80
 	ChapStringElement = 0x85
 	ChapLanguageElement = 0x437C
+	ChapLanguageIETFElement = 0x437D
 	ChapCountryElement = 0x437E
 	ChapProcessElement = 0x6944
 	ChapProcessCodecIDElement = 0x6955
@@ -251,12 +261,13 @@ const (
 	SimpleTagElement = 0x67C8
 	TagNameElement = 0x45A3
 	TagLanguageElement = 0x447A
+	TagLanguageIETFElement = 0x447B
 	TagDefaultElement = 0x4484
 	TagStringElement = 0x4487
 	TagBinaryElement = 0x4485
 )
 
-var elementTypes = map[ElementID]ElementType {
+var elementTypes = map[ElementID]elementType {
 	EBMLElement:masterType,
 	EBMLVersionElement:uintegerType,
 	EBMLReadVersionElement:uintegerType,
@@ -347,6 +358,7 @@ var elementTypes = map[ElementID]ElementType {
 	MaxBlockAdditionIDElement:uintegerType,
 	NameElement:utf8Type,
 	LanguageElement:stringType,
+	LanguageIETFElement:stringType,
 	CodecIDElement:stringType,
 	CodecPrivateElement:binaryType,
 	CodecNameElement:utf8Type,
@@ -406,6 +418,12 @@ var elementTypes = map[ElementID]ElementType {
 	WhitePointChromaticityYElement:floatType,
 	LuminanceMaxElement:floatType,
 	LuminanceMinElement:floatType,
+	ProjectionElement:masterType,
+	ProjectionTypeElement:uintegerType,
+	ProjectionPrivateElement:binaryType,
+	ProjectionPoseYawElement:floatType,
+	ProjectionPosePitchElement:floatType,
+	ProjectionPoseRollElement:floatType,
 	AudioElement:masterType,
 	SamplingFrequencyElement:floatType,
 	OutputSamplingFrequencyElement:floatType,
@@ -435,6 +453,8 @@ var elementTypes = map[ElementID]ElementType {
 	ContentEncryptionElement:masterType,
 	ContentEncAlgoElement:uintegerType,
 	ContentEncKeyIDElement:binaryType,
+	ContentEncAESSettingsElement:masterType,
+	AESSettingsCipherModeElement:uintegerType,
 	ContentSignatureElement:binaryType,
 	ContentSigKeyIDElement:binaryType,
 	ContentSigAlgoElement:uintegerType,
@@ -485,6 +505,7 @@ var elementTypes = map[ElementID]ElementType {
 	ChapterDisplayElement:masterType,
 	ChapStringElement:utf8Type,
 	ChapLanguageElement:stringType,
+	ChapLanguageIETFElement:stringType,
 	ChapCountryElement:stringType,
 	ChapProcessElement:masterType,
 	ChapProcessCodecIDElement:uintegerType,
@@ -504,6 +525,7 @@ var elementTypes = map[ElementID]ElementType {
 	SimpleTagElement:masterType,
 	TagNameElement:utf8Type,
 	TagLanguageElement:stringType,
+	TagLanguageIETFElement:stringType,
 	TagDefaultElement:uintegerType,
 	TagStringElement:utf8Type,
 	TagBinaryElement:binaryType,}
@@ -599,6 +621,7 @@ var elementNames = map[ElementID]string {
 	MaxBlockAdditionIDElement: "MaxBlockAdditionID",
 	NameElement: "Name",
 	LanguageElement: "Language",
+	LanguageIETFElement: "LanguageIETF",
 	CodecIDElement: "CodecID",
 	CodecPrivateElement: "CodecPrivate",
 	CodecNameElement: "CodecName",
@@ -658,6 +681,12 @@ var elementNames = map[ElementID]string {
 	WhitePointChromaticityYElement: "WhitePointChromaticityY",
 	LuminanceMaxElement: "LuminanceMax",
 	LuminanceMinElement: "LuminanceMin",
+	ProjectionElement: "Projection",
+	ProjectionTypeElement: "ProjectionType",
+	ProjectionPrivateElement: "ProjectionPrivate",
+	ProjectionPoseYawElement: "ProjectionPoseYaw",
+	ProjectionPosePitchElement: "ProjectionPosePitch",
+	ProjectionPoseRollElement: "ProjectionPoseRoll",
 	AudioElement: "Audio",
 	SamplingFrequencyElement: "SamplingFrequency",
 	OutputSamplingFrequencyElement: "OutputSamplingFrequency",
@@ -687,6 +716,8 @@ var elementNames = map[ElementID]string {
 	ContentEncryptionElement: "ContentEncryption",
 	ContentEncAlgoElement: "ContentEncAlgo",
 	ContentEncKeyIDElement: "ContentEncKeyID",
+	ContentEncAESSettingsElement: "ContentEncAESSettings",
+	AESSettingsCipherModeElement: "AESSettingsCipherMode",
 	ContentSignatureElement: "ContentSignature",
 	ContentSigKeyIDElement: "ContentSigKeyID",
 	ContentSigAlgoElement: "ContentSigAlgo",
@@ -737,6 +768,7 @@ var elementNames = map[ElementID]string {
 	ChapterDisplayElement: "ChapterDisplay",
 	ChapStringElement: "ChapString",
 	ChapLanguageElement: "ChapLanguage",
+	ChapLanguageIETFElement: "ChapLanguageIETF",
 	ChapCountryElement: "ChapCountry",
 	ChapProcessElement: "ChapProcess",
 	ChapProcessCodecIDElement: "ChapProcessCodecID",
@@ -756,6 +788,7 @@ var elementNames = map[ElementID]string {
 	SimpleTagElement: "SimpleTag",
 	TagNameElement: "TagName",
 	TagLanguageElement: "TagLanguage",
+	TagLanguageIETFElement: "TagLanguageIETF",
 	TagDefaultElement: "TagDefault",
 	TagStringElement: "TagString",
 	TagBinaryElement: "TagBinary",}

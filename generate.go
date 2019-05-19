@@ -62,7 +62,7 @@ const (
 	{{end }}
 )
 
-var elementTypes = map[ElementID]ElementType {
+var elementTypes = map[ElementID]elementType {
 	{{- range .Elements }}
 	{{ .Name }}Element: 
 		{{- if eq .Type "master" -}}
