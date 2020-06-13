@@ -105,6 +105,7 @@ func (p *ParseHandler) HandleBinary(id ElementID, value []byte, info ElementInfo
 type ParseTest struct {
 	data  []byte
 	event ParseEvent
+	fail  bool // error is expected
 }
 
 func TestParseElement(t *testing.T) {
@@ -120,23 +121,37 @@ func TestParseElement(t *testing.T) {
 				},
 				time.Date(1980, time.January, 21, 21, 03, 0, 0, time.UTC),
 			},
+			false,
+		},
+		// Avoid panicking with a too-large slice allocation when an element claims a
+		// very large size: https://github.com/remko/go-mkvparse/issues/4
+		"excessive size": {
+			[]byte{0xa3, 0x01, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x01, 0x02, 0x03, 0x04},
+			ParseEvent{},
+			true,
 		},
 	}
 	for name, test := range tests {
 		reader := bytes.NewReader(test.data)
 		handler := ParseHandler{}
 		count, err := parseElement(reader, 0, 0, &handler)
-		if err != nil {
-			t.Errorf("%s: %v", name, err)
-		}
-		if count != int64(len(test.data)) {
-			t.Errorf("%s: %d != %d. Data: %v", name, count, len(test.data), test.data)
-		}
-		if len(handler.events) != 1 {
-			t.Errorf("%s: Invalid event count: %d", name, len(handler.events))
-		}
-		if test.event != handler.events[0] {
-			t.Errorf("%s: Invalid event: %v != %v", name, test.event, handler.events[0])
+		if test.fail {
+			if err == nil {
+				t.Errorf("%s: Unexpectedly succeeded", name)
+			}
+		} else {
+			if err != nil {
+				t.Errorf("%s: %v", name, err)
+			}
+			if count != int64(len(test.data)) {
+				t.Errorf("%s: %d != %d. Data: %v", name, count, len(test.data), test.data)
+			}
+			if len(handler.events) != 1 {
+				t.Errorf("%s: Invalid event count: %d", name, len(handler.events))
+			}
+			if test.event != handler.events[0] {
+				t.Errorf("%s: Invalid event: %v != %v", name, test.event, handler.events[0])
+			}
 		}
 	}
 }
