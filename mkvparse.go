@@ -5,6 +5,7 @@
 package mkvparse
 
 import (
+	"bytes"
 	"encoding/binary"
 	"fmt"
 	"io"
@@ -121,8 +122,9 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 				return -1, err
 			}
 		} else {
-			data := make([]byte, size)
-			reader.Read(data)
+			if _, err := readData(reader, size); err != nil {
+				return -1, err
+			}
 		}
 		err = handler.HandleMasterEnd(id, info)
 		if err != nil {
@@ -130,8 +132,10 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 		}
 		return count, nil
 	} else {
-		data := make([]byte, size)
-		reader.Read(data)
+		data, err := readData(reader, size)
+		if err != nil {
+			return -1, err
+		}
 
 		switch typ {
 		case uintegerType:
@@ -173,6 +177,18 @@ func NameForElementID(id ElementID) string {
 ////////////////////////////////////////////////////////////////////////////////
 
 var baseDate = time.Date(2001, time.January, 1, 0, 0, 0, 0, time.UTC)
+
+// readData reads and returns size bytes from r.
+// An error is returned if EOF is encountered before the requested bytes have been read.
+func readData(r io.Reader, size int64) ([]byte, error) {
+	// Use bytes.Buffer to avoid allocating the full size until needed:
+	// https://github.com/remko/go-mkvparse/issues/4
+	var buf bytes.Buffer
+	if _, err := io.CopyN(&buf, r, size); err != nil {
+		return nil, err
+	}
+	return buf.Bytes(), nil
+}
 
 func convertBytesToSignedInt(data []byte) int64 {
 	if data[0] >= 0x80 {
