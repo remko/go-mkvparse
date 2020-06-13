@@ -9,6 +9,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"math"
 	"os"
 	"time"
@@ -122,7 +123,7 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 				return -1, err
 			}
 		} else {
-			if _, err := readData(reader, size); err != nil {
+			if _, err := io.CopyN(ioutil.Discard, reader, size); err != nil {
 				return -1, err
 			}
 		}
