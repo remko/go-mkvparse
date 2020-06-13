@@ -123,6 +123,20 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 				return -1, err
 			}
 		} else {
+
+			// Could probably be made more efficient using the code below.
+			// Write tests for this first
+			// switch reader := reader.(type) {
+			// case io.Seeker:
+			// 	if _, err := reader.Seek(size, io.SeekCurrent); err != nil {
+			// 		return -1, err
+			// 	}
+			// default:
+			// 	if _, err := io.CopyN(ioutil.Discard, reader, size); err != nil {
+			// 		return -1, err
+			// 	}
+			// }
+
 			if _, err := io.CopyN(ioutil.Discard, reader, size); err != nil {
 				return -1, err
 			}
