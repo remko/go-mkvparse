@@ -31,6 +31,14 @@ func TestReadVarInt_2Encodings(t *testing.T) {
 	}
 }
 
+func TestReadVarInt_ZeroLength(t *testing.T) {
+	reader := bytes.NewReader([]byte{0x0})
+	_, _, err := readVarInt(reader)
+	if err == nil {
+		t.Fatalf("unexpected success")
+	}
+}
+
 func TestReadElementID(t *testing.T) {
 	testIDs := map[ElementID][]byte{
 		TimecodeElement:        {0xE7},

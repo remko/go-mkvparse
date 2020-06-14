@@ -270,6 +270,8 @@ func readVarIntRaw(reader io.Reader, doMask bool) (int64, int64, error) {
 	} else if ((b[0] & 0x01) >> 0) == 1 {
 		length = 8
 		mask = 0x0
+	} else {
+		return -1, -1, fmt.Errorf("invalid varint length")
 	}
 
 	result := make([]byte, 8)
