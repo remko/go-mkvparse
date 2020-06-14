@@ -123,22 +123,15 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 				return -1, err
 			}
 		} else {
-
-			// Could probably be made more efficient using the code below.
-			// Write tests for this first
-			// switch reader := reader.(type) {
-			// case io.Seeker:
-			// 	if _, err := reader.Seek(size, io.SeekCurrent); err != nil {
-			// 		return -1, err
-			// 	}
-			// default:
-			// 	if _, err := io.CopyN(ioutil.Discard, reader, size); err != nil {
-			// 		return -1, err
-			// 	}
-			// }
-
-			if _, err := io.CopyN(ioutil.Discard, reader, size); err != nil {
-				return -1, err
+			switch reader := reader.(type) {
+			case io.Seeker:
+				if _, err := reader.Seek(size, io.SeekCurrent); err != nil {
+					return -1, err
+				}
+			default:
+				if _, err := io.CopyN(ioutil.Discard, reader, size); err != nil {
+					return -1, err
+				}
 			}
 		}
 		err = handler.HandleMasterEnd(id, info)
@@ -182,7 +175,7 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 func NameForElementID(id ElementID) string {
 	name, ok := elementNames[id]
 	if !ok {
-		return "UNKNOWN"
+		return fmt.Sprintf("UNKNOWN:%x", id)
 	}
 	return name
 }
