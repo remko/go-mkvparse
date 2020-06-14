@@ -123,15 +123,8 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 				return -1, err
 			}
 		} else {
-			switch reader := reader.(type) {
-			case io.Seeker:
-				if _, err := reader.Seek(size, io.SeekCurrent); err != nil {
-					return -1, err
-				}
-			default:
-				if _, err := io.CopyN(ioutil.Discard, reader, size); err != nil {
-					return -1, err
-				}
+			if err := skipData(reader, size); err != nil {
+				return -1, err
 			}
 		}
 		err = handler.HandleMasterEnd(id, info)
@@ -196,6 +189,16 @@ func readData(r io.Reader, size int64) ([]byte, error) {
 		return nil, err
 	}
 	return buf.Bytes(), nil
+}
+
+func skipData(reader io.Reader, size int64) (err error) {
+	switch reader := reader.(type) {
+	case io.Seeker:
+		_, err = reader.Seek(size, io.SeekCurrent)
+	default:
+		_, err = io.CopyN(ioutil.Discard, reader, size)
+	}
+	return
 }
 
 func convertBytesToSignedInt(data []byte) int64 {
