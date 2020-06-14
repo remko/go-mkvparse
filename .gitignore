@@ -1,4 +1,6 @@
+.DS_Store
 specdata.xml
+coverage.out
 examples/mkvinfo/mkvinfo
 examples/mkvcover/mkvcover
 examples/mkvtags/mkvtags

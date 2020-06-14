@@ -133,21 +133,24 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 		}
 		return count, nil
 	} else {
-		data, err := readData(reader, size)
-		if err != nil {
-			return -1, err
-		}
-
 		switch typ {
 		case uintegerType:
+			data, err := readDataN(reader, size, 8)
+			if err != nil {
+				return -1, err
+			}
 			handler.HandleInteger(id, int64(binary.BigEndian.Uint64(pad(data, 8))), info)
 		case integerType:
+			data, err := readDataN(reader, size, 8)
+			if err != nil {
+				return -1, err
+			}
 			handler.HandleInteger(id, convertBytesToSignedInt(data), info)
-		case binaryType:
-			handler.HandleBinary(id, data, info)
-		case stringType, utf8Type:
-			handler.HandleString(id, string(unpadString(data)), info)
 		case floatType:
+			data, err := readDataN(reader, size, 8)
+			if err != nil {
+				return -1, err
+			}
 			var value float64
 			if size == 4 {
 				value = float64(math.Float32frombits(binary.BigEndian.Uint32(data)))
@@ -158,7 +161,23 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 			}
 			handler.HandleFloat(id, value, info)
 		case dateType:
+			data, err := readDataN(reader, size, 8)
+			if err != nil {
+				return -1, err
+			}
 			handler.HandleDate(id, baseDate.Add(time.Duration(convertBytesToSignedInt(data))), info)
+		case binaryType:
+			data, err := readData(reader, size)
+			if err != nil {
+				return -1, err
+			}
+			handler.HandleBinary(id, data, info)
+		case stringType, utf8Type:
+			data, err := readData(reader, size)
+			if err != nil {
+				return -1, err
+			}
+			handler.HandleString(id, string(unpadString(data)), info)
 		}
 		return count, nil
 	}
@@ -189,6 +208,16 @@ func readData(r io.Reader, size int64) ([]byte, error) {
 		return nil, err
 	}
 	return buf.Bytes(), nil
+}
+
+// Read data with a limited size
+func readDataN(reader io.Reader, size int64, limit int64) ([]byte, error) {
+	if size > limit {
+		return nil, fmt.Errorf("data too large: %d > %d", size, limit)
+	}
+	data := make([]byte, size)
+	_, err := reader.Read(data)
+	return data, err
 }
 
 func skipData(reader io.Reader, size int64) (err error) {
