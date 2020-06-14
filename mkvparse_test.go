@@ -237,13 +237,24 @@ func TestParseMaster_Skips(t *testing.T) {
 		handler := ParseHandler{skipDescend: true}
 		count, err := parseElement(reader, 0, 0, &handler)
 		if err != nil {
-			t.Fatalf("%v", err)
+			t.Errorf("%v", err)
+			continue
 		}
 		if count != int64(len(data)) {
-			t.Fatalf("Invalid #bytes read: %d != %d. Data: %v", count, len(data), data)
+			t.Errorf("Invalid #bytes read: %d != %d. Data: %v", count, len(data), data)
 		}
 		if !reflect.DeepEqual(expectedEvents, handler.events) {
-			t.Fatalf("Invalid events: %#v != %#v", expectedEvents, handler.events)
+			t.Errorf("Invalid events: %#v != %#v", expectedEvents, handler.events)
 		}
+	}
+}
+
+func TestParseMaster_SkipsWithInsufficientData(t *testing.T) {
+	data := []byte{0x1F, 0x43, 0xB6, 0x75, 0x80 | 0x3, 0xE7}
+	reader := bytes.NewBuffer(data)
+	handler := ParseHandler{skipDescend: true}
+	_, err := parseElement(reader, 0, 0, &handler)
+	if err == nil {
+		t.Errorf("unexpected success")
 	}
 }
