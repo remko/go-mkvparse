@@ -1,5 +1,17 @@
-check:
-	go test .
+GO_TEST_FLAGS:=-timeout 5s
+ifeq ($(V),1)
+GO_TEST_FLAGS:=$(GO_TEST_FLAGS) -v
+endif
+ifeq ($(COVERAGE),1)
+GO_TEST_FLAGS:=$(GO_TEST_FLAGS) -coverprofile=coverage.out
+endif
+
+.PHONY: check
+check: 
+	go test $(GO_TEST_FLAGS) .
+ifeq ($(COVERAGE),1)
+	go tool cover -html=coverage.out
+endif
 
 lint:
 	staticcheck .
