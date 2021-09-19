@@ -29,7 +29,7 @@ type handler struct {
 }
 
 func (p *handler) HandleMasterEnd(id mkvparse.ElementID, info mkvparse.ElementInfo) error {
-	if id == mkvparse.AttachedFileElement && p.currentAttachmentFileName == "cover.jpg" {
+	if id == mkvparse.AttachedFileElement && (p.currentAttachmentFileName == "cover.jpg" || p.currentAttachmentFileName == "cover.png") {
 		p.cover = p.currentAttachmentData
 		p.coverMIMEType = p.currentAttachmentMIMEType
 	}
@@ -85,18 +85,15 @@ func run() error {
 		return err
 	}
 	dw.SetTitle("Cover")
-	draw.Draw(dw.Screen(), img.Bounds(), img, image.ZP, draw.Src)
+	draw.Draw(dw.Screen(), img.Bounds(), img, image.Point{}, draw.Src)
 	dw.FlushImage()
 	dw.Show()
 	go func() {
 		events := dw.EventChan()
-		for {
-			select {
-			case event := <-events:
-				switch event.(type) {
-				case wde.CloseEvent:
-					wde.Stop()
-				}
+		for event := range events {
+			switch event.(type) {
+			case wde.CloseEvent:
+				wde.Stop()
 			}
 		}
 	}()
