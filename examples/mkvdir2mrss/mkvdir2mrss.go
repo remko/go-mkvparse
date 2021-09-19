@@ -37,6 +37,8 @@ type MediaFile struct {
 }
 
 type MediaParser struct {
+	mkvparse.DefaultHandler
+
 	duration                  float64
 	timecodeScale             int64
 	currentTagGlobal          bool
@@ -96,10 +98,6 @@ func (p *MediaParser) HandleFloat(id mkvparse.ElementID, value float64, info mkv
 	if id == mkvparse.DurationElement {
 		p.duration = value
 	}
-	return nil
-}
-
-func (p *MediaParser) HandleDate(id mkvparse.ElementID, value time.Time, info mkvparse.ElementInfo) error {
 	return nil
 }
 

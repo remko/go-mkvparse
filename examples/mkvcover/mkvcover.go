@@ -7,27 +7,25 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"github.com/remko/go-mkvparse"
-	"github.com/skelterjohn/go.wde"
-	_ "github.com/skelterjohn/go.wde/init"
 	"image"
 	"image/draw"
 	"image/jpeg"
 	"image/png"
 	"os"
-	"time"
+
+	"github.com/remko/go-mkvparse"
+	wde "github.com/skelterjohn/go.wde"
+	_ "github.com/skelterjohn/go.wde/init"
 )
 
 type handler struct {
+	mkvparse.DefaultHandler
+
 	currentAttachmentData     []byte
 	currentAttachmentFileName string
 	currentAttachmentMIMEType string
 	cover                     []byte
 	coverMIMEType             string
-}
-
-func (p *handler) HandleMasterBegin(id mkvparse.ElementID, info mkvparse.ElementInfo) (bool, error) {
-	return true, nil
 }
 
 func (p *handler) HandleMasterEnd(id mkvparse.ElementID, info mkvparse.ElementInfo) error {
@@ -44,18 +42,6 @@ func (p *handler) HandleString(id mkvparse.ElementID, value string, info mkvpars
 	} else if id == mkvparse.FileMimeTypeElement {
 		p.currentAttachmentMIMEType = value
 	}
-	return nil
-}
-
-func (p *handler) HandleInteger(id mkvparse.ElementID, value int64, info mkvparse.ElementInfo) error {
-	return nil
-}
-
-func (p *handler) HandleFloat(id mkvparse.ElementID, value float64, info mkvparse.ElementInfo) error {
-	return nil
-}
-
-func (p *handler) HandleDate(id mkvparse.ElementID, value time.Time, info mkvparse.ElementInfo) error {
 	return nil
 }
 

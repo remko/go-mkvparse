@@ -350,3 +350,35 @@ func readElementID(reader io.Reader) (ElementID, int64, error) {
 	rawID, count, _, err := readVarIntRaw(reader, false)
 	return ElementID(rawID), count, err
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+type DefaultHandler struct{}
+
+func (h DefaultHandler) HandleMasterBegin(id ElementID, info ElementInfo) (bool, error) {
+	return true, nil
+}
+
+func (h DefaultHandler) HandleMasterEnd(id ElementID, info ElementInfo) error {
+	return nil
+}
+
+func (h DefaultHandler) HandleString(id ElementID, value string, info ElementInfo) error {
+	return nil
+}
+
+func (h DefaultHandler) HandleInteger(id ElementID, value int64, info ElementInfo) error {
+	return nil
+}
+
+func (h DefaultHandler) HandleFloat(id ElementID, value float64, info ElementInfo) error {
+	return nil
+}
+
+func (h DefaultHandler) HandleDate(id ElementID, value time.Time, info ElementInfo) error {
+	return nil
+}
+
+func (h DefaultHandler) HandleBinary(id ElementID, value []byte, info ElementInfo) error {
+	return nil
+}

@@ -6,13 +6,15 @@ package main
 
 import (
 	"fmt"
-	"github.com/remko/go-mkvparse"
 	"os"
 	"sort"
-	"time"
+
+	"github.com/remko/go-mkvparse"
 )
 
 type MyParser struct {
+	mkvparse.DefaultHandler
+
 	currentTagGlobal bool
 	currentTagName   *string
 	currentTagValue  *string
@@ -52,18 +54,6 @@ func (p *MyParser) HandleInteger(id mkvparse.ElementID, value int64, info mkvpar
 	if (id == mkvparse.TagTrackUIDElement || id == mkvparse.TagEditionUIDElement || id == mkvparse.TagChapterUIDElement || id == mkvparse.TagAttachmentUIDElement) && value != 0 {
 		p.currentTagGlobal = false
 	}
-	return nil
-}
-
-func (p *MyParser) HandleFloat(id mkvparse.ElementID, value float64, info mkvparse.ElementInfo) error {
-	return nil
-}
-
-func (p *MyParser) HandleDate(id mkvparse.ElementID, value time.Time, info mkvparse.ElementInfo) error {
-	return nil
-}
-
-func (p *MyParser) HandleBinary(id mkvparse.ElementID, value []byte, info mkvparse.ElementInfo) error {
 	return nil
 }
 
