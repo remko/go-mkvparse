@@ -2,7 +2,7 @@
 
 package mkvparse
 
-// Supported tags
+// Official tags. See https://www.matroska.org/technical/tagging.html
 const (
 	TagAccompaniment         string = "ACCOMPANIMENT"
 	TagActor                 string = "ACTOR"
@@ -53,10 +53,10 @@ const (
 	TagInitialKey            string = "INITIAL_KEY"
 	TagInstruments           string = "INSTRUMENTS"
 	TagKeywords              string = "KEYWORDS"
+	TagLCCN                  string = "LCCN"
 	TagLabel                 string = "LABEL"
 	TagLabelCode             string = "LABEL_CODE"
 	TagLawRating             string = "LAW_RATING"
-	TagLccn                  string = "LCCN"
 	TagLeadPerformer         string = "LEAD_PERFORMER"
 	TagLicense               string = "LICENSE"
 	TagLyricist              string = "LYRICIST"

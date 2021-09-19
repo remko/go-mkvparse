@@ -41,7 +41,7 @@ func TestReadVarInt_ZeroLength(t *testing.T) {
 
 func TestReadElementID(t *testing.T) {
 	testIDs := map[ElementID][]byte{
-		TimestampElement:       {0xE7},
+		TimecodeElement:        {0xE7},
 		EBMLVersionElement:     {0x42, 0x86},
 		DefaultDurationElement: {0x23, 0xE3, 0x83},
 		EBMLElement:            {0x1A, 0x45, 0xDF, 0xA3},
@@ -150,7 +150,7 @@ func TestParseElement(t *testing.T) {
 					MasterBeginEvent{},
 				},
 				{
-					TimestampElement,
+					TimecodeElement,
 					ElementInfo{
 						Offset: 7,
 						Size:   1,

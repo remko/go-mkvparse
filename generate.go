@@ -46,7 +46,8 @@ func generateElements() error {
 	haveElement := map[string]bool{}
 	for _, schema := range []string{
 		"https://raw.githubusercontent.com/ietf-wg-cellar/ebml-specification/master/ebml.xml",
-		"https://raw.githubusercontent.com/ietf-wg-cellar/matroska-specification/master/ebml_matroska.xml",
+		// "https://raw.githubusercontent.com/ietf-wg-cellar/matroska-specification/master/ebml_matroska.xml",
+		"https://raw.githubusercontent.com/ietf-wg-cellar/matroska-specification/v03/ebml_matroska.xml",
 	} {
 		resp, err := http.Get(schema)
 		if err != nil {
@@ -73,13 +74,13 @@ func generateElements() error {
 	}
 
 	// Add legacy named fields
-	elements = append(elements, []*EBMLSchemaElement{
-		{Name: "ChapterTrackNumber", ID: "ChapterTrackUIDElement", Deprecated: true, Type: "uinteger"},
-		{Name: "ReferenceTimeCode", ID: "ReferenceTimestampElement", Deprecated: true, Type: "uinteger"},
-		{Name: "TimeCode", ID: "TimestampElement", Deprecated: true, Type: "uinteger"},
-		{Name: "TimeCodeScale", ID: "TimestampScaleElement", Deprecated: true, Type: "uinteger"},
-		{Name: "TrackTimeCodeScale", ID: "TrackTimestampScaleElement", Deprecated: true, Type: "float"},
-	}...)
+	// elements = append(elements, []*EBMLSchemaElement{
+	// 	{Name: "ChapterTrackNumber", ID: "ChapterTrackUIDElement", Deprecated: true, Type: "uinteger"},
+	// 	{Name: "ReferenceTimeCode", ID: "ReferenceTimestampElement", Deprecated: true, Type: "uinteger"},
+	// 	{Name: "TimeCode", ID: "TimestampElement", Deprecated: true, Type: "uinteger"},
+	// 	{Name: "TimeCodeScale", ID: "TimestampScaleElement", Deprecated: true, Type: "uinteger"},
+	// 	{Name: "TrackTimeCodeScale", ID: "TrackTimestampScaleElement", Deprecated: true, Type: "float"},
+	// }...)
 
 	log.Printf("Generating elements.go ...")
 

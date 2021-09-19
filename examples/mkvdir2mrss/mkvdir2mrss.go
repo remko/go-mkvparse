@@ -86,7 +86,7 @@ func (p *MediaParser) HandleString(id mkvparse.ElementID, value string, info mkv
 func (p *MediaParser) HandleInteger(id mkvparse.ElementID, value int64, info mkvparse.ElementInfo) error {
 	if (id == mkvparse.TagTrackUIDElement || id == mkvparse.TagEditionUIDElement || id == mkvparse.TagChapterUIDElement || id == mkvparse.TagAttachmentUIDElement) && value != 0 {
 		p.currentTagGlobal = false
-	} else if id == mkvparse.TimestampScaleElement {
+	} else if id == mkvparse.TimecodeScaleElement {
 		p.timecodeScale = value
 	}
 	return nil

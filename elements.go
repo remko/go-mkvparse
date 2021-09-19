@@ -4,7 +4,6 @@ package mkvparse
 
 // Supported ElementIDs
 const (
-	AESSettingsCipherModeElement       ElementID = 0x47E8
 	AlphaModeElement                   ElementID = 0x53C0
 	AspectRatioTypeElement             ElementID = 0x54B3
 	AttachedFileElement                ElementID = 0x61A7
@@ -14,12 +13,7 @@ const (
 	BitDepthElement                    ElementID = 0x6264
 	BitsPerChannelElement              ElementID = 0x55B2
 	BlockAddIDElement                  ElementID = 0xEE
-	BlockAddIDExtraDataElement         ElementID = 0x41ED
-	BlockAddIDNameElement              ElementID = 0x41A4
-	BlockAddIDTypeElement              ElementID = 0x41E7
-	BlockAddIDValueElement             ElementID = 0x41F0
 	BlockAdditionIDElement             ElementID = 0xCB
-	BlockAdditionMappingElement        ElementID = 0x41E4
 	BlockAdditionalElement             ElementID = 0xA5
 	BlockAdditionsElement              ElementID = 0x75A1
 	BlockDurationElement               ElementID = 0x9B
@@ -53,8 +47,7 @@ const (
 	ChapterTimeEndElement              ElementID = 0x92
 	ChapterTimeStartElement            ElementID = 0x91
 	ChapterTrackElement                ElementID = 0x8F
-	ChapterTrackNumberElement          ElementID = ChapterTrackUIDElement // Deprecated. Do not use.
-	ChapterTrackUIDElement             ElementID = 0x89
+	ChapterTrackNumberElement          ElementID = 0x89
 	ChapterTranslateCodecElement       ElementID = 0x69BF
 	ChapterTranslateEditionUIDElement  ElementID = 0x69FC
 	ChapterTranslateElement            ElementID = 0x6924
@@ -80,7 +73,6 @@ const (
 	ContentCompAlgoElement             ElementID = 0x4254
 	ContentCompSettingsElement         ElementID = 0x4255
 	ContentCompressionElement          ElementID = 0x5034
-	ContentEncAESSettingsElement       ElementID = 0x47E7
 	ContentEncAlgoElement              ElementID = 0x47E1
 	ContentEncKeyIDElement             ElementID = 0x47E2
 	ContentEncodingElement             ElementID = 0x6240
@@ -143,16 +135,11 @@ const (
 	FileUIDElement                     ElementID = 0x46AE
 	FileUsedEndTimeElement             ElementID = 0x4662
 	FileUsedStartTimeElement           ElementID = 0x4661
-	FlagCommentaryElement              ElementID = 0x55AF
 	FlagDefaultElement                 ElementID = 0x88
 	FlagEnabledElement                 ElementID = 0xB9
 	FlagForcedElement                  ElementID = 0x55AA
-	FlagHearingImpairedElement         ElementID = 0x55AB
 	FlagInterlacedElement              ElementID = 0x9A
 	FlagLacingElement                  ElementID = 0x9C
-	FlagOriginalElement                ElementID = 0x55AE
-	FlagTextDescriptionsElement        ElementID = 0x55AD
-	FlagVisualImpairedElement          ElementID = 0x55AC
 	FrameNumberElement                 ElementID = 0xCD
 	FrameRateElement                   ElementID = 0x2383E3
 	GammaValueElement                  ElementID = 0x2FB523
@@ -203,8 +190,7 @@ const (
 	ReferenceFrameElement              ElementID = 0xC8
 	ReferenceOffsetElement             ElementID = 0xC9
 	ReferencePriorityElement           ElementID = 0xFA
-	ReferenceTimeCodeElement           ElementID = ReferenceTimestampElement // Deprecated. Do not use.
-	ReferenceTimestampElement          ElementID = 0xCA
+	ReferenceTimeCodeElement           ElementID = 0xCA
 	ReferenceVirtualElement            ElementID = 0xFD
 	SamplingFrequencyElement           ElementID = 0xB5
 	SeekElement                        ElementID = 0x4DBB
@@ -226,7 +212,6 @@ const (
 	TagAttachmentUIDElement            ElementID = 0x63C6
 	TagBinaryElement                   ElementID = 0x4485
 	TagChapterUIDElement               ElementID = 0x63C4
-	TagDefaultBogusElement             ElementID = 0x44B4
 	TagDefaultElement                  ElementID = 0x4484
 	TagEditionUIDElement               ElementID = 0x63C9
 	TagElement                         ElementID = 0x7373
@@ -239,11 +224,9 @@ const (
 	TargetTypeElement                  ElementID = 0x63CA
 	TargetTypeValueElement             ElementID = 0x68CA
 	TargetsElement                     ElementID = 0x63C0
-	TimeCodeElement                    ElementID = TimestampElement      // Deprecated. Do not use.
-	TimeCodeScaleElement               ElementID = TimestampScaleElement // Deprecated. Do not use.
 	TimeSliceElement                   ElementID = 0xE8
-	TimestampElement                   ElementID = 0xE7
-	TimestampScaleElement              ElementID = 0x2AD7B1
+	TimecodeElement                    ElementID = 0xE7
+	TimecodeScaleElement               ElementID = 0x2AD7B1
 	TitleElement                       ElementID = 0x7BA9
 	TrackCombinePlanesElement          ElementID = 0xE3
 	TrackEntryElement                  ElementID = 0xAE
@@ -256,8 +239,7 @@ const (
 	TrackPlaneElement                  ElementID = 0xE4
 	TrackPlaneTypeElement              ElementID = 0xE6
 	TrackPlaneUIDElement               ElementID = 0xE5
-	TrackTimeCodeScaleElement          ElementID = TrackTimestampScaleElement // Deprecated. Do not use.
-	TrackTimestampScaleElement         ElementID = 0x23314F
+	TrackTimecodeScaleElement          ElementID = 0x23314F
 	TrackTranslateCodecElement         ElementID = 0x66BF
 	TrackTranslateEditionUIDElement    ElementID = 0x66FC
 	TrackTranslateElement              ElementID = 0x6624
@@ -279,7 +261,6 @@ const (
 )
 
 var elementTypes = map[ElementID]elementType{
-	AESSettingsCipherModeElement:       uintegerType,
 	AlphaModeElement:                   uintegerType,
 	AspectRatioTypeElement:             uintegerType,
 	AttachedFileElement:                masterType,
@@ -289,12 +270,7 @@ var elementTypes = map[ElementID]elementType{
 	BitDepthElement:                    uintegerType,
 	BitsPerChannelElement:              uintegerType,
 	BlockAddIDElement:                  uintegerType,
-	BlockAddIDExtraDataElement:         binaryType,
-	BlockAddIDNameElement:              stringType,
-	BlockAddIDTypeElement:              uintegerType,
-	BlockAddIDValueElement:             uintegerType,
 	BlockAdditionIDElement:             uintegerType,
-	BlockAdditionMappingElement:        masterType,
 	BlockAdditionalElement:             binaryType,
 	BlockAdditionsElement:              masterType,
 	BlockDurationElement:               uintegerType,
@@ -328,7 +304,7 @@ var elementTypes = map[ElementID]elementType{
 	ChapterTimeEndElement:              uintegerType,
 	ChapterTimeStartElement:            uintegerType,
 	ChapterTrackElement:                masterType,
-	ChapterTrackUIDElement:             uintegerType,
+	ChapterTrackNumberElement:          uintegerType,
 	ChapterTranslateCodecElement:       uintegerType,
 	ChapterTranslateEditionUIDElement:  uintegerType,
 	ChapterTranslateElement:            masterType,
@@ -354,7 +330,6 @@ var elementTypes = map[ElementID]elementType{
 	ContentCompAlgoElement:             uintegerType,
 	ContentCompSettingsElement:         binaryType,
 	ContentCompressionElement:          masterType,
-	ContentEncAESSettingsElement:       masterType,
 	ContentEncAlgoElement:              uintegerType,
 	ContentEncKeyIDElement:             binaryType,
 	ContentEncodingElement:             masterType,
@@ -417,16 +392,11 @@ var elementTypes = map[ElementID]elementType{
 	FileUIDElement:                     uintegerType,
 	FileUsedEndTimeElement:             uintegerType,
 	FileUsedStartTimeElement:           uintegerType,
-	FlagCommentaryElement:              uintegerType,
 	FlagDefaultElement:                 uintegerType,
 	FlagEnabledElement:                 uintegerType,
 	FlagForcedElement:                  uintegerType,
-	FlagHearingImpairedElement:         uintegerType,
 	FlagInterlacedElement:              uintegerType,
 	FlagLacingElement:                  uintegerType,
-	FlagOriginalElement:                uintegerType,
-	FlagTextDescriptionsElement:        uintegerType,
-	FlagVisualImpairedElement:          uintegerType,
 	FrameNumberElement:                 uintegerType,
 	FrameRateElement:                   floatType,
 	GammaValueElement:                  floatType,
@@ -477,7 +447,7 @@ var elementTypes = map[ElementID]elementType{
 	ReferenceFrameElement:              masterType,
 	ReferenceOffsetElement:             uintegerType,
 	ReferencePriorityElement:           uintegerType,
-	ReferenceTimestampElement:          uintegerType,
+	ReferenceTimeCodeElement:           uintegerType,
 	ReferenceVirtualElement:            integerType,
 	SamplingFrequencyElement:           floatType,
 	SeekElement:                        masterType,
@@ -499,7 +469,6 @@ var elementTypes = map[ElementID]elementType{
 	TagAttachmentUIDElement:            uintegerType,
 	TagBinaryElement:                   binaryType,
 	TagChapterUIDElement:               uintegerType,
-	TagDefaultBogusElement:             uintegerType,
 	TagDefaultElement:                  uintegerType,
 	TagEditionUIDElement:               uintegerType,
 	TagElement:                         masterType,
@@ -513,8 +482,8 @@ var elementTypes = map[ElementID]elementType{
 	TargetTypeValueElement:             uintegerType,
 	TargetsElement:                     masterType,
 	TimeSliceElement:                   masterType,
-	TimestampElement:                   uintegerType,
-	TimestampScaleElement:              uintegerType,
+	TimecodeElement:                    uintegerType,
+	TimecodeScaleElement:               uintegerType,
 	TitleElement:                       utf8Type,
 	TrackCombinePlanesElement:          masterType,
 	TrackEntryElement:                  masterType,
@@ -527,7 +496,7 @@ var elementTypes = map[ElementID]elementType{
 	TrackPlaneElement:                  masterType,
 	TrackPlaneTypeElement:              uintegerType,
 	TrackPlaneUIDElement:               uintegerType,
-	TrackTimestampScaleElement:         floatType,
+	TrackTimecodeScaleElement:          floatType,
 	TrackTranslateCodecElement:         uintegerType,
 	TrackTranslateEditionUIDElement:    uintegerType,
 	TrackTranslateElement:              masterType,
@@ -548,7 +517,6 @@ var elementTypes = map[ElementID]elementType{
 	WritingAppElement:                  utf8Type}
 
 var elementNames = map[ElementID]string{
-	AESSettingsCipherModeElement:       "AESSettingsCipherMode",
 	AlphaModeElement:                   "AlphaMode",
 	AspectRatioTypeElement:             "AspectRatioType",
 	AttachedFileElement:                "AttachedFile",
@@ -558,12 +526,7 @@ var elementNames = map[ElementID]string{
 	BitDepthElement:                    "BitDepth",
 	BitsPerChannelElement:              "BitsPerChannel",
 	BlockAddIDElement:                  "BlockAddID",
-	BlockAddIDExtraDataElement:         "BlockAddIDExtraData",
-	BlockAddIDNameElement:              "BlockAddIDName",
-	BlockAddIDTypeElement:              "BlockAddIDType",
-	BlockAddIDValueElement:             "BlockAddIDValue",
 	BlockAdditionIDElement:             "BlockAdditionID",
-	BlockAdditionMappingElement:        "BlockAdditionMapping",
 	BlockAdditionalElement:             "BlockAdditional",
 	BlockAdditionsElement:              "BlockAdditions",
 	BlockDurationElement:               "BlockDuration",
@@ -597,7 +560,7 @@ var elementNames = map[ElementID]string{
 	ChapterTimeEndElement:              "ChapterTimeEnd",
 	ChapterTimeStartElement:            "ChapterTimeStart",
 	ChapterTrackElement:                "ChapterTrack",
-	ChapterTrackUIDElement:             "ChapterTrackUID",
+	ChapterTrackNumberElement:          "ChapterTrackNumber",
 	ChapterTranslateCodecElement:       "ChapterTranslateCodec",
 	ChapterTranslateEditionUIDElement:  "ChapterTranslateEditionUID",
 	ChapterTranslateElement:            "ChapterTranslate",
@@ -623,7 +586,6 @@ var elementNames = map[ElementID]string{
 	ContentCompAlgoElement:             "ContentCompAlgo",
 	ContentCompSettingsElement:         "ContentCompSettings",
 	ContentCompressionElement:          "ContentCompression",
-	ContentEncAESSettingsElement:       "ContentEncAESSettings",
 	ContentEncAlgoElement:              "ContentEncAlgo",
 	ContentEncKeyIDElement:             "ContentEncKeyID",
 	ContentEncodingElement:             "ContentEncoding",
@@ -686,16 +648,11 @@ var elementNames = map[ElementID]string{
 	FileUIDElement:                     "FileUID",
 	FileUsedEndTimeElement:             "FileUsedEndTime",
 	FileUsedStartTimeElement:           "FileUsedStartTime",
-	FlagCommentaryElement:              "FlagCommentary",
 	FlagDefaultElement:                 "FlagDefault",
 	FlagEnabledElement:                 "FlagEnabled",
 	FlagForcedElement:                  "FlagForced",
-	FlagHearingImpairedElement:         "FlagHearingImpaired",
 	FlagInterlacedElement:              "FlagInterlaced",
 	FlagLacingElement:                  "FlagLacing",
-	FlagOriginalElement:                "FlagOriginal",
-	FlagTextDescriptionsElement:        "FlagTextDescriptions",
-	FlagVisualImpairedElement:          "FlagVisualImpaired",
 	FrameNumberElement:                 "FrameNumber",
 	FrameRateElement:                   "FrameRate",
 	GammaValueElement:                  "GammaValue",
@@ -746,7 +703,7 @@ var elementNames = map[ElementID]string{
 	ReferenceFrameElement:              "ReferenceFrame",
 	ReferenceOffsetElement:             "ReferenceOffset",
 	ReferencePriorityElement:           "ReferencePriority",
-	ReferenceTimestampElement:          "ReferenceTimestamp",
+	ReferenceTimeCodeElement:           "ReferenceTimeCode",
 	ReferenceVirtualElement:            "ReferenceVirtual",
 	SamplingFrequencyElement:           "SamplingFrequency",
 	SeekElement:                        "Seek",
@@ -768,7 +725,6 @@ var elementNames = map[ElementID]string{
 	TagAttachmentUIDElement:            "TagAttachmentUID",
 	TagBinaryElement:                   "TagBinary",
 	TagChapterUIDElement:               "TagChapterUID",
-	TagDefaultBogusElement:             "TagDefaultBogus",
 	TagDefaultElement:                  "TagDefault",
 	TagEditionUIDElement:               "TagEditionUID",
 	TagElement:                         "Tag",
@@ -782,8 +738,8 @@ var elementNames = map[ElementID]string{
 	TargetTypeValueElement:             "TargetTypeValue",
 	TargetsElement:                     "Targets",
 	TimeSliceElement:                   "TimeSlice",
-	TimestampElement:                   "Timestamp",
-	TimestampScaleElement:              "TimestampScale",
+	TimecodeElement:                    "Timecode",
+	TimecodeScaleElement:               "TimecodeScale",
 	TitleElement:                       "Title",
 	TrackCombinePlanesElement:          "TrackCombinePlanes",
 	TrackEntryElement:                  "TrackEntry",
@@ -796,7 +752,7 @@ var elementNames = map[ElementID]string{
 	TrackPlaneElement:                  "TrackPlane",
 	TrackPlaneTypeElement:              "TrackPlaneType",
 	TrackPlaneUIDElement:               "TrackPlaneUID",
-	TrackTimestampScaleElement:         "TrackTimestampScale",
+	TrackTimecodeScaleElement:          "TrackTimecodeScale",
 	TrackTranslateCodecElement:         "TrackTranslateCodec",
 	TrackTranslateEditionUIDElement:    "TrackTranslateEditionUID",
 	TrackTranslateElement:              "TrackTranslate",
