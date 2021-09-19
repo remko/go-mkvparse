@@ -1029,2262 +1029,2263 @@ var elementNames = map[ElementID]string{
 	VoidElement:                        "Void",
 	WhitePointChromaticityXElement:     "WhitePointChromaticityX",
 	WhitePointChromaticityYElement:     "WhitePointChromaticityY",
-	WritingAppElement:                  "WritingApp"}
+	WritingAppElement:                  "WritingApp",
+}
 
 func isDescendantElement(p1, p2 ElementID) bool {
 	switch p2 {
-	case 0x61A7: // \Segment\Attachments\AttachedFile
+	case AttachedFileElement: // \Segment\Attachments\AttachedFile
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x467E: // \Segment\Attachments\AttachedFile\FileDescription
+		case FileDescriptionElement: // \Segment\Attachments\AttachedFile\FileDescription
 			return true
-		case 0x466E: // \Segment\Attachments\AttachedFile\FileName
+		case FileNameElement: // \Segment\Attachments\AttachedFile\FileName
 			return true
-		case 0x4660: // \Segment\Attachments\AttachedFile\FileMimeType
+		case FileMimeTypeElement: // \Segment\Attachments\AttachedFile\FileMimeType
 			return true
-		case 0x465C: // \Segment\Attachments\AttachedFile\FileData
+		case FileDataElement: // \Segment\Attachments\AttachedFile\FileData
 			return true
-		case 0x46AE: // \Segment\Attachments\AttachedFile\FileUID
+		case FileUIDElement: // \Segment\Attachments\AttachedFile\FileUID
 			return true
-		case 0x4675: // \Segment\Attachments\AttachedFile\FileReferral
+		case FileReferralElement: // \Segment\Attachments\AttachedFile\FileReferral
 			return true
-		case 0x4661: // \Segment\Attachments\AttachedFile\FileUsedStartTime
+		case FileUsedStartTimeElement: // \Segment\Attachments\AttachedFile\FileUsedStartTime
 			return true
-		case 0x4662: // \Segment\Attachments\AttachedFile\FileUsedEndTime
+		case FileUsedEndTimeElement: // \Segment\Attachments\AttachedFile\FileUsedEndTime
 			return true
 		default:
 			return false
 		}
-	case 0x1941A469: // \Segment\Attachments
+	case AttachmentsElement: // \Segment\Attachments
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x61A7: // \Segment\Attachments\AttachedFile
+		case AttachedFileElement: // \Segment\Attachments\AttachedFile
 			return true
-		case 0x467E: // \Segment\Attachments\AttachedFile\FileDescription
+		case FileDescriptionElement: // \Segment\Attachments\AttachedFile\FileDescription
 			return true
-		case 0x466E: // \Segment\Attachments\AttachedFile\FileName
+		case FileNameElement: // \Segment\Attachments\AttachedFile\FileName
 			return true
-		case 0x4660: // \Segment\Attachments\AttachedFile\FileMimeType
+		case FileMimeTypeElement: // \Segment\Attachments\AttachedFile\FileMimeType
 			return true
-		case 0x465C: // \Segment\Attachments\AttachedFile\FileData
+		case FileDataElement: // \Segment\Attachments\AttachedFile\FileData
 			return true
-		case 0x46AE: // \Segment\Attachments\AttachedFile\FileUID
+		case FileUIDElement: // \Segment\Attachments\AttachedFile\FileUID
 			return true
-		case 0x4675: // \Segment\Attachments\AttachedFile\FileReferral
+		case FileReferralElement: // \Segment\Attachments\AttachedFile\FileReferral
 			return true
-		case 0x4661: // \Segment\Attachments\AttachedFile\FileUsedStartTime
+		case FileUsedStartTimeElement: // \Segment\Attachments\AttachedFile\FileUsedStartTime
 			return true
-		case 0x4662: // \Segment\Attachments\AttachedFile\FileUsedEndTime
+		case FileUsedEndTimeElement: // \Segment\Attachments\AttachedFile\FileUsedEndTime
 			return true
 		default:
 			return false
 		}
-	case 0xE1: // \Segment\Tracks\TrackEntry\Audio
+	case AudioElement: // \Segment\Tracks\TrackEntry\Audio
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xB5: // \Segment\Tracks\TrackEntry\Audio\SamplingFrequency
+		case SamplingFrequencyElement: // \Segment\Tracks\TrackEntry\Audio\SamplingFrequency
 			return true
-		case 0x78B5: // \Segment\Tracks\TrackEntry\Audio\OutputSamplingFrequency
+		case OutputSamplingFrequencyElement: // \Segment\Tracks\TrackEntry\Audio\OutputSamplingFrequency
 			return true
-		case 0x9F: // \Segment\Tracks\TrackEntry\Audio\Channels
+		case ChannelsElement: // \Segment\Tracks\TrackEntry\Audio\Channels
 			return true
-		case 0x7D7B: // \Segment\Tracks\TrackEntry\Audio\ChannelPositions
+		case ChannelPositionsElement: // \Segment\Tracks\TrackEntry\Audio\ChannelPositions
 			return true
-		case 0x6264: // \Segment\Tracks\TrackEntry\Audio\BitDepth
+		case BitDepthElement: // \Segment\Tracks\TrackEntry\Audio\BitDepth
 			return true
 		default:
 			return false
 		}
-	case 0x75A1: // \Segment\Cluster\BlockGroup\BlockAdditions
+	case BlockAdditionsElement: // \Segment\Cluster\BlockGroup\BlockAdditions
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xA6: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore
+		case BlockMoreElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore
 			return true
-		case 0xEE: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAddID
+		case BlockAddIDElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAddID
 			return true
-		case 0xA5: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAdditional
+		case BlockAdditionalElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAdditional
 			return true
 		default:
 			return false
 		}
-	case 0xA0: // \Segment\Cluster\BlockGroup
+	case BlockGroupElement: // \Segment\Cluster\BlockGroup
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xA1: // \Segment\Cluster\BlockGroup\Block
+		case BlockElement: // \Segment\Cluster\BlockGroup\Block
 			return true
-		case 0xA2: // \Segment\Cluster\BlockGroup\BlockVirtual
+		case BlockVirtualElement: // \Segment\Cluster\BlockGroup\BlockVirtual
 			return true
-		case 0x75A1: // \Segment\Cluster\BlockGroup\BlockAdditions
+		case BlockAdditionsElement: // \Segment\Cluster\BlockGroup\BlockAdditions
 			return true
-		case 0xA6: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore
+		case BlockMoreElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore
 			return true
-		case 0xEE: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAddID
+		case BlockAddIDElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAddID
 			return true
-		case 0xA5: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAdditional
+		case BlockAdditionalElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAdditional
 			return true
-		case 0x9B: // \Segment\Cluster\BlockGroup\BlockDuration
+		case BlockDurationElement: // \Segment\Cluster\BlockGroup\BlockDuration
 			return true
-		case 0xFA: // \Segment\Cluster\BlockGroup\ReferencePriority
+		case ReferencePriorityElement: // \Segment\Cluster\BlockGroup\ReferencePriority
 			return true
-		case 0xFB: // \Segment\Cluster\BlockGroup\ReferenceBlock
+		case ReferenceBlockElement: // \Segment\Cluster\BlockGroup\ReferenceBlock
 			return true
-		case 0xFD: // \Segment\Cluster\BlockGroup\ReferenceVirtual
+		case ReferenceVirtualElement: // \Segment\Cluster\BlockGroup\ReferenceVirtual
 			return true
-		case 0xA4: // \Segment\Cluster\BlockGroup\CodecState
+		case CodecStateElement: // \Segment\Cluster\BlockGroup\CodecState
 			return true
-		case 0x75A2: // \Segment\Cluster\BlockGroup\DiscardPadding
+		case DiscardPaddingElement: // \Segment\Cluster\BlockGroup\DiscardPadding
 			return true
-		case 0x8E: // \Segment\Cluster\BlockGroup\Slices
+		case SlicesElement: // \Segment\Cluster\BlockGroup\Slices
 			return true
-		case 0xE8: // \Segment\Cluster\BlockGroup\Slices\TimeSlice
+		case TimeSliceElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice
 			return true
-		case 0xCC: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\LaceNumber
+		case LaceNumberElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\LaceNumber
 			return true
-		case 0xCD: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\FrameNumber
+		case FrameNumberElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\FrameNumber
 			return true
-		case 0xCB: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\BlockAdditionID
+		case BlockAdditionIDElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\BlockAdditionID
 			return true
-		case 0xCE: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\Delay
+		case DelayElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\Delay
 			return true
-		case 0xCF: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\SliceDuration
+		case SliceDurationElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\SliceDuration
 			return true
-		case 0xC8: // \Segment\Cluster\BlockGroup\ReferenceFrame
+		case ReferenceFrameElement: // \Segment\Cluster\BlockGroup\ReferenceFrame
 			return true
-		case 0xC9: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceOffset
+		case ReferenceOffsetElement: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceOffset
 			return true
-		case 0xCA: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceTimeCode
+		case ReferenceTimeCodeElement: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceTimeCode
 			return true
 		default:
 			return false
 		}
-	case 0xA6: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore
+	case BlockMoreElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xEE: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAddID
+		case BlockAddIDElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAddID
 			return true
-		case 0xA5: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAdditional
+		case BlockAdditionalElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAdditional
 			return true
 		default:
 			return false
 		}
-	case 0x6911: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand
+	case ChapProcessCommandElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x6922: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessTime
+		case ChapProcessTimeElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessTime
 			return true
-		case 0x6933: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessData
+		case ChapProcessDataElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessData
 			return true
 		default:
 			return false
 		}
-	case 0x6944: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess
+	case ChapProcessElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x6955: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCodecID
+		case ChapProcessCodecIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCodecID
 			return true
-		case 0x450D: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessPrivate
+		case ChapProcessPrivateElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessPrivate
 			return true
-		case 0x6911: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand
+		case ChapProcessCommandElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand
 			return true
-		case 0x6922: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessTime
+		case ChapProcessTimeElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessTime
 			return true
-		case 0x6933: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessData
+		case ChapProcessDataElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessData
 			return true
 		default:
 			return false
 		}
-	case 0xB6: // \Segment\Chapters\EditionEntry\ChapterAtom
+	case ChapterAtomElement: // \Segment\Chapters\EditionEntry\ChapterAtom
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x73C4: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterUID
+		case ChapterUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterUID
 			return true
-		case 0x5654: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterStringUID
+		case ChapterStringUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterStringUID
 			return true
-		case 0x91: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeStart
+		case ChapterTimeStartElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeStart
 			return true
-		case 0x92: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeEnd
+		case ChapterTimeEndElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeEnd
 			return true
-		case 0x98: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagHidden
+		case ChapterFlagHiddenElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagHidden
 			return true
-		case 0x4598: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagEnabled
+		case ChapterFlagEnabledElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagEnabled
 			return true
-		case 0x6E67: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentUID
+		case ChapterSegmentUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentUID
 			return true
-		case 0x6EBC: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentEditionUID
+		case ChapterSegmentEditionUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentEditionUID
 			return true
-		case 0x63C3: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterPhysicalEquiv
+		case ChapterPhysicalEquivElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterPhysicalEquiv
 			return true
-		case 0x8F: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack
+		case ChapterTrackElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack
 			return true
-		case 0x89: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack\ChapterTrackNumber
+		case ChapterTrackNumberElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack\ChapterTrackNumber
 			return true
-		case 0x80: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay
+		case ChapterDisplayElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay
 			return true
-		case 0x85: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapString
+		case ChapStringElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapString
 			return true
-		case 0x437C: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguage
+		case ChapLanguageElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguage
 			return true
-		case 0x437D: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguageIETF
+		case ChapLanguageIETFElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguageIETF
 			return true
-		case 0x437E: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapCountry
+		case ChapCountryElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapCountry
 			return true
-		case 0x6944: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess
+		case ChapProcessElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess
 			return true
-		case 0x6955: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCodecID
+		case ChapProcessCodecIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCodecID
 			return true
-		case 0x450D: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessPrivate
+		case ChapProcessPrivateElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessPrivate
 			return true
-		case 0x6911: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand
+		case ChapProcessCommandElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand
 			return true
-		case 0x6922: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessTime
+		case ChapProcessTimeElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessTime
 			return true
-		case 0x6933: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessData
+		case ChapProcessDataElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessData
 			return true
 		default:
 			return false
 		}
-	case 0x80: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay
+	case ChapterDisplayElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x85: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapString
+		case ChapStringElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapString
 			return true
-		case 0x437C: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguage
+		case ChapLanguageElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguage
 			return true
-		case 0x437D: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguageIETF
+		case ChapLanguageIETFElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguageIETF
 			return true
-		case 0x437E: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapCountry
+		case ChapCountryElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapCountry
 			return true
 		default:
 			return false
 		}
-	case 0x8F: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack
+	case ChapterTrackElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x89: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack\ChapterTrackNumber
+		case ChapterTrackNumberElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack\ChapterTrackNumber
 			return true
 		default:
 			return false
 		}
-	case 0x6924: // \Segment\Info\ChapterTranslate
+	case ChapterTranslateElement: // \Segment\Info\ChapterTranslate
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x69FC: // \Segment\Info\ChapterTranslate\ChapterTranslateEditionUID
+		case ChapterTranslateEditionUIDElement: // \Segment\Info\ChapterTranslate\ChapterTranslateEditionUID
 			return true
-		case 0x69BF: // \Segment\Info\ChapterTranslate\ChapterTranslateCodec
+		case ChapterTranslateCodecElement: // \Segment\Info\ChapterTranslate\ChapterTranslateCodec
 			return true
-		case 0x69A5: // \Segment\Info\ChapterTranslate\ChapterTranslateID
+		case ChapterTranslateIDElement: // \Segment\Info\ChapterTranslate\ChapterTranslateID
 			return true
 		default:
 			return false
 		}
-	case 0x1043A770: // \Segment\Chapters
+	case ChaptersElement: // \Segment\Chapters
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x45B9: // \Segment\Chapters\EditionEntry
+		case EditionEntryElement: // \Segment\Chapters\EditionEntry
 			return true
-		case 0x45BC: // \Segment\Chapters\EditionEntry\EditionUID
+		case EditionUIDElement: // \Segment\Chapters\EditionEntry\EditionUID
 			return true
-		case 0x45BD: // \Segment\Chapters\EditionEntry\EditionFlagHidden
+		case EditionFlagHiddenElement: // \Segment\Chapters\EditionEntry\EditionFlagHidden
 			return true
-		case 0x45DB: // \Segment\Chapters\EditionEntry\EditionFlagDefault
+		case EditionFlagDefaultElement: // \Segment\Chapters\EditionEntry\EditionFlagDefault
 			return true
-		case 0x45DD: // \Segment\Chapters\EditionEntry\EditionFlagOrdered
+		case EditionFlagOrderedElement: // \Segment\Chapters\EditionEntry\EditionFlagOrdered
 			return true
-		case 0xB6: // \Segment\Chapters\EditionEntry\ChapterAtom
+		case ChapterAtomElement: // \Segment\Chapters\EditionEntry\ChapterAtom
 			return true
-		case 0x73C4: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterUID
+		case ChapterUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterUID
 			return true
-		case 0x5654: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterStringUID
+		case ChapterStringUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterStringUID
 			return true
-		case 0x91: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeStart
+		case ChapterTimeStartElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeStart
 			return true
-		case 0x92: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeEnd
+		case ChapterTimeEndElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeEnd
 			return true
-		case 0x98: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagHidden
+		case ChapterFlagHiddenElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagHidden
 			return true
-		case 0x4598: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagEnabled
+		case ChapterFlagEnabledElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagEnabled
 			return true
-		case 0x6E67: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentUID
+		case ChapterSegmentUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentUID
 			return true
-		case 0x6EBC: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentEditionUID
+		case ChapterSegmentEditionUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentEditionUID
 			return true
-		case 0x63C3: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterPhysicalEquiv
+		case ChapterPhysicalEquivElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterPhysicalEquiv
 			return true
-		case 0x8F: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack
+		case ChapterTrackElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack
 			return true
-		case 0x89: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack\ChapterTrackNumber
+		case ChapterTrackNumberElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack\ChapterTrackNumber
 			return true
-		case 0x80: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay
+		case ChapterDisplayElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay
 			return true
-		case 0x85: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapString
+		case ChapStringElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapString
 			return true
-		case 0x437C: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguage
+		case ChapLanguageElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguage
 			return true
-		case 0x437D: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguageIETF
+		case ChapLanguageIETFElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguageIETF
 			return true
-		case 0x437E: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapCountry
+		case ChapCountryElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapCountry
 			return true
-		case 0x6944: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess
+		case ChapProcessElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess
 			return true
-		case 0x6955: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCodecID
+		case ChapProcessCodecIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCodecID
 			return true
-		case 0x450D: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessPrivate
+		case ChapProcessPrivateElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessPrivate
 			return true
-		case 0x6911: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand
+		case ChapProcessCommandElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand
 			return true
-		case 0x6922: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessTime
+		case ChapProcessTimeElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessTime
 			return true
-		case 0x6933: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessData
+		case ChapProcessDataElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessData
 			return true
 		default:
 			return false
 		}
-	case 0x1F43B675: // \Segment\Cluster
+	case ClusterElement: // \Segment\Cluster
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xE7: // \Segment\Cluster\Timecode
+		case TimecodeElement: // \Segment\Cluster\Timecode
 			return true
-		case 0x5854: // \Segment\Cluster\SilentTracks
+		case SilentTracksElement: // \Segment\Cluster\SilentTracks
 			return true
-		case 0x58D7: // \Segment\Cluster\SilentTracks\SilentTrackNumber
+		case SilentTrackNumberElement: // \Segment\Cluster\SilentTracks\SilentTrackNumber
 			return true
-		case 0xA7: // \Segment\Cluster\Position
+		case PositionElement: // \Segment\Cluster\Position
 			return true
-		case 0xAB: // \Segment\Cluster\PrevSize
+		case PrevSizeElement: // \Segment\Cluster\PrevSize
 			return true
-		case 0xA3: // \Segment\Cluster\SimpleBlock
+		case SimpleBlockElement: // \Segment\Cluster\SimpleBlock
 			return true
-		case 0xA0: // \Segment\Cluster\BlockGroup
+		case BlockGroupElement: // \Segment\Cluster\BlockGroup
 			return true
-		case 0xA1: // \Segment\Cluster\BlockGroup\Block
+		case BlockElement: // \Segment\Cluster\BlockGroup\Block
 			return true
-		case 0xA2: // \Segment\Cluster\BlockGroup\BlockVirtual
+		case BlockVirtualElement: // \Segment\Cluster\BlockGroup\BlockVirtual
 			return true
-		case 0x75A1: // \Segment\Cluster\BlockGroup\BlockAdditions
+		case BlockAdditionsElement: // \Segment\Cluster\BlockGroup\BlockAdditions
 			return true
-		case 0xA6: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore
+		case BlockMoreElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore
 			return true
-		case 0xEE: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAddID
+		case BlockAddIDElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAddID
 			return true
-		case 0xA5: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAdditional
+		case BlockAdditionalElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAdditional
 			return true
-		case 0x9B: // \Segment\Cluster\BlockGroup\BlockDuration
+		case BlockDurationElement: // \Segment\Cluster\BlockGroup\BlockDuration
 			return true
-		case 0xFA: // \Segment\Cluster\BlockGroup\ReferencePriority
+		case ReferencePriorityElement: // \Segment\Cluster\BlockGroup\ReferencePriority
 			return true
-		case 0xFB: // \Segment\Cluster\BlockGroup\ReferenceBlock
+		case ReferenceBlockElement: // \Segment\Cluster\BlockGroup\ReferenceBlock
 			return true
-		case 0xFD: // \Segment\Cluster\BlockGroup\ReferenceVirtual
+		case ReferenceVirtualElement: // \Segment\Cluster\BlockGroup\ReferenceVirtual
 			return true
-		case 0xA4: // \Segment\Cluster\BlockGroup\CodecState
+		case CodecStateElement: // \Segment\Cluster\BlockGroup\CodecState
 			return true
-		case 0x75A2: // \Segment\Cluster\BlockGroup\DiscardPadding
+		case DiscardPaddingElement: // \Segment\Cluster\BlockGroup\DiscardPadding
 			return true
-		case 0x8E: // \Segment\Cluster\BlockGroup\Slices
+		case SlicesElement: // \Segment\Cluster\BlockGroup\Slices
 			return true
-		case 0xE8: // \Segment\Cluster\BlockGroup\Slices\TimeSlice
+		case TimeSliceElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice
 			return true
-		case 0xCC: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\LaceNumber
+		case LaceNumberElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\LaceNumber
 			return true
-		case 0xCD: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\FrameNumber
+		case FrameNumberElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\FrameNumber
 			return true
-		case 0xCB: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\BlockAdditionID
+		case BlockAdditionIDElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\BlockAdditionID
 			return true
-		case 0xCE: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\Delay
+		case DelayElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\Delay
 			return true
-		case 0xCF: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\SliceDuration
+		case SliceDurationElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\SliceDuration
 			return true
-		case 0xC8: // \Segment\Cluster\BlockGroup\ReferenceFrame
+		case ReferenceFrameElement: // \Segment\Cluster\BlockGroup\ReferenceFrame
 			return true
-		case 0xC9: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceOffset
+		case ReferenceOffsetElement: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceOffset
 			return true
-		case 0xCA: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceTimeCode
+		case ReferenceTimeCodeElement: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceTimeCode
 			return true
-		case 0xAF: // \Segment\Cluster\EncryptedBlock
+		case EncryptedBlockElement: // \Segment\Cluster\EncryptedBlock
 			return true
 		default:
 			return false
 		}
-	case 0x55B0: // \Segment\Tracks\TrackEntry\Video\Colour
+	case ColourElement: // \Segment\Tracks\TrackEntry\Video\Colour
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x2EB524: // \Segment\Tracks\TrackEntry\Video\ColourSpace
+		case ColourSpaceElement: // \Segment\Tracks\TrackEntry\Video\ColourSpace
 			return true
-		case 0x55B1: // \Segment\Tracks\TrackEntry\Video\Colour\MatrixCoefficients
+		case MatrixCoefficientsElement: // \Segment\Tracks\TrackEntry\Video\Colour\MatrixCoefficients
 			return true
-		case 0x55B2: // \Segment\Tracks\TrackEntry\Video\Colour\BitsPerChannel
+		case BitsPerChannelElement: // \Segment\Tracks\TrackEntry\Video\Colour\BitsPerChannel
 			return true
-		case 0x55B3: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingHorz
+		case ChromaSubsamplingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingHorz
 			return true
-		case 0x55B4: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingVert
+		case ChromaSubsamplingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingVert
 			return true
-		case 0x55B5: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingHorz
+		case CbSubsamplingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingHorz
 			return true
-		case 0x55B6: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingVert
+		case CbSubsamplingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingVert
 			return true
-		case 0x55B7: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingHorz
+		case ChromaSitingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingHorz
 			return true
-		case 0x55B8: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingVert
+		case ChromaSitingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingVert
 			return true
-		case 0x55B9: // \Segment\Tracks\TrackEntry\Video\Colour\Range
+		case RangeElement: // \Segment\Tracks\TrackEntry\Video\Colour\Range
 			return true
-		case 0x55BA: // \Segment\Tracks\TrackEntry\Video\Colour\TransferCharacteristics
+		case TransferCharacteristicsElement: // \Segment\Tracks\TrackEntry\Video\Colour\TransferCharacteristics
 			return true
-		case 0x55BB: // \Segment\Tracks\TrackEntry\Video\Colour\Primaries
+		case PrimariesElement: // \Segment\Tracks\TrackEntry\Video\Colour\Primaries
 			return true
-		case 0x55BC: // \Segment\Tracks\TrackEntry\Video\Colour\MaxCLL
+		case MaxCLLElement: // \Segment\Tracks\TrackEntry\Video\Colour\MaxCLL
 			return true
-		case 0x55BD: // \Segment\Tracks\TrackEntry\Video\Colour\MaxFALL
+		case MaxFALLElement: // \Segment\Tracks\TrackEntry\Video\Colour\MaxFALL
 			return true
-		case 0x55D0: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata
+		case MasteringMetadataElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata
 			return true
-		case 0x55D1: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityX
+		case PrimaryRChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityX
 			return true
-		case 0x55D2: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityY
+		case PrimaryRChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityY
 			return true
-		case 0x55D3: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityX
+		case PrimaryGChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityX
 			return true
-		case 0x55D4: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityY
+		case PrimaryGChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityY
 			return true
-		case 0x55D5: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityX
+		case PrimaryBChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityX
 			return true
-		case 0x55D6: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityY
+		case PrimaryBChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityY
 			return true
-		case 0x55D7: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityX
+		case WhitePointChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityX
 			return true
-		case 0x55D8: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityY
+		case WhitePointChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityY
 			return true
-		case 0x55D9: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMax
+		case LuminanceMaxElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMax
 			return true
-		case 0x55DA: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMin
+		case LuminanceMinElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMin
 			return true
 		default:
 			return false
 		}
-	case 0x5034: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression
+	case ContentCompressionElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x4254: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompAlgo
+		case ContentCompAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompAlgo
 			return true
-		case 0x4255: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompSettings
+		case ContentCompSettingsElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompSettings
 			return true
 		default:
 			return false
 		}
-	case 0x6240: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding
+	case ContentEncodingElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x5031: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingOrder
+		case ContentEncodingOrderElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingOrder
 			return true
-		case 0x5032: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingScope
+		case ContentEncodingScopeElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingScope
 			return true
-		case 0x5033: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingType
+		case ContentEncodingTypeElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingType
 			return true
-		case 0x5034: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression
+		case ContentCompressionElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression
 			return true
-		case 0x4254: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompAlgo
+		case ContentCompAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompAlgo
 			return true
-		case 0x4255: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompSettings
+		case ContentCompSettingsElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompSettings
 			return true
-		case 0x5035: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption
+		case ContentEncryptionElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption
 			return true
-		case 0x47E1: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncAlgo
+		case ContentEncAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncAlgo
 			return true
-		case 0x47E2: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncKeyID
+		case ContentEncKeyIDElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncKeyID
 			return true
-		case 0x47E3: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSignature
+		case ContentSignatureElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSignature
 			return true
-		case 0x47E4: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigKeyID
+		case ContentSigKeyIDElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigKeyID
 			return true
-		case 0x47E5: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigAlgo
+		case ContentSigAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigAlgo
 			return true
-		case 0x47E6: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigHashAlgo
+		case ContentSigHashAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigHashAlgo
 			return true
 		default:
 			return false
 		}
-	case 0x6D80: // \Segment\Tracks\TrackEntry\ContentEncodings
+	case ContentEncodingsElement: // \Segment\Tracks\TrackEntry\ContentEncodings
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x6240: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding
+		case ContentEncodingElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding
 			return true
-		case 0x5031: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingOrder
+		case ContentEncodingOrderElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingOrder
 			return true
-		case 0x5032: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingScope
+		case ContentEncodingScopeElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingScope
 			return true
-		case 0x5033: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingType
+		case ContentEncodingTypeElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingType
 			return true
-		case 0x5034: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression
+		case ContentCompressionElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression
 			return true
-		case 0x4254: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompAlgo
+		case ContentCompAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompAlgo
 			return true
-		case 0x4255: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompSettings
+		case ContentCompSettingsElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompSettings
 			return true
-		case 0x5035: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption
+		case ContentEncryptionElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption
 			return true
-		case 0x47E1: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncAlgo
+		case ContentEncAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncAlgo
 			return true
-		case 0x47E2: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncKeyID
+		case ContentEncKeyIDElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncKeyID
 			return true
-		case 0x47E3: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSignature
+		case ContentSignatureElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSignature
 			return true
-		case 0x47E4: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigKeyID
+		case ContentSigKeyIDElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigKeyID
 			return true
-		case 0x47E5: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigAlgo
+		case ContentSigAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigAlgo
 			return true
-		case 0x47E6: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigHashAlgo
+		case ContentSigHashAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigHashAlgo
 			return true
 		default:
 			return false
 		}
-	case 0x5035: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption
+	case ContentEncryptionElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x47E1: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncAlgo
+		case ContentEncAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncAlgo
 			return true
-		case 0x47E2: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncKeyID
+		case ContentEncKeyIDElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncKeyID
 			return true
-		case 0x47E3: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSignature
+		case ContentSignatureElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSignature
 			return true
-		case 0x47E4: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigKeyID
+		case ContentSigKeyIDElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigKeyID
 			return true
-		case 0x47E5: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigAlgo
+		case ContentSigAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigAlgo
 			return true
-		case 0x47E6: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigHashAlgo
+		case ContentSigHashAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigHashAlgo
 			return true
 		default:
 			return false
 		}
-	case 0xBB: // \Segment\Cues\CuePoint
+	case CuePointElement: // \Segment\Cues\CuePoint
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xB3: // \Segment\Cues\CuePoint\CueTime
+		case CueTimeElement: // \Segment\Cues\CuePoint\CueTime
 			return true
-		case 0xB7: // \Segment\Cues\CuePoint\CueTrackPositions
+		case CueTrackPositionsElement: // \Segment\Cues\CuePoint\CueTrackPositions
 			return true
-		case 0xF7: // \Segment\Cues\CuePoint\CueTrackPositions\CueTrack
+		case CueTrackElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueTrack
 			return true
-		case 0xF1: // \Segment\Cues\CuePoint\CueTrackPositions\CueClusterPosition
+		case CueClusterPositionElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueClusterPosition
 			return true
-		case 0xF0: // \Segment\Cues\CuePoint\CueTrackPositions\CueRelativePosition
+		case CueRelativePositionElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueRelativePosition
 			return true
-		case 0xB2: // \Segment\Cues\CuePoint\CueTrackPositions\CueDuration
+		case CueDurationElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueDuration
 			return true
-		case 0x5378: // \Segment\Cues\CuePoint\CueTrackPositions\CueBlockNumber
+		case CueBlockNumberElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueBlockNumber
 			return true
-		case 0xEA: // \Segment\Cues\CuePoint\CueTrackPositions\CueCodecState
+		case CueCodecStateElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueCodecState
 			return true
-		case 0xDB: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference
+		case CueReferenceElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference
 			return true
-		case 0x96: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefTime
+		case CueRefTimeElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefTime
 			return true
-		case 0x97: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCluster
+		case CueRefClusterElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCluster
 			return true
-		case 0x535F: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefNumber
+		case CueRefNumberElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefNumber
 			return true
-		case 0xEB: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCodecState
+		case CueRefCodecStateElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCodecState
 			return true
 		default:
 			return false
 		}
-	case 0xDB: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference
+	case CueReferenceElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x96: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefTime
+		case CueRefTimeElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefTime
 			return true
-		case 0x97: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCluster
+		case CueRefClusterElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCluster
 			return true
-		case 0x535F: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefNumber
+		case CueRefNumberElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefNumber
 			return true
-		case 0xEB: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCodecState
+		case CueRefCodecStateElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCodecState
 			return true
 		default:
 			return false
 		}
-	case 0xB7: // \Segment\Cues\CuePoint\CueTrackPositions
+	case CueTrackPositionsElement: // \Segment\Cues\CuePoint\CueTrackPositions
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xF7: // \Segment\Cues\CuePoint\CueTrackPositions\CueTrack
+		case CueTrackElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueTrack
 			return true
-		case 0xF1: // \Segment\Cues\CuePoint\CueTrackPositions\CueClusterPosition
+		case CueClusterPositionElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueClusterPosition
 			return true
-		case 0xF0: // \Segment\Cues\CuePoint\CueTrackPositions\CueRelativePosition
+		case CueRelativePositionElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueRelativePosition
 			return true
-		case 0xB2: // \Segment\Cues\CuePoint\CueTrackPositions\CueDuration
+		case CueDurationElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueDuration
 			return true
-		case 0x5378: // \Segment\Cues\CuePoint\CueTrackPositions\CueBlockNumber
+		case CueBlockNumberElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueBlockNumber
 			return true
-		case 0xEA: // \Segment\Cues\CuePoint\CueTrackPositions\CueCodecState
+		case CueCodecStateElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueCodecState
 			return true
-		case 0xDB: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference
+		case CueReferenceElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference
 			return true
-		case 0x96: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefTime
+		case CueRefTimeElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefTime
 			return true
-		case 0x97: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCluster
+		case CueRefClusterElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCluster
 			return true
-		case 0x535F: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefNumber
+		case CueRefNumberElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefNumber
 			return true
-		case 0xEB: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCodecState
+		case CueRefCodecStateElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCodecState
 			return true
 		default:
 			return false
 		}
-	case 0x1C53BB6B: // \Segment\Cues
+	case CuesElement: // \Segment\Cues
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xBB: // \Segment\Cues\CuePoint
+		case CuePointElement: // \Segment\Cues\CuePoint
 			return true
-		case 0xB3: // \Segment\Cues\CuePoint\CueTime
+		case CueTimeElement: // \Segment\Cues\CuePoint\CueTime
 			return true
-		case 0xB7: // \Segment\Cues\CuePoint\CueTrackPositions
+		case CueTrackPositionsElement: // \Segment\Cues\CuePoint\CueTrackPositions
 			return true
-		case 0xF7: // \Segment\Cues\CuePoint\CueTrackPositions\CueTrack
+		case CueTrackElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueTrack
 			return true
-		case 0xF1: // \Segment\Cues\CuePoint\CueTrackPositions\CueClusterPosition
+		case CueClusterPositionElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueClusterPosition
 			return true
-		case 0xF0: // \Segment\Cues\CuePoint\CueTrackPositions\CueRelativePosition
+		case CueRelativePositionElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueRelativePosition
 			return true
-		case 0xB2: // \Segment\Cues\CuePoint\CueTrackPositions\CueDuration
+		case CueDurationElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueDuration
 			return true
-		case 0x5378: // \Segment\Cues\CuePoint\CueTrackPositions\CueBlockNumber
+		case CueBlockNumberElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueBlockNumber
 			return true
-		case 0xEA: // \Segment\Cues\CuePoint\CueTrackPositions\CueCodecState
+		case CueCodecStateElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueCodecState
 			return true
-		case 0xDB: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference
+		case CueReferenceElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference
 			return true
-		case 0x96: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefTime
+		case CueRefTimeElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefTime
 			return true
-		case 0x97: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCluster
+		case CueRefClusterElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCluster
 			return true
-		case 0x535F: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefNumber
+		case CueRefNumberElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefNumber
 			return true
-		case 0xEB: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCodecState
+		case CueRefCodecStateElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCodecState
 			return true
 		default:
 			return false
 		}
-	case 0x4281: // \EBML\DocTypeExtension
+	case DocTypeExtensionElement: // \EBML\DocTypeExtension
 		switch p1 {
-		case 0x4283: // \EBML\DocTypeExtension\DocTypeExtensionName
+		case DocTypeExtensionNameElement: // \EBML\DocTypeExtension\DocTypeExtensionName
 			return true
-		case 0x4284: // \EBML\DocTypeExtension\DocTypeExtensionVersion
+		case DocTypeExtensionVersionElement: // \EBML\DocTypeExtension\DocTypeExtensionVersion
 			return true
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
 		default:
 			return false
 		}
-	case 0x1A45DFA3: // \EBML
+	case EBMLElement: // \EBML
 		switch p1 {
-		case 0x4286: // \EBML\EBMLVersion
+		case EBMLVersionElement: // \EBML\EBMLVersion
 			return true
-		case 0x42F7: // \EBML\EBMLReadVersion
+		case EBMLReadVersionElement: // \EBML\EBMLReadVersion
 			return true
-		case 0x42F2: // \EBML\EBMLMaxIDLength
+		case EBMLMaxIDLengthElement: // \EBML\EBMLMaxIDLength
 			return true
-		case 0x42F3: // \EBML\EBMLMaxSizeLength
+		case EBMLMaxSizeLengthElement: // \EBML\EBMLMaxSizeLength
 			return true
-		case 0x4282: // \EBML\DocType
+		case DocTypeElement: // \EBML\DocType
 			return true
-		case 0x4287: // \EBML\DocTypeVersion
+		case DocTypeVersionElement: // \EBML\DocTypeVersion
 			return true
-		case 0x4285: // \EBML\DocTypeReadVersion
+		case DocTypeReadVersionElement: // \EBML\DocTypeReadVersion
 			return true
-		case 0x4281: // \EBML\DocTypeExtension
+		case DocTypeExtensionElement: // \EBML\DocTypeExtension
 			return true
-		case 0x4283: // \EBML\DocTypeExtension\DocTypeExtensionName
+		case DocTypeExtensionNameElement: // \EBML\DocTypeExtension\DocTypeExtensionName
 			return true
-		case 0x4284: // \EBML\DocTypeExtension\DocTypeExtensionVersion
+		case DocTypeExtensionVersionElement: // \EBML\DocTypeExtension\DocTypeExtensionVersion
 			return true
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
 		default:
 			return false
 		}
-	case 0x45B9: // \Segment\Chapters\EditionEntry
+	case EditionEntryElement: // \Segment\Chapters\EditionEntry
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x45BC: // \Segment\Chapters\EditionEntry\EditionUID
+		case EditionUIDElement: // \Segment\Chapters\EditionEntry\EditionUID
 			return true
-		case 0x45BD: // \Segment\Chapters\EditionEntry\EditionFlagHidden
+		case EditionFlagHiddenElement: // \Segment\Chapters\EditionEntry\EditionFlagHidden
 			return true
-		case 0x45DB: // \Segment\Chapters\EditionEntry\EditionFlagDefault
+		case EditionFlagDefaultElement: // \Segment\Chapters\EditionEntry\EditionFlagDefault
 			return true
-		case 0x45DD: // \Segment\Chapters\EditionEntry\EditionFlagOrdered
+		case EditionFlagOrderedElement: // \Segment\Chapters\EditionEntry\EditionFlagOrdered
 			return true
-		case 0xB6: // \Segment\Chapters\EditionEntry\ChapterAtom
+		case ChapterAtomElement: // \Segment\Chapters\EditionEntry\ChapterAtom
 			return true
-		case 0x73C4: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterUID
+		case ChapterUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterUID
 			return true
-		case 0x5654: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterStringUID
+		case ChapterStringUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterStringUID
 			return true
-		case 0x91: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeStart
+		case ChapterTimeStartElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeStart
 			return true
-		case 0x92: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeEnd
+		case ChapterTimeEndElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeEnd
 			return true
-		case 0x98: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagHidden
+		case ChapterFlagHiddenElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagHidden
 			return true
-		case 0x4598: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagEnabled
+		case ChapterFlagEnabledElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagEnabled
 			return true
-		case 0x6E67: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentUID
+		case ChapterSegmentUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentUID
 			return true
-		case 0x6EBC: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentEditionUID
+		case ChapterSegmentEditionUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentEditionUID
 			return true
-		case 0x63C3: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterPhysicalEquiv
+		case ChapterPhysicalEquivElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterPhysicalEquiv
 			return true
-		case 0x8F: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack
+		case ChapterTrackElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack
 			return true
-		case 0x89: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack\ChapterTrackNumber
+		case ChapterTrackNumberElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack\ChapterTrackNumber
 			return true
-		case 0x80: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay
+		case ChapterDisplayElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay
 			return true
-		case 0x85: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapString
+		case ChapStringElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapString
 			return true
-		case 0x437C: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguage
+		case ChapLanguageElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguage
 			return true
-		case 0x437D: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguageIETF
+		case ChapLanguageIETFElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguageIETF
 			return true
-		case 0x437E: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapCountry
+		case ChapCountryElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapCountry
 			return true
-		case 0x6944: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess
+		case ChapProcessElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess
 			return true
-		case 0x6955: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCodecID
+		case ChapProcessCodecIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCodecID
 			return true
-		case 0x450D: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessPrivate
+		case ChapProcessPrivateElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessPrivate
 			return true
-		case 0x6911: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand
+		case ChapProcessCommandElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand
 			return true
-		case 0x6922: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessTime
+		case ChapProcessTimeElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessTime
 			return true
-		case 0x6933: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessData
+		case ChapProcessDataElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessData
 			return true
 		default:
 			return false
 		}
-	case 0x1549A966: // \Segment\Info
+	case InfoElement: // \Segment\Info
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x73A4: // \Segment\Info\SegmentUID
+		case SegmentUIDElement: // \Segment\Info\SegmentUID
 			return true
-		case 0x7384: // \Segment\Info\SegmentFilename
+		case SegmentFilenameElement: // \Segment\Info\SegmentFilename
 			return true
-		case 0x3CB923: // \Segment\Info\PrevUID
+		case PrevUIDElement: // \Segment\Info\PrevUID
 			return true
-		case 0x3C83AB: // \Segment\Info\PrevFilename
+		case PrevFilenameElement: // \Segment\Info\PrevFilename
 			return true
-		case 0x3EB923: // \Segment\Info\NextUID
+		case NextUIDElement: // \Segment\Info\NextUID
 			return true
-		case 0x3E83BB: // \Segment\Info\NextFilename
+		case NextFilenameElement: // \Segment\Info\NextFilename
 			return true
-		case 0x4444: // \Segment\Info\SegmentFamily
+		case SegmentFamilyElement: // \Segment\Info\SegmentFamily
 			return true
-		case 0x6924: // \Segment\Info\ChapterTranslate
+		case ChapterTranslateElement: // \Segment\Info\ChapterTranslate
 			return true
-		case 0x69FC: // \Segment\Info\ChapterTranslate\ChapterTranslateEditionUID
+		case ChapterTranslateEditionUIDElement: // \Segment\Info\ChapterTranslate\ChapterTranslateEditionUID
 			return true
-		case 0x69BF: // \Segment\Info\ChapterTranslate\ChapterTranslateCodec
+		case ChapterTranslateCodecElement: // \Segment\Info\ChapterTranslate\ChapterTranslateCodec
 			return true
-		case 0x69A5: // \Segment\Info\ChapterTranslate\ChapterTranslateID
+		case ChapterTranslateIDElement: // \Segment\Info\ChapterTranslate\ChapterTranslateID
 			return true
-		case 0x2AD7B1: // \Segment\Info\TimecodeScale
+		case TimecodeScaleElement: // \Segment\Info\TimecodeScale
 			return true
-		case 0x4489: // \Segment\Info\Duration
+		case DurationElement: // \Segment\Info\Duration
 			return true
-		case 0x4461: // \Segment\Info\DateUTC
+		case DateUTCElement: // \Segment\Info\DateUTC
 			return true
-		case 0x7BA9: // \Segment\Info\Title
+		case TitleElement: // \Segment\Info\Title
 			return true
-		case 0x4D80: // \Segment\Info\MuxingApp
+		case MuxingAppElement: // \Segment\Info\MuxingApp
 			return true
-		case 0x5741: // \Segment\Info\WritingApp
+		case WritingAppElement: // \Segment\Info\WritingApp
 			return true
 		default:
 			return false
 		}
-	case 0x55D0: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata
+	case MasteringMetadataElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x55D1: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityX
+		case PrimaryRChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityX
 			return true
-		case 0x55D2: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityY
+		case PrimaryRChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityY
 			return true
-		case 0x55D3: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityX
+		case PrimaryGChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityX
 			return true
-		case 0x55D4: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityY
+		case PrimaryGChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityY
 			return true
-		case 0x55D5: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityX
+		case PrimaryBChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityX
 			return true
-		case 0x55D6: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityY
+		case PrimaryBChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityY
 			return true
-		case 0x55D7: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityX
+		case WhitePointChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityX
 			return true
-		case 0x55D8: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityY
+		case WhitePointChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityY
 			return true
-		case 0x55D9: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMax
+		case LuminanceMaxElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMax
 			return true
-		case 0x55DA: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMin
+		case LuminanceMinElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMin
 			return true
 		default:
 			return false
 		}
-	case 0x7670: // \Segment\Tracks\TrackEntry\Video\Projection
+	case ProjectionElement: // \Segment\Tracks\TrackEntry\Video\Projection
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x7671: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionType
+		case ProjectionTypeElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionType
 			return true
-		case 0x7672: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPrivate
+		case ProjectionPrivateElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPrivate
 			return true
-		case 0x7673: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseYaw
+		case ProjectionPoseYawElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseYaw
 			return true
-		case 0x7674: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPosePitch
+		case ProjectionPosePitchElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPosePitch
 			return true
-		case 0x7675: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseRoll
+		case ProjectionPoseRollElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseRoll
 			return true
 		default:
 			return false
 		}
-	case 0xC8: // \Segment\Cluster\BlockGroup\ReferenceFrame
+	case ReferenceFrameElement: // \Segment\Cluster\BlockGroup\ReferenceFrame
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xC9: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceOffset
+		case ReferenceOffsetElement: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceOffset
 			return true
-		case 0xCA: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceTimeCode
+		case ReferenceTimeCodeElement: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceTimeCode
 			return true
 		default:
 			return false
 		}
-	case 0x4DBB: // \Segment\SeekHead\Seek
+	case SeekElement: // \Segment\SeekHead\Seek
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x53AB: // \Segment\SeekHead\Seek\SeekID
+		case SeekIDElement: // \Segment\SeekHead\Seek\SeekID
 			return true
-		case 0x53AC: // \Segment\SeekHead\Seek\SeekPosition
+		case SeekPositionElement: // \Segment\SeekHead\Seek\SeekPosition
 			return true
 		default:
 			return false
 		}
-	case 0x114D9B74: // \Segment\SeekHead
+	case SeekHeadElement: // \Segment\SeekHead
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x4DBB: // \Segment\SeekHead\Seek
+		case SeekElement: // \Segment\SeekHead\Seek
 			return true
-		case 0x53AB: // \Segment\SeekHead\Seek\SeekID
+		case SeekIDElement: // \Segment\SeekHead\Seek\SeekID
 			return true
-		case 0x53AC: // \Segment\SeekHead\Seek\SeekPosition
+		case SeekPositionElement: // \Segment\SeekHead\Seek\SeekPosition
 			return true
 		default:
 			return false
 		}
-	case 0x18538067: // \Segment
+	case SegmentElement: // \Segment
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x114D9B74: // \Segment\SeekHead
+		case SeekHeadElement: // \Segment\SeekHead
 			return true
-		case 0x4DBB: // \Segment\SeekHead\Seek
+		case SeekElement: // \Segment\SeekHead\Seek
 			return true
-		case 0x53AB: // \Segment\SeekHead\Seek\SeekID
+		case SeekIDElement: // \Segment\SeekHead\Seek\SeekID
 			return true
-		case 0x53AC: // \Segment\SeekHead\Seek\SeekPosition
+		case SeekPositionElement: // \Segment\SeekHead\Seek\SeekPosition
 			return true
-		case 0x1549A966: // \Segment\Info
+		case InfoElement: // \Segment\Info
 			return true
-		case 0x73A4: // \Segment\Info\SegmentUID
+		case SegmentUIDElement: // \Segment\Info\SegmentUID
 			return true
-		case 0x7384: // \Segment\Info\SegmentFilename
+		case SegmentFilenameElement: // \Segment\Info\SegmentFilename
 			return true
-		case 0x3CB923: // \Segment\Info\PrevUID
+		case PrevUIDElement: // \Segment\Info\PrevUID
 			return true
-		case 0x3C83AB: // \Segment\Info\PrevFilename
+		case PrevFilenameElement: // \Segment\Info\PrevFilename
 			return true
-		case 0x3EB923: // \Segment\Info\NextUID
+		case NextUIDElement: // \Segment\Info\NextUID
 			return true
-		case 0x3E83BB: // \Segment\Info\NextFilename
+		case NextFilenameElement: // \Segment\Info\NextFilename
 			return true
-		case 0x4444: // \Segment\Info\SegmentFamily
+		case SegmentFamilyElement: // \Segment\Info\SegmentFamily
 			return true
-		case 0x6924: // \Segment\Info\ChapterTranslate
+		case ChapterTranslateElement: // \Segment\Info\ChapterTranslate
 			return true
-		case 0x69FC: // \Segment\Info\ChapterTranslate\ChapterTranslateEditionUID
+		case ChapterTranslateEditionUIDElement: // \Segment\Info\ChapterTranslate\ChapterTranslateEditionUID
 			return true
-		case 0x69BF: // \Segment\Info\ChapterTranslate\ChapterTranslateCodec
+		case ChapterTranslateCodecElement: // \Segment\Info\ChapterTranslate\ChapterTranslateCodec
 			return true
-		case 0x69A5: // \Segment\Info\ChapterTranslate\ChapterTranslateID
+		case ChapterTranslateIDElement: // \Segment\Info\ChapterTranslate\ChapterTranslateID
 			return true
-		case 0x2AD7B1: // \Segment\Info\TimecodeScale
+		case TimecodeScaleElement: // \Segment\Info\TimecodeScale
 			return true
-		case 0x4489: // \Segment\Info\Duration
+		case DurationElement: // \Segment\Info\Duration
 			return true
-		case 0x4461: // \Segment\Info\DateUTC
+		case DateUTCElement: // \Segment\Info\DateUTC
 			return true
-		case 0x7BA9: // \Segment\Info\Title
+		case TitleElement: // \Segment\Info\Title
 			return true
-		case 0x4D80: // \Segment\Info\MuxingApp
+		case MuxingAppElement: // \Segment\Info\MuxingApp
 			return true
-		case 0x5741: // \Segment\Info\WritingApp
+		case WritingAppElement: // \Segment\Info\WritingApp
 			return true
-		case 0x1F43B675: // \Segment\Cluster
+		case ClusterElement: // \Segment\Cluster
 			return true
-		case 0xE7: // \Segment\Cluster\Timecode
+		case TimecodeElement: // \Segment\Cluster\Timecode
 			return true
-		case 0x5854: // \Segment\Cluster\SilentTracks
+		case SilentTracksElement: // \Segment\Cluster\SilentTracks
 			return true
-		case 0x58D7: // \Segment\Cluster\SilentTracks\SilentTrackNumber
+		case SilentTrackNumberElement: // \Segment\Cluster\SilentTracks\SilentTrackNumber
 			return true
-		case 0xA7: // \Segment\Cluster\Position
+		case PositionElement: // \Segment\Cluster\Position
 			return true
-		case 0xAB: // \Segment\Cluster\PrevSize
+		case PrevSizeElement: // \Segment\Cluster\PrevSize
 			return true
-		case 0xA3: // \Segment\Cluster\SimpleBlock
+		case SimpleBlockElement: // \Segment\Cluster\SimpleBlock
 			return true
-		case 0xA0: // \Segment\Cluster\BlockGroup
+		case BlockGroupElement: // \Segment\Cluster\BlockGroup
 			return true
-		case 0xA1: // \Segment\Cluster\BlockGroup\Block
+		case BlockElement: // \Segment\Cluster\BlockGroup\Block
 			return true
-		case 0xA2: // \Segment\Cluster\BlockGroup\BlockVirtual
+		case BlockVirtualElement: // \Segment\Cluster\BlockGroup\BlockVirtual
 			return true
-		case 0x75A1: // \Segment\Cluster\BlockGroup\BlockAdditions
+		case BlockAdditionsElement: // \Segment\Cluster\BlockGroup\BlockAdditions
 			return true
-		case 0xA6: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore
+		case BlockMoreElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore
 			return true
-		case 0xEE: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAddID
+		case BlockAddIDElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAddID
 			return true
-		case 0xA5: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAdditional
+		case BlockAdditionalElement: // \Segment\Cluster\BlockGroup\BlockAdditions\BlockMore\BlockAdditional
 			return true
-		case 0x9B: // \Segment\Cluster\BlockGroup\BlockDuration
+		case BlockDurationElement: // \Segment\Cluster\BlockGroup\BlockDuration
 			return true
-		case 0xFA: // \Segment\Cluster\BlockGroup\ReferencePriority
+		case ReferencePriorityElement: // \Segment\Cluster\BlockGroup\ReferencePriority
 			return true
-		case 0xFB: // \Segment\Cluster\BlockGroup\ReferenceBlock
+		case ReferenceBlockElement: // \Segment\Cluster\BlockGroup\ReferenceBlock
 			return true
-		case 0xFD: // \Segment\Cluster\BlockGroup\ReferenceVirtual
+		case ReferenceVirtualElement: // \Segment\Cluster\BlockGroup\ReferenceVirtual
 			return true
-		case 0xA4: // \Segment\Cluster\BlockGroup\CodecState
+		case CodecStateElement: // \Segment\Cluster\BlockGroup\CodecState
 			return true
-		case 0x75A2: // \Segment\Cluster\BlockGroup\DiscardPadding
+		case DiscardPaddingElement: // \Segment\Cluster\BlockGroup\DiscardPadding
 			return true
-		case 0x8E: // \Segment\Cluster\BlockGroup\Slices
+		case SlicesElement: // \Segment\Cluster\BlockGroup\Slices
 			return true
-		case 0xE8: // \Segment\Cluster\BlockGroup\Slices\TimeSlice
+		case TimeSliceElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice
 			return true
-		case 0xCC: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\LaceNumber
+		case LaceNumberElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\LaceNumber
 			return true
-		case 0xCD: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\FrameNumber
+		case FrameNumberElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\FrameNumber
 			return true
-		case 0xCB: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\BlockAdditionID
+		case BlockAdditionIDElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\BlockAdditionID
 			return true
-		case 0xCE: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\Delay
+		case DelayElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\Delay
 			return true
-		case 0xCF: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\SliceDuration
+		case SliceDurationElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\SliceDuration
 			return true
-		case 0xC8: // \Segment\Cluster\BlockGroup\ReferenceFrame
+		case ReferenceFrameElement: // \Segment\Cluster\BlockGroup\ReferenceFrame
 			return true
-		case 0xC9: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceOffset
+		case ReferenceOffsetElement: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceOffset
 			return true
-		case 0xCA: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceTimeCode
+		case ReferenceTimeCodeElement: // \Segment\Cluster\BlockGroup\ReferenceFrame\ReferenceTimeCode
 			return true
-		case 0xAF: // \Segment\Cluster\EncryptedBlock
+		case EncryptedBlockElement: // \Segment\Cluster\EncryptedBlock
 			return true
-		case 0x1654AE6B: // \Segment\Tracks
+		case TracksElement: // \Segment\Tracks
 			return true
-		case 0xAE: // \Segment\Tracks\TrackEntry
+		case TrackEntryElement: // \Segment\Tracks\TrackEntry
 			return true
-		case 0xD7: // \Segment\Tracks\TrackEntry\TrackNumber
+		case TrackNumberElement: // \Segment\Tracks\TrackEntry\TrackNumber
 			return true
-		case 0x73C5: // \Segment\Tracks\TrackEntry\TrackUID
+		case TrackUIDElement: // \Segment\Tracks\TrackEntry\TrackUID
 			return true
-		case 0x83: // \Segment\Tracks\TrackEntry\TrackType
+		case TrackTypeElement: // \Segment\Tracks\TrackEntry\TrackType
 			return true
-		case 0xB9: // \Segment\Tracks\TrackEntry\FlagEnabled
+		case FlagEnabledElement: // \Segment\Tracks\TrackEntry\FlagEnabled
 			return true
-		case 0x88: // \Segment\Tracks\TrackEntry\FlagDefault
+		case FlagDefaultElement: // \Segment\Tracks\TrackEntry\FlagDefault
 			return true
-		case 0x55AA: // \Segment\Tracks\TrackEntry\FlagForced
+		case FlagForcedElement: // \Segment\Tracks\TrackEntry\FlagForced
 			return true
-		case 0x9C: // \Segment\Tracks\TrackEntry\FlagLacing
+		case FlagLacingElement: // \Segment\Tracks\TrackEntry\FlagLacing
 			return true
-		case 0x6DE7: // \Segment\Tracks\TrackEntry\MinCache
+		case MinCacheElement: // \Segment\Tracks\TrackEntry\MinCache
 			return true
-		case 0x6DF8: // \Segment\Tracks\TrackEntry\MaxCache
+		case MaxCacheElement: // \Segment\Tracks\TrackEntry\MaxCache
 			return true
-		case 0x23E383: // \Segment\Tracks\TrackEntry\DefaultDuration
+		case DefaultDurationElement: // \Segment\Tracks\TrackEntry\DefaultDuration
 			return true
-		case 0x234E7A: // \Segment\Tracks\TrackEntry\DefaultDecodedFieldDuration
+		case DefaultDecodedFieldDurationElement: // \Segment\Tracks\TrackEntry\DefaultDecodedFieldDuration
 			return true
-		case 0x23314F: // \Segment\Tracks\TrackEntry\TrackTimecodeScale
+		case TrackTimecodeScaleElement: // \Segment\Tracks\TrackEntry\TrackTimecodeScale
 			return true
-		case 0x537F: // \Segment\Tracks\TrackEntry\TrackOffset
+		case TrackOffsetElement: // \Segment\Tracks\TrackEntry\TrackOffset
 			return true
-		case 0x55EE: // \Segment\Tracks\TrackEntry\MaxBlockAdditionID
+		case MaxBlockAdditionIDElement: // \Segment\Tracks\TrackEntry\MaxBlockAdditionID
 			return true
-		case 0x536E: // \Segment\Tracks\TrackEntry\Name
+		case NameElement: // \Segment\Tracks\TrackEntry\Name
 			return true
-		case 0x22B59C: // \Segment\Tracks\TrackEntry\Language
+		case LanguageElement: // \Segment\Tracks\TrackEntry\Language
 			return true
-		case 0x22B59D: // \Segment\Tracks\TrackEntry\LanguageIETF
+		case LanguageIETFElement: // \Segment\Tracks\TrackEntry\LanguageIETF
 			return true
-		case 0x86: // \Segment\Tracks\TrackEntry\CodecID
+		case CodecIDElement: // \Segment\Tracks\TrackEntry\CodecID
 			return true
-		case 0x63A2: // \Segment\Tracks\TrackEntry\CodecPrivate
+		case CodecPrivateElement: // \Segment\Tracks\TrackEntry\CodecPrivate
 			return true
-		case 0x258688: // \Segment\Tracks\TrackEntry\CodecName
+		case CodecNameElement: // \Segment\Tracks\TrackEntry\CodecName
 			return true
-		case 0x7446: // \Segment\Tracks\TrackEntry\AttachmentLink
+		case AttachmentLinkElement: // \Segment\Tracks\TrackEntry\AttachmentLink
 			return true
-		case 0x3A9697: // \Segment\Tracks\TrackEntry\CodecSettings
+		case CodecSettingsElement: // \Segment\Tracks\TrackEntry\CodecSettings
 			return true
-		case 0x3B4040: // \Segment\Tracks\TrackEntry\CodecInfoURL
+		case CodecInfoURLElement: // \Segment\Tracks\TrackEntry\CodecInfoURL
 			return true
-		case 0x26B240: // \Segment\Tracks\TrackEntry\CodecDownloadURL
+		case CodecDownloadURLElement: // \Segment\Tracks\TrackEntry\CodecDownloadURL
 			return true
-		case 0xAA: // \Segment\Tracks\TrackEntry\CodecDecodeAll
+		case CodecDecodeAllElement: // \Segment\Tracks\TrackEntry\CodecDecodeAll
 			return true
-		case 0x6FAB: // \Segment\Tracks\TrackEntry\TrackOverlay
+		case TrackOverlayElement: // \Segment\Tracks\TrackEntry\TrackOverlay
 			return true
-		case 0x56AA: // \Segment\Tracks\TrackEntry\CodecDelay
+		case CodecDelayElement: // \Segment\Tracks\TrackEntry\CodecDelay
 			return true
-		case 0x56BB: // \Segment\Tracks\TrackEntry\SeekPreRoll
+		case SeekPreRollElement: // \Segment\Tracks\TrackEntry\SeekPreRoll
 			return true
-		case 0x6624: // \Segment\Tracks\TrackEntry\TrackTranslate
+		case TrackTranslateElement: // \Segment\Tracks\TrackEntry\TrackTranslate
 			return true
-		case 0x66FC: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateEditionUID
+		case TrackTranslateEditionUIDElement: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateEditionUID
 			return true
-		case 0x66BF: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateCodec
+		case TrackTranslateCodecElement: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateCodec
 			return true
-		case 0x66A5: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateTrackID
+		case TrackTranslateTrackIDElement: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateTrackID
 			return true
-		case 0xE0: // \Segment\Tracks\TrackEntry\Video
+		case VideoElement: // \Segment\Tracks\TrackEntry\Video
 			return true
-		case 0x9A: // \Segment\Tracks\TrackEntry\Video\FlagInterlaced
+		case FlagInterlacedElement: // \Segment\Tracks\TrackEntry\Video\FlagInterlaced
 			return true
-		case 0x9D: // \Segment\Tracks\TrackEntry\Video\FieldOrder
+		case FieldOrderElement: // \Segment\Tracks\TrackEntry\Video\FieldOrder
 			return true
-		case 0x53B8: // \Segment\Tracks\TrackEntry\Video\StereoMode
+		case StereoModeElement: // \Segment\Tracks\TrackEntry\Video\StereoMode
 			return true
-		case 0x53C0: // \Segment\Tracks\TrackEntry\Video\AlphaMode
+		case AlphaModeElement: // \Segment\Tracks\TrackEntry\Video\AlphaMode
 			return true
-		case 0x53B9: // \Segment\Tracks\TrackEntry\Video\OldStereoMode
+		case OldStereoModeElement: // \Segment\Tracks\TrackEntry\Video\OldStereoMode
 			return true
-		case 0xB0: // \Segment\Tracks\TrackEntry\Video\PixelWidth
+		case PixelWidthElement: // \Segment\Tracks\TrackEntry\Video\PixelWidth
 			return true
-		case 0xBA: // \Segment\Tracks\TrackEntry\Video\PixelHeight
+		case PixelHeightElement: // \Segment\Tracks\TrackEntry\Video\PixelHeight
 			return true
-		case 0x54AA: // \Segment\Tracks\TrackEntry\Video\PixelCropBottom
+		case PixelCropBottomElement: // \Segment\Tracks\TrackEntry\Video\PixelCropBottom
 			return true
-		case 0x54BB: // \Segment\Tracks\TrackEntry\Video\PixelCropTop
+		case PixelCropTopElement: // \Segment\Tracks\TrackEntry\Video\PixelCropTop
 			return true
-		case 0x54CC: // \Segment\Tracks\TrackEntry\Video\PixelCropLeft
+		case PixelCropLeftElement: // \Segment\Tracks\TrackEntry\Video\PixelCropLeft
 			return true
-		case 0x54DD: // \Segment\Tracks\TrackEntry\Video\PixelCropRight
+		case PixelCropRightElement: // \Segment\Tracks\TrackEntry\Video\PixelCropRight
 			return true
-		case 0x54B0: // \Segment\Tracks\TrackEntry\Video\DisplayWidth
+		case DisplayWidthElement: // \Segment\Tracks\TrackEntry\Video\DisplayWidth
 			return true
-		case 0x54BA: // \Segment\Tracks\TrackEntry\Video\DisplayHeight
+		case DisplayHeightElement: // \Segment\Tracks\TrackEntry\Video\DisplayHeight
 			return true
-		case 0x54B2: // \Segment\Tracks\TrackEntry\Video\DisplayUnit
+		case DisplayUnitElement: // \Segment\Tracks\TrackEntry\Video\DisplayUnit
 			return true
-		case 0x54B3: // \Segment\Tracks\TrackEntry\Video\AspectRatioType
+		case AspectRatioTypeElement: // \Segment\Tracks\TrackEntry\Video\AspectRatioType
 			return true
-		case 0x2EB524: // \Segment\Tracks\TrackEntry\Video\ColourSpace
+		case ColourSpaceElement: // \Segment\Tracks\TrackEntry\Video\ColourSpace
 			return true
-		case 0x2FB523: // \Segment\Tracks\TrackEntry\Video\GammaValue
+		case GammaValueElement: // \Segment\Tracks\TrackEntry\Video\GammaValue
 			return true
-		case 0x2383E3: // \Segment\Tracks\TrackEntry\Video\FrameRate
+		case FrameRateElement: // \Segment\Tracks\TrackEntry\Video\FrameRate
 			return true
-		case 0x55B0: // \Segment\Tracks\TrackEntry\Video\Colour
+		case ColourElement: // \Segment\Tracks\TrackEntry\Video\Colour
 			return true
-		case 0x55B1: // \Segment\Tracks\TrackEntry\Video\Colour\MatrixCoefficients
+		case MatrixCoefficientsElement: // \Segment\Tracks\TrackEntry\Video\Colour\MatrixCoefficients
 			return true
-		case 0x55B2: // \Segment\Tracks\TrackEntry\Video\Colour\BitsPerChannel
+		case BitsPerChannelElement: // \Segment\Tracks\TrackEntry\Video\Colour\BitsPerChannel
 			return true
-		case 0x55B3: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingHorz
+		case ChromaSubsamplingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingHorz
 			return true
-		case 0x55B4: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingVert
+		case ChromaSubsamplingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingVert
 			return true
-		case 0x55B5: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingHorz
+		case CbSubsamplingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingHorz
 			return true
-		case 0x55B6: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingVert
+		case CbSubsamplingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingVert
 			return true
-		case 0x55B7: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingHorz
+		case ChromaSitingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingHorz
 			return true
-		case 0x55B8: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingVert
+		case ChromaSitingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingVert
 			return true
-		case 0x55B9: // \Segment\Tracks\TrackEntry\Video\Colour\Range
+		case RangeElement: // \Segment\Tracks\TrackEntry\Video\Colour\Range
 			return true
-		case 0x55BA: // \Segment\Tracks\TrackEntry\Video\Colour\TransferCharacteristics
+		case TransferCharacteristicsElement: // \Segment\Tracks\TrackEntry\Video\Colour\TransferCharacteristics
 			return true
-		case 0x55BB: // \Segment\Tracks\TrackEntry\Video\Colour\Primaries
+		case PrimariesElement: // \Segment\Tracks\TrackEntry\Video\Colour\Primaries
 			return true
-		case 0x55BC: // \Segment\Tracks\TrackEntry\Video\Colour\MaxCLL
+		case MaxCLLElement: // \Segment\Tracks\TrackEntry\Video\Colour\MaxCLL
 			return true
-		case 0x55BD: // \Segment\Tracks\TrackEntry\Video\Colour\MaxFALL
+		case MaxFALLElement: // \Segment\Tracks\TrackEntry\Video\Colour\MaxFALL
 			return true
-		case 0x55D0: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata
+		case MasteringMetadataElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata
 			return true
-		case 0x55D1: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityX
+		case PrimaryRChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityX
 			return true
-		case 0x55D2: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityY
+		case PrimaryRChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityY
 			return true
-		case 0x55D3: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityX
+		case PrimaryGChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityX
 			return true
-		case 0x55D4: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityY
+		case PrimaryGChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityY
 			return true
-		case 0x55D5: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityX
+		case PrimaryBChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityX
 			return true
-		case 0x55D6: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityY
+		case PrimaryBChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityY
 			return true
-		case 0x55D7: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityX
+		case WhitePointChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityX
 			return true
-		case 0x55D8: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityY
+		case WhitePointChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityY
 			return true
-		case 0x55D9: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMax
+		case LuminanceMaxElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMax
 			return true
-		case 0x55DA: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMin
+		case LuminanceMinElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMin
 			return true
-		case 0x7670: // \Segment\Tracks\TrackEntry\Video\Projection
+		case ProjectionElement: // \Segment\Tracks\TrackEntry\Video\Projection
 			return true
-		case 0x7671: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionType
+		case ProjectionTypeElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionType
 			return true
-		case 0x7672: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPrivate
+		case ProjectionPrivateElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPrivate
 			return true
-		case 0x7673: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseYaw
+		case ProjectionPoseYawElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseYaw
 			return true
-		case 0x7674: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPosePitch
+		case ProjectionPosePitchElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPosePitch
 			return true
-		case 0x7675: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseRoll
+		case ProjectionPoseRollElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseRoll
 			return true
-		case 0xE1: // \Segment\Tracks\TrackEntry\Audio
+		case AudioElement: // \Segment\Tracks\TrackEntry\Audio
 			return true
-		case 0xB5: // \Segment\Tracks\TrackEntry\Audio\SamplingFrequency
+		case SamplingFrequencyElement: // \Segment\Tracks\TrackEntry\Audio\SamplingFrequency
 			return true
-		case 0x78B5: // \Segment\Tracks\TrackEntry\Audio\OutputSamplingFrequency
+		case OutputSamplingFrequencyElement: // \Segment\Tracks\TrackEntry\Audio\OutputSamplingFrequency
 			return true
-		case 0x9F: // \Segment\Tracks\TrackEntry\Audio\Channels
+		case ChannelsElement: // \Segment\Tracks\TrackEntry\Audio\Channels
 			return true
-		case 0x7D7B: // \Segment\Tracks\TrackEntry\Audio\ChannelPositions
+		case ChannelPositionsElement: // \Segment\Tracks\TrackEntry\Audio\ChannelPositions
 			return true
-		case 0x6264: // \Segment\Tracks\TrackEntry\Audio\BitDepth
+		case BitDepthElement: // \Segment\Tracks\TrackEntry\Audio\BitDepth
 			return true
-		case 0xE2: // \Segment\Tracks\TrackEntry\TrackOperation
+		case TrackOperationElement: // \Segment\Tracks\TrackEntry\TrackOperation
 			return true
-		case 0xE3: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes
+		case TrackCombinePlanesElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes
 			return true
-		case 0xE4: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane
+		case TrackPlaneElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane
 			return true
-		case 0xE5: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneUID
+		case TrackPlaneUIDElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneUID
 			return true
-		case 0xE6: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneType
+		case TrackPlaneTypeElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneType
 			return true
-		case 0xE9: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks
+		case TrackJoinBlocksElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks
 			return true
-		case 0xED: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks\TrackJoinUID
+		case TrackJoinUIDElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks\TrackJoinUID
 			return true
-		case 0xC0: // \Segment\Tracks\TrackEntry\TrickTrackUID
+		case TrickTrackUIDElement: // \Segment\Tracks\TrackEntry\TrickTrackUID
 			return true
-		case 0xC1: // \Segment\Tracks\TrackEntry\TrickTrackSegmentUID
+		case TrickTrackSegmentUIDElement: // \Segment\Tracks\TrackEntry\TrickTrackSegmentUID
 			return true
-		case 0xC6: // \Segment\Tracks\TrackEntry\TrickTrackFlag
+		case TrickTrackFlagElement: // \Segment\Tracks\TrackEntry\TrickTrackFlag
 			return true
-		case 0xC7: // \Segment\Tracks\TrackEntry\TrickMasterTrackUID
+		case TrickMasterTrackUIDElement: // \Segment\Tracks\TrackEntry\TrickMasterTrackUID
 			return true
-		case 0xC4: // \Segment\Tracks\TrackEntry\TrickMasterTrackSegmentUID
+		case TrickMasterTrackSegmentUIDElement: // \Segment\Tracks\TrackEntry\TrickMasterTrackSegmentUID
 			return true
-		case 0x6D80: // \Segment\Tracks\TrackEntry\ContentEncodings
+		case ContentEncodingsElement: // \Segment\Tracks\TrackEntry\ContentEncodings
 			return true
-		case 0x6240: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding
+		case ContentEncodingElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding
 			return true
-		case 0x5031: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingOrder
+		case ContentEncodingOrderElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingOrder
 			return true
-		case 0x5032: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingScope
+		case ContentEncodingScopeElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingScope
 			return true
-		case 0x5033: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingType
+		case ContentEncodingTypeElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingType
 			return true
-		case 0x5034: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression
+		case ContentCompressionElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression
 			return true
-		case 0x4254: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompAlgo
+		case ContentCompAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompAlgo
 			return true
-		case 0x4255: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompSettings
+		case ContentCompSettingsElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompSettings
 			return true
-		case 0x5035: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption
+		case ContentEncryptionElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption
 			return true
-		case 0x47E1: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncAlgo
+		case ContentEncAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncAlgo
 			return true
-		case 0x47E2: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncKeyID
+		case ContentEncKeyIDElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncKeyID
 			return true
-		case 0x47E3: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSignature
+		case ContentSignatureElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSignature
 			return true
-		case 0x47E4: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigKeyID
+		case ContentSigKeyIDElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigKeyID
 			return true
-		case 0x47E5: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigAlgo
+		case ContentSigAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigAlgo
 			return true
-		case 0x47E6: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigHashAlgo
+		case ContentSigHashAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigHashAlgo
 			return true
-		case 0x1C53BB6B: // \Segment\Cues
+		case CuesElement: // \Segment\Cues
 			return true
-		case 0xBB: // \Segment\Cues\CuePoint
+		case CuePointElement: // \Segment\Cues\CuePoint
 			return true
-		case 0xB3: // \Segment\Cues\CuePoint\CueTime
+		case CueTimeElement: // \Segment\Cues\CuePoint\CueTime
 			return true
-		case 0xB7: // \Segment\Cues\CuePoint\CueTrackPositions
+		case CueTrackPositionsElement: // \Segment\Cues\CuePoint\CueTrackPositions
 			return true
-		case 0xF7: // \Segment\Cues\CuePoint\CueTrackPositions\CueTrack
+		case CueTrackElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueTrack
 			return true
-		case 0xF1: // \Segment\Cues\CuePoint\CueTrackPositions\CueClusterPosition
+		case CueClusterPositionElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueClusterPosition
 			return true
-		case 0xF0: // \Segment\Cues\CuePoint\CueTrackPositions\CueRelativePosition
+		case CueRelativePositionElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueRelativePosition
 			return true
-		case 0xB2: // \Segment\Cues\CuePoint\CueTrackPositions\CueDuration
+		case CueDurationElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueDuration
 			return true
-		case 0x5378: // \Segment\Cues\CuePoint\CueTrackPositions\CueBlockNumber
+		case CueBlockNumberElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueBlockNumber
 			return true
-		case 0xEA: // \Segment\Cues\CuePoint\CueTrackPositions\CueCodecState
+		case CueCodecStateElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueCodecState
 			return true
-		case 0xDB: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference
+		case CueReferenceElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference
 			return true
-		case 0x96: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefTime
+		case CueRefTimeElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefTime
 			return true
-		case 0x97: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCluster
+		case CueRefClusterElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCluster
 			return true
-		case 0x535F: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefNumber
+		case CueRefNumberElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefNumber
 			return true
-		case 0xEB: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCodecState
+		case CueRefCodecStateElement: // \Segment\Cues\CuePoint\CueTrackPositions\CueReference\CueRefCodecState
 			return true
-		case 0x1941A469: // \Segment\Attachments
+		case AttachmentsElement: // \Segment\Attachments
 			return true
-		case 0x61A7: // \Segment\Attachments\AttachedFile
+		case AttachedFileElement: // \Segment\Attachments\AttachedFile
 			return true
-		case 0x467E: // \Segment\Attachments\AttachedFile\FileDescription
+		case FileDescriptionElement: // \Segment\Attachments\AttachedFile\FileDescription
 			return true
-		case 0x466E: // \Segment\Attachments\AttachedFile\FileName
+		case FileNameElement: // \Segment\Attachments\AttachedFile\FileName
 			return true
-		case 0x4660: // \Segment\Attachments\AttachedFile\FileMimeType
+		case FileMimeTypeElement: // \Segment\Attachments\AttachedFile\FileMimeType
 			return true
-		case 0x465C: // \Segment\Attachments\AttachedFile\FileData
+		case FileDataElement: // \Segment\Attachments\AttachedFile\FileData
 			return true
-		case 0x46AE: // \Segment\Attachments\AttachedFile\FileUID
+		case FileUIDElement: // \Segment\Attachments\AttachedFile\FileUID
 			return true
-		case 0x4675: // \Segment\Attachments\AttachedFile\FileReferral
+		case FileReferralElement: // \Segment\Attachments\AttachedFile\FileReferral
 			return true
-		case 0x4661: // \Segment\Attachments\AttachedFile\FileUsedStartTime
+		case FileUsedStartTimeElement: // \Segment\Attachments\AttachedFile\FileUsedStartTime
 			return true
-		case 0x4662: // \Segment\Attachments\AttachedFile\FileUsedEndTime
+		case FileUsedEndTimeElement: // \Segment\Attachments\AttachedFile\FileUsedEndTime
 			return true
-		case 0x1043A770: // \Segment\Chapters
+		case ChaptersElement: // \Segment\Chapters
 			return true
-		case 0x45B9: // \Segment\Chapters\EditionEntry
+		case EditionEntryElement: // \Segment\Chapters\EditionEntry
 			return true
-		case 0x45BC: // \Segment\Chapters\EditionEntry\EditionUID
+		case EditionUIDElement: // \Segment\Chapters\EditionEntry\EditionUID
 			return true
-		case 0x45BD: // \Segment\Chapters\EditionEntry\EditionFlagHidden
+		case EditionFlagHiddenElement: // \Segment\Chapters\EditionEntry\EditionFlagHidden
 			return true
-		case 0x45DB: // \Segment\Chapters\EditionEntry\EditionFlagDefault
+		case EditionFlagDefaultElement: // \Segment\Chapters\EditionEntry\EditionFlagDefault
 			return true
-		case 0x45DD: // \Segment\Chapters\EditionEntry\EditionFlagOrdered
+		case EditionFlagOrderedElement: // \Segment\Chapters\EditionEntry\EditionFlagOrdered
 			return true
-		case 0xB6: // \Segment\Chapters\EditionEntry\ChapterAtom
+		case ChapterAtomElement: // \Segment\Chapters\EditionEntry\ChapterAtom
 			return true
-		case 0x73C4: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterUID
+		case ChapterUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterUID
 			return true
-		case 0x5654: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterStringUID
+		case ChapterStringUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterStringUID
 			return true
-		case 0x91: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeStart
+		case ChapterTimeStartElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeStart
 			return true
-		case 0x92: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeEnd
+		case ChapterTimeEndElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTimeEnd
 			return true
-		case 0x98: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagHidden
+		case ChapterFlagHiddenElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagHidden
 			return true
-		case 0x4598: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagEnabled
+		case ChapterFlagEnabledElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterFlagEnabled
 			return true
-		case 0x6E67: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentUID
+		case ChapterSegmentUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentUID
 			return true
-		case 0x6EBC: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentEditionUID
+		case ChapterSegmentEditionUIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterSegmentEditionUID
 			return true
-		case 0x63C3: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterPhysicalEquiv
+		case ChapterPhysicalEquivElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterPhysicalEquiv
 			return true
-		case 0x8F: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack
+		case ChapterTrackElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack
 			return true
-		case 0x89: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack\ChapterTrackNumber
+		case ChapterTrackNumberElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterTrack\ChapterTrackNumber
 			return true
-		case 0x80: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay
+		case ChapterDisplayElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay
 			return true
-		case 0x85: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapString
+		case ChapStringElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapString
 			return true
-		case 0x437C: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguage
+		case ChapLanguageElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguage
 			return true
-		case 0x437D: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguageIETF
+		case ChapLanguageIETFElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapLanguageIETF
 			return true
-		case 0x437E: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapCountry
+		case ChapCountryElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapterDisplay\ChapCountry
 			return true
-		case 0x6944: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess
+		case ChapProcessElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess
 			return true
-		case 0x6955: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCodecID
+		case ChapProcessCodecIDElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCodecID
 			return true
-		case 0x450D: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessPrivate
+		case ChapProcessPrivateElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessPrivate
 			return true
-		case 0x6911: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand
+		case ChapProcessCommandElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand
 			return true
-		case 0x6922: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessTime
+		case ChapProcessTimeElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessTime
 			return true
-		case 0x6933: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessData
+		case ChapProcessDataElement: // \Segment\Chapters\EditionEntry\ChapterAtom\ChapProcess\ChapProcessCommand\ChapProcessData
 			return true
-		case 0x1254C367: // \Segment\Tags
+		case TagsElement: // \Segment\Tags
 			return true
-		case 0x7373: // \Segment\Tags\Tag
+		case TagElement: // \Segment\Tags\Tag
 			return true
-		case 0x63C0: // \Segment\Tags\Tag\Targets
+		case TargetsElement: // \Segment\Tags\Tag\Targets
 			return true
-		case 0x68CA: // \Segment\Tags\Tag\Targets\TargetTypeValue
+		case TargetTypeValueElement: // \Segment\Tags\Tag\Targets\TargetTypeValue
 			return true
-		case 0x63CA: // \Segment\Tags\Tag\Targets\TargetType
+		case TargetTypeElement: // \Segment\Tags\Tag\Targets\TargetType
 			return true
-		case 0x63C5: // \Segment\Tags\Tag\Targets\TagTrackUID
+		case TagTrackUIDElement: // \Segment\Tags\Tag\Targets\TagTrackUID
 			return true
-		case 0x63C9: // \Segment\Tags\Tag\Targets\TagEditionUID
+		case TagEditionUIDElement: // \Segment\Tags\Tag\Targets\TagEditionUID
 			return true
-		case 0x63C4: // \Segment\Tags\Tag\Targets\TagChapterUID
+		case TagChapterUIDElement: // \Segment\Tags\Tag\Targets\TagChapterUID
 			return true
-		case 0x63C6: // \Segment\Tags\Tag\Targets\TagAttachmentUID
+		case TagAttachmentUIDElement: // \Segment\Tags\Tag\Targets\TagAttachmentUID
 			return true
-		case 0x67C8: // \Segment\Tags\Tag\SimpleTag
+		case SimpleTagElement: // \Segment\Tags\Tag\SimpleTag
 			return true
-		case 0x45A3: // \Segment\Tags\Tag\SimpleTag\TagName
+		case TagNameElement: // \Segment\Tags\Tag\SimpleTag\TagName
 			return true
-		case 0x447A: // \Segment\Tags\Tag\SimpleTag\TagLanguage
+		case TagLanguageElement: // \Segment\Tags\Tag\SimpleTag\TagLanguage
 			return true
-		case 0x447B: // \Segment\Tags\Tag\SimpleTag\TagLanguageIETF
+		case TagLanguageIETFElement: // \Segment\Tags\Tag\SimpleTag\TagLanguageIETF
 			return true
-		case 0x4484: // \Segment\Tags\Tag\SimpleTag\TagDefault
+		case TagDefaultElement: // \Segment\Tags\Tag\SimpleTag\TagDefault
 			return true
-		case 0x4487: // \Segment\Tags\Tag\SimpleTag\TagString
+		case TagStringElement: // \Segment\Tags\Tag\SimpleTag\TagString
 			return true
-		case 0x4485: // \Segment\Tags\Tag\SimpleTag\TagBinary
+		case TagBinaryElement: // \Segment\Tags\Tag\SimpleTag\TagBinary
 			return true
 		default:
 			return false
 		}
-	case 0x5854: // \Segment\Cluster\SilentTracks
+	case SilentTracksElement: // \Segment\Cluster\SilentTracks
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x58D7: // \Segment\Cluster\SilentTracks\SilentTrackNumber
+		case SilentTrackNumberElement: // \Segment\Cluster\SilentTracks\SilentTrackNumber
 			return true
 		default:
 			return false
 		}
-	case 0x67C8: // \Segment\Tags\Tag\SimpleTag
+	case SimpleTagElement: // \Segment\Tags\Tag\SimpleTag
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x45A3: // \Segment\Tags\Tag\SimpleTag\TagName
+		case TagNameElement: // \Segment\Tags\Tag\SimpleTag\TagName
 			return true
-		case 0x447A: // \Segment\Tags\Tag\SimpleTag\TagLanguage
+		case TagLanguageElement: // \Segment\Tags\Tag\SimpleTag\TagLanguage
 			return true
-		case 0x447B: // \Segment\Tags\Tag\SimpleTag\TagLanguageIETF
+		case TagLanguageIETFElement: // \Segment\Tags\Tag\SimpleTag\TagLanguageIETF
 			return true
-		case 0x4484: // \Segment\Tags\Tag\SimpleTag\TagDefault
+		case TagDefaultElement: // \Segment\Tags\Tag\SimpleTag\TagDefault
 			return true
-		case 0x4487: // \Segment\Tags\Tag\SimpleTag\TagString
+		case TagStringElement: // \Segment\Tags\Tag\SimpleTag\TagString
 			return true
-		case 0x4485: // \Segment\Tags\Tag\SimpleTag\TagBinary
+		case TagBinaryElement: // \Segment\Tags\Tag\SimpleTag\TagBinary
 			return true
 		default:
 			return false
 		}
-	case 0x8E: // \Segment\Cluster\BlockGroup\Slices
+	case SlicesElement: // \Segment\Cluster\BlockGroup\Slices
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xE8: // \Segment\Cluster\BlockGroup\Slices\TimeSlice
+		case TimeSliceElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice
 			return true
-		case 0xCC: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\LaceNumber
+		case LaceNumberElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\LaceNumber
 			return true
-		case 0xCD: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\FrameNumber
+		case FrameNumberElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\FrameNumber
 			return true
-		case 0xCB: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\BlockAdditionID
+		case BlockAdditionIDElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\BlockAdditionID
 			return true
-		case 0xCE: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\Delay
+		case DelayElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\Delay
 			return true
-		case 0xCF: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\SliceDuration
+		case SliceDurationElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\SliceDuration
 			return true
 		default:
 			return false
 		}
-	case 0x7373: // \Segment\Tags\Tag
+	case TagElement: // \Segment\Tags\Tag
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x63C0: // \Segment\Tags\Tag\Targets
+		case TargetsElement: // \Segment\Tags\Tag\Targets
 			return true
-		case 0x68CA: // \Segment\Tags\Tag\Targets\TargetTypeValue
+		case TargetTypeValueElement: // \Segment\Tags\Tag\Targets\TargetTypeValue
 			return true
-		case 0x63CA: // \Segment\Tags\Tag\Targets\TargetType
+		case TargetTypeElement: // \Segment\Tags\Tag\Targets\TargetType
 			return true
-		case 0x63C5: // \Segment\Tags\Tag\Targets\TagTrackUID
+		case TagTrackUIDElement: // \Segment\Tags\Tag\Targets\TagTrackUID
 			return true
-		case 0x63C9: // \Segment\Tags\Tag\Targets\TagEditionUID
+		case TagEditionUIDElement: // \Segment\Tags\Tag\Targets\TagEditionUID
 			return true
-		case 0x63C4: // \Segment\Tags\Tag\Targets\TagChapterUID
+		case TagChapterUIDElement: // \Segment\Tags\Tag\Targets\TagChapterUID
 			return true
-		case 0x63C6: // \Segment\Tags\Tag\Targets\TagAttachmentUID
+		case TagAttachmentUIDElement: // \Segment\Tags\Tag\Targets\TagAttachmentUID
 			return true
-		case 0x67C8: // \Segment\Tags\Tag\SimpleTag
+		case SimpleTagElement: // \Segment\Tags\Tag\SimpleTag
 			return true
-		case 0x45A3: // \Segment\Tags\Tag\SimpleTag\TagName
+		case TagNameElement: // \Segment\Tags\Tag\SimpleTag\TagName
 			return true
-		case 0x447A: // \Segment\Tags\Tag\SimpleTag\TagLanguage
+		case TagLanguageElement: // \Segment\Tags\Tag\SimpleTag\TagLanguage
 			return true
-		case 0x447B: // \Segment\Tags\Tag\SimpleTag\TagLanguageIETF
+		case TagLanguageIETFElement: // \Segment\Tags\Tag\SimpleTag\TagLanguageIETF
 			return true
-		case 0x4484: // \Segment\Tags\Tag\SimpleTag\TagDefault
+		case TagDefaultElement: // \Segment\Tags\Tag\SimpleTag\TagDefault
 			return true
-		case 0x4487: // \Segment\Tags\Tag\SimpleTag\TagString
+		case TagStringElement: // \Segment\Tags\Tag\SimpleTag\TagString
 			return true
-		case 0x4485: // \Segment\Tags\Tag\SimpleTag\TagBinary
+		case TagBinaryElement: // \Segment\Tags\Tag\SimpleTag\TagBinary
 			return true
 		default:
 			return false
 		}
-	case 0x1254C367: // \Segment\Tags
+	case TagsElement: // \Segment\Tags
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x7373: // \Segment\Tags\Tag
+		case TagElement: // \Segment\Tags\Tag
 			return true
-		case 0x63C0: // \Segment\Tags\Tag\Targets
+		case TargetsElement: // \Segment\Tags\Tag\Targets
 			return true
-		case 0x68CA: // \Segment\Tags\Tag\Targets\TargetTypeValue
+		case TargetTypeValueElement: // \Segment\Tags\Tag\Targets\TargetTypeValue
 			return true
-		case 0x63CA: // \Segment\Tags\Tag\Targets\TargetType
+		case TargetTypeElement: // \Segment\Tags\Tag\Targets\TargetType
 			return true
-		case 0x63C5: // \Segment\Tags\Tag\Targets\TagTrackUID
+		case TagTrackUIDElement: // \Segment\Tags\Tag\Targets\TagTrackUID
 			return true
-		case 0x63C9: // \Segment\Tags\Tag\Targets\TagEditionUID
+		case TagEditionUIDElement: // \Segment\Tags\Tag\Targets\TagEditionUID
 			return true
-		case 0x63C4: // \Segment\Tags\Tag\Targets\TagChapterUID
+		case TagChapterUIDElement: // \Segment\Tags\Tag\Targets\TagChapterUID
 			return true
-		case 0x63C6: // \Segment\Tags\Tag\Targets\TagAttachmentUID
+		case TagAttachmentUIDElement: // \Segment\Tags\Tag\Targets\TagAttachmentUID
 			return true
-		case 0x67C8: // \Segment\Tags\Tag\SimpleTag
+		case SimpleTagElement: // \Segment\Tags\Tag\SimpleTag
 			return true
-		case 0x45A3: // \Segment\Tags\Tag\SimpleTag\TagName
+		case TagNameElement: // \Segment\Tags\Tag\SimpleTag\TagName
 			return true
-		case 0x447A: // \Segment\Tags\Tag\SimpleTag\TagLanguage
+		case TagLanguageElement: // \Segment\Tags\Tag\SimpleTag\TagLanguage
 			return true
-		case 0x447B: // \Segment\Tags\Tag\SimpleTag\TagLanguageIETF
+		case TagLanguageIETFElement: // \Segment\Tags\Tag\SimpleTag\TagLanguageIETF
 			return true
-		case 0x4484: // \Segment\Tags\Tag\SimpleTag\TagDefault
+		case TagDefaultElement: // \Segment\Tags\Tag\SimpleTag\TagDefault
 			return true
-		case 0x4487: // \Segment\Tags\Tag\SimpleTag\TagString
+		case TagStringElement: // \Segment\Tags\Tag\SimpleTag\TagString
 			return true
-		case 0x4485: // \Segment\Tags\Tag\SimpleTag\TagBinary
+		case TagBinaryElement: // \Segment\Tags\Tag\SimpleTag\TagBinary
 			return true
 		default:
 			return false
 		}
-	case 0x63C0: // \Segment\Tags\Tag\Targets
+	case TargetsElement: // \Segment\Tags\Tag\Targets
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x68CA: // \Segment\Tags\Tag\Targets\TargetTypeValue
+		case TargetTypeValueElement: // \Segment\Tags\Tag\Targets\TargetTypeValue
 			return true
-		case 0x63CA: // \Segment\Tags\Tag\Targets\TargetType
+		case TargetTypeElement: // \Segment\Tags\Tag\Targets\TargetType
 			return true
-		case 0x63C5: // \Segment\Tags\Tag\Targets\TagTrackUID
+		case TagTrackUIDElement: // \Segment\Tags\Tag\Targets\TagTrackUID
 			return true
-		case 0x63C9: // \Segment\Tags\Tag\Targets\TagEditionUID
+		case TagEditionUIDElement: // \Segment\Tags\Tag\Targets\TagEditionUID
 			return true
-		case 0x63C4: // \Segment\Tags\Tag\Targets\TagChapterUID
+		case TagChapterUIDElement: // \Segment\Tags\Tag\Targets\TagChapterUID
 			return true
-		case 0x63C6: // \Segment\Tags\Tag\Targets\TagAttachmentUID
+		case TagAttachmentUIDElement: // \Segment\Tags\Tag\Targets\TagAttachmentUID
 			return true
 		default:
 			return false
 		}
-	case 0xE8: // \Segment\Cluster\BlockGroup\Slices\TimeSlice
+	case TimeSliceElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xCC: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\LaceNumber
+		case LaceNumberElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\LaceNumber
 			return true
-		case 0xCD: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\FrameNumber
+		case FrameNumberElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\FrameNumber
 			return true
-		case 0xCB: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\BlockAdditionID
+		case BlockAdditionIDElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\BlockAdditionID
 			return true
-		case 0xCE: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\Delay
+		case DelayElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\Delay
 			return true
-		case 0xCF: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\SliceDuration
+		case SliceDurationElement: // \Segment\Cluster\BlockGroup\Slices\TimeSlice\SliceDuration
 			return true
 		default:
 			return false
 		}
-	case 0xE3: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes
+	case TrackCombinePlanesElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xE4: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane
+		case TrackPlaneElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane
 			return true
-		case 0xE5: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneUID
+		case TrackPlaneUIDElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneUID
 			return true
-		case 0xE6: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneType
+		case TrackPlaneTypeElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneType
 			return true
 		default:
 			return false
 		}
-	case 0xAE: // \Segment\Tracks\TrackEntry
+	case TrackEntryElement: // \Segment\Tracks\TrackEntry
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xD7: // \Segment\Tracks\TrackEntry\TrackNumber
+		case TrackNumberElement: // \Segment\Tracks\TrackEntry\TrackNumber
 			return true
-		case 0x73C5: // \Segment\Tracks\TrackEntry\TrackUID
+		case TrackUIDElement: // \Segment\Tracks\TrackEntry\TrackUID
 			return true
-		case 0x83: // \Segment\Tracks\TrackEntry\TrackType
+		case TrackTypeElement: // \Segment\Tracks\TrackEntry\TrackType
 			return true
-		case 0xB9: // \Segment\Tracks\TrackEntry\FlagEnabled
+		case FlagEnabledElement: // \Segment\Tracks\TrackEntry\FlagEnabled
 			return true
-		case 0x88: // \Segment\Tracks\TrackEntry\FlagDefault
+		case FlagDefaultElement: // \Segment\Tracks\TrackEntry\FlagDefault
 			return true
-		case 0x55AA: // \Segment\Tracks\TrackEntry\FlagForced
+		case FlagForcedElement: // \Segment\Tracks\TrackEntry\FlagForced
 			return true
-		case 0x9C: // \Segment\Tracks\TrackEntry\FlagLacing
+		case FlagLacingElement: // \Segment\Tracks\TrackEntry\FlagLacing
 			return true
-		case 0x6DE7: // \Segment\Tracks\TrackEntry\MinCache
+		case MinCacheElement: // \Segment\Tracks\TrackEntry\MinCache
 			return true
-		case 0x6DF8: // \Segment\Tracks\TrackEntry\MaxCache
+		case MaxCacheElement: // \Segment\Tracks\TrackEntry\MaxCache
 			return true
-		case 0x23E383: // \Segment\Tracks\TrackEntry\DefaultDuration
+		case DefaultDurationElement: // \Segment\Tracks\TrackEntry\DefaultDuration
 			return true
-		case 0x234E7A: // \Segment\Tracks\TrackEntry\DefaultDecodedFieldDuration
+		case DefaultDecodedFieldDurationElement: // \Segment\Tracks\TrackEntry\DefaultDecodedFieldDuration
 			return true
-		case 0x23314F: // \Segment\Tracks\TrackEntry\TrackTimecodeScale
+		case TrackTimecodeScaleElement: // \Segment\Tracks\TrackEntry\TrackTimecodeScale
 			return true
-		case 0x537F: // \Segment\Tracks\TrackEntry\TrackOffset
+		case TrackOffsetElement: // \Segment\Tracks\TrackEntry\TrackOffset
 			return true
-		case 0x55EE: // \Segment\Tracks\TrackEntry\MaxBlockAdditionID
+		case MaxBlockAdditionIDElement: // \Segment\Tracks\TrackEntry\MaxBlockAdditionID
 			return true
-		case 0x536E: // \Segment\Tracks\TrackEntry\Name
+		case NameElement: // \Segment\Tracks\TrackEntry\Name
 			return true
-		case 0x22B59C: // \Segment\Tracks\TrackEntry\Language
+		case LanguageElement: // \Segment\Tracks\TrackEntry\Language
 			return true
-		case 0x22B59D: // \Segment\Tracks\TrackEntry\LanguageIETF
+		case LanguageIETFElement: // \Segment\Tracks\TrackEntry\LanguageIETF
 			return true
-		case 0x86: // \Segment\Tracks\TrackEntry\CodecID
+		case CodecIDElement: // \Segment\Tracks\TrackEntry\CodecID
 			return true
-		case 0x63A2: // \Segment\Tracks\TrackEntry\CodecPrivate
+		case CodecPrivateElement: // \Segment\Tracks\TrackEntry\CodecPrivate
 			return true
-		case 0x258688: // \Segment\Tracks\TrackEntry\CodecName
+		case CodecNameElement: // \Segment\Tracks\TrackEntry\CodecName
 			return true
-		case 0x7446: // \Segment\Tracks\TrackEntry\AttachmentLink
+		case AttachmentLinkElement: // \Segment\Tracks\TrackEntry\AttachmentLink
 			return true
-		case 0x3A9697: // \Segment\Tracks\TrackEntry\CodecSettings
+		case CodecSettingsElement: // \Segment\Tracks\TrackEntry\CodecSettings
 			return true
-		case 0x3B4040: // \Segment\Tracks\TrackEntry\CodecInfoURL
+		case CodecInfoURLElement: // \Segment\Tracks\TrackEntry\CodecInfoURL
 			return true
-		case 0x26B240: // \Segment\Tracks\TrackEntry\CodecDownloadURL
+		case CodecDownloadURLElement: // \Segment\Tracks\TrackEntry\CodecDownloadURL
 			return true
-		case 0xAA: // \Segment\Tracks\TrackEntry\CodecDecodeAll
+		case CodecDecodeAllElement: // \Segment\Tracks\TrackEntry\CodecDecodeAll
 			return true
-		case 0x6FAB: // \Segment\Tracks\TrackEntry\TrackOverlay
+		case TrackOverlayElement: // \Segment\Tracks\TrackEntry\TrackOverlay
 			return true
-		case 0x56AA: // \Segment\Tracks\TrackEntry\CodecDelay
+		case CodecDelayElement: // \Segment\Tracks\TrackEntry\CodecDelay
 			return true
-		case 0x56BB: // \Segment\Tracks\TrackEntry\SeekPreRoll
+		case SeekPreRollElement: // \Segment\Tracks\TrackEntry\SeekPreRoll
 			return true
-		case 0x6624: // \Segment\Tracks\TrackEntry\TrackTranslate
+		case TrackTranslateElement: // \Segment\Tracks\TrackEntry\TrackTranslate
 			return true
-		case 0x66FC: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateEditionUID
+		case TrackTranslateEditionUIDElement: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateEditionUID
 			return true
-		case 0x66BF: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateCodec
+		case TrackTranslateCodecElement: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateCodec
 			return true
-		case 0x66A5: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateTrackID
+		case TrackTranslateTrackIDElement: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateTrackID
 			return true
-		case 0xE0: // \Segment\Tracks\TrackEntry\Video
+		case VideoElement: // \Segment\Tracks\TrackEntry\Video
 			return true
-		case 0x9A: // \Segment\Tracks\TrackEntry\Video\FlagInterlaced
+		case FlagInterlacedElement: // \Segment\Tracks\TrackEntry\Video\FlagInterlaced
 			return true
-		case 0x9D: // \Segment\Tracks\TrackEntry\Video\FieldOrder
+		case FieldOrderElement: // \Segment\Tracks\TrackEntry\Video\FieldOrder
 			return true
-		case 0x53B8: // \Segment\Tracks\TrackEntry\Video\StereoMode
+		case StereoModeElement: // \Segment\Tracks\TrackEntry\Video\StereoMode
 			return true
-		case 0x53C0: // \Segment\Tracks\TrackEntry\Video\AlphaMode
+		case AlphaModeElement: // \Segment\Tracks\TrackEntry\Video\AlphaMode
 			return true
-		case 0x53B9: // \Segment\Tracks\TrackEntry\Video\OldStereoMode
+		case OldStereoModeElement: // \Segment\Tracks\TrackEntry\Video\OldStereoMode
 			return true
-		case 0xB0: // \Segment\Tracks\TrackEntry\Video\PixelWidth
+		case PixelWidthElement: // \Segment\Tracks\TrackEntry\Video\PixelWidth
 			return true
-		case 0xBA: // \Segment\Tracks\TrackEntry\Video\PixelHeight
+		case PixelHeightElement: // \Segment\Tracks\TrackEntry\Video\PixelHeight
 			return true
-		case 0x54AA: // \Segment\Tracks\TrackEntry\Video\PixelCropBottom
+		case PixelCropBottomElement: // \Segment\Tracks\TrackEntry\Video\PixelCropBottom
 			return true
-		case 0x54BB: // \Segment\Tracks\TrackEntry\Video\PixelCropTop
+		case PixelCropTopElement: // \Segment\Tracks\TrackEntry\Video\PixelCropTop
 			return true
-		case 0x54CC: // \Segment\Tracks\TrackEntry\Video\PixelCropLeft
+		case PixelCropLeftElement: // \Segment\Tracks\TrackEntry\Video\PixelCropLeft
 			return true
-		case 0x54DD: // \Segment\Tracks\TrackEntry\Video\PixelCropRight
+		case PixelCropRightElement: // \Segment\Tracks\TrackEntry\Video\PixelCropRight
 			return true
-		case 0x54B0: // \Segment\Tracks\TrackEntry\Video\DisplayWidth
+		case DisplayWidthElement: // \Segment\Tracks\TrackEntry\Video\DisplayWidth
 			return true
-		case 0x54BA: // \Segment\Tracks\TrackEntry\Video\DisplayHeight
+		case DisplayHeightElement: // \Segment\Tracks\TrackEntry\Video\DisplayHeight
 			return true
-		case 0x54B2: // \Segment\Tracks\TrackEntry\Video\DisplayUnit
+		case DisplayUnitElement: // \Segment\Tracks\TrackEntry\Video\DisplayUnit
 			return true
-		case 0x54B3: // \Segment\Tracks\TrackEntry\Video\AspectRatioType
+		case AspectRatioTypeElement: // \Segment\Tracks\TrackEntry\Video\AspectRatioType
 			return true
-		case 0x2EB524: // \Segment\Tracks\TrackEntry\Video\ColourSpace
+		case ColourSpaceElement: // \Segment\Tracks\TrackEntry\Video\ColourSpace
 			return true
-		case 0x2FB523: // \Segment\Tracks\TrackEntry\Video\GammaValue
+		case GammaValueElement: // \Segment\Tracks\TrackEntry\Video\GammaValue
 			return true
-		case 0x2383E3: // \Segment\Tracks\TrackEntry\Video\FrameRate
+		case FrameRateElement: // \Segment\Tracks\TrackEntry\Video\FrameRate
 			return true
-		case 0x55B0: // \Segment\Tracks\TrackEntry\Video\Colour
+		case ColourElement: // \Segment\Tracks\TrackEntry\Video\Colour
 			return true
-		case 0x55B1: // \Segment\Tracks\TrackEntry\Video\Colour\MatrixCoefficients
+		case MatrixCoefficientsElement: // \Segment\Tracks\TrackEntry\Video\Colour\MatrixCoefficients
 			return true
-		case 0x55B2: // \Segment\Tracks\TrackEntry\Video\Colour\BitsPerChannel
+		case BitsPerChannelElement: // \Segment\Tracks\TrackEntry\Video\Colour\BitsPerChannel
 			return true
-		case 0x55B3: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingHorz
+		case ChromaSubsamplingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingHorz
 			return true
-		case 0x55B4: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingVert
+		case ChromaSubsamplingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingVert
 			return true
-		case 0x55B5: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingHorz
+		case CbSubsamplingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingHorz
 			return true
-		case 0x55B6: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingVert
+		case CbSubsamplingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingVert
 			return true
-		case 0x55B7: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingHorz
+		case ChromaSitingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingHorz
 			return true
-		case 0x55B8: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingVert
+		case ChromaSitingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingVert
 			return true
-		case 0x55B9: // \Segment\Tracks\TrackEntry\Video\Colour\Range
+		case RangeElement: // \Segment\Tracks\TrackEntry\Video\Colour\Range
 			return true
-		case 0x55BA: // \Segment\Tracks\TrackEntry\Video\Colour\TransferCharacteristics
+		case TransferCharacteristicsElement: // \Segment\Tracks\TrackEntry\Video\Colour\TransferCharacteristics
 			return true
-		case 0x55BB: // \Segment\Tracks\TrackEntry\Video\Colour\Primaries
+		case PrimariesElement: // \Segment\Tracks\TrackEntry\Video\Colour\Primaries
 			return true
-		case 0x55BC: // \Segment\Tracks\TrackEntry\Video\Colour\MaxCLL
+		case MaxCLLElement: // \Segment\Tracks\TrackEntry\Video\Colour\MaxCLL
 			return true
-		case 0x55BD: // \Segment\Tracks\TrackEntry\Video\Colour\MaxFALL
+		case MaxFALLElement: // \Segment\Tracks\TrackEntry\Video\Colour\MaxFALL
 			return true
-		case 0x55D0: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata
+		case MasteringMetadataElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata
 			return true
-		case 0x55D1: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityX
+		case PrimaryRChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityX
 			return true
-		case 0x55D2: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityY
+		case PrimaryRChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityY
 			return true
-		case 0x55D3: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityX
+		case PrimaryGChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityX
 			return true
-		case 0x55D4: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityY
+		case PrimaryGChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityY
 			return true
-		case 0x55D5: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityX
+		case PrimaryBChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityX
 			return true
-		case 0x55D6: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityY
+		case PrimaryBChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityY
 			return true
-		case 0x55D7: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityX
+		case WhitePointChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityX
 			return true
-		case 0x55D8: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityY
+		case WhitePointChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityY
 			return true
-		case 0x55D9: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMax
+		case LuminanceMaxElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMax
 			return true
-		case 0x55DA: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMin
+		case LuminanceMinElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMin
 			return true
-		case 0x7670: // \Segment\Tracks\TrackEntry\Video\Projection
+		case ProjectionElement: // \Segment\Tracks\TrackEntry\Video\Projection
 			return true
-		case 0x7671: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionType
+		case ProjectionTypeElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionType
 			return true
-		case 0x7672: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPrivate
+		case ProjectionPrivateElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPrivate
 			return true
-		case 0x7673: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseYaw
+		case ProjectionPoseYawElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseYaw
 			return true
-		case 0x7674: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPosePitch
+		case ProjectionPosePitchElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPosePitch
 			return true
-		case 0x7675: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseRoll
+		case ProjectionPoseRollElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseRoll
 			return true
-		case 0xE1: // \Segment\Tracks\TrackEntry\Audio
+		case AudioElement: // \Segment\Tracks\TrackEntry\Audio
 			return true
-		case 0xB5: // \Segment\Tracks\TrackEntry\Audio\SamplingFrequency
+		case SamplingFrequencyElement: // \Segment\Tracks\TrackEntry\Audio\SamplingFrequency
 			return true
-		case 0x78B5: // \Segment\Tracks\TrackEntry\Audio\OutputSamplingFrequency
+		case OutputSamplingFrequencyElement: // \Segment\Tracks\TrackEntry\Audio\OutputSamplingFrequency
 			return true
-		case 0x9F: // \Segment\Tracks\TrackEntry\Audio\Channels
+		case ChannelsElement: // \Segment\Tracks\TrackEntry\Audio\Channels
 			return true
-		case 0x7D7B: // \Segment\Tracks\TrackEntry\Audio\ChannelPositions
+		case ChannelPositionsElement: // \Segment\Tracks\TrackEntry\Audio\ChannelPositions
 			return true
-		case 0x6264: // \Segment\Tracks\TrackEntry\Audio\BitDepth
+		case BitDepthElement: // \Segment\Tracks\TrackEntry\Audio\BitDepth
 			return true
-		case 0xE2: // \Segment\Tracks\TrackEntry\TrackOperation
+		case TrackOperationElement: // \Segment\Tracks\TrackEntry\TrackOperation
 			return true
-		case 0xE3: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes
+		case TrackCombinePlanesElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes
 			return true
-		case 0xE4: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane
+		case TrackPlaneElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane
 			return true
-		case 0xE5: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneUID
+		case TrackPlaneUIDElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneUID
 			return true
-		case 0xE6: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneType
+		case TrackPlaneTypeElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneType
 			return true
-		case 0xE9: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks
+		case TrackJoinBlocksElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks
 			return true
-		case 0xED: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks\TrackJoinUID
+		case TrackJoinUIDElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks\TrackJoinUID
 			return true
-		case 0xC0: // \Segment\Tracks\TrackEntry\TrickTrackUID
+		case TrickTrackUIDElement: // \Segment\Tracks\TrackEntry\TrickTrackUID
 			return true
-		case 0xC1: // \Segment\Tracks\TrackEntry\TrickTrackSegmentUID
+		case TrickTrackSegmentUIDElement: // \Segment\Tracks\TrackEntry\TrickTrackSegmentUID
 			return true
-		case 0xC6: // \Segment\Tracks\TrackEntry\TrickTrackFlag
+		case TrickTrackFlagElement: // \Segment\Tracks\TrackEntry\TrickTrackFlag
 			return true
-		case 0xC7: // \Segment\Tracks\TrackEntry\TrickMasterTrackUID
+		case TrickMasterTrackUIDElement: // \Segment\Tracks\TrackEntry\TrickMasterTrackUID
 			return true
-		case 0xC4: // \Segment\Tracks\TrackEntry\TrickMasterTrackSegmentUID
+		case TrickMasterTrackSegmentUIDElement: // \Segment\Tracks\TrackEntry\TrickMasterTrackSegmentUID
 			return true
-		case 0x6D80: // \Segment\Tracks\TrackEntry\ContentEncodings
+		case ContentEncodingsElement: // \Segment\Tracks\TrackEntry\ContentEncodings
 			return true
-		case 0x6240: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding
+		case ContentEncodingElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding
 			return true
-		case 0x5031: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingOrder
+		case ContentEncodingOrderElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingOrder
 			return true
-		case 0x5032: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingScope
+		case ContentEncodingScopeElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingScope
 			return true
-		case 0x5033: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingType
+		case ContentEncodingTypeElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingType
 			return true
-		case 0x5034: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression
+		case ContentCompressionElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression
 			return true
-		case 0x4254: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompAlgo
+		case ContentCompAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompAlgo
 			return true
-		case 0x4255: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompSettings
+		case ContentCompSettingsElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompSettings
 			return true
-		case 0x5035: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption
+		case ContentEncryptionElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption
 			return true
-		case 0x47E1: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncAlgo
+		case ContentEncAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncAlgo
 			return true
-		case 0x47E2: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncKeyID
+		case ContentEncKeyIDElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncKeyID
 			return true
-		case 0x47E3: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSignature
+		case ContentSignatureElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSignature
 			return true
-		case 0x47E4: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigKeyID
+		case ContentSigKeyIDElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigKeyID
 			return true
-		case 0x47E5: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigAlgo
+		case ContentSigAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigAlgo
 			return true
-		case 0x47E6: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigHashAlgo
+		case ContentSigHashAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigHashAlgo
 			return true
 		default:
 			return false
 		}
-	case 0xE9: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks
+	case TrackJoinBlocksElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xED: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks\TrackJoinUID
+		case TrackJoinUIDElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks\TrackJoinUID
 			return true
 		default:
 			return false
 		}
-	case 0xE2: // \Segment\Tracks\TrackEntry\TrackOperation
+	case TrackOperationElement: // \Segment\Tracks\TrackEntry\TrackOperation
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xE3: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes
+		case TrackCombinePlanesElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes
 			return true
-		case 0xE4: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane
+		case TrackPlaneElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane
 			return true
-		case 0xE5: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneUID
+		case TrackPlaneUIDElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneUID
 			return true
-		case 0xE6: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneType
+		case TrackPlaneTypeElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneType
 			return true
-		case 0xE9: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks
+		case TrackJoinBlocksElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks
 			return true
-		case 0xED: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks\TrackJoinUID
+		case TrackJoinUIDElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks\TrackJoinUID
 			return true
 		default:
 			return false
 		}
-	case 0xE4: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane
+	case TrackPlaneElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xE5: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneUID
+		case TrackPlaneUIDElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneUID
 			return true
-		case 0xE6: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneType
+		case TrackPlaneTypeElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneType
 			return true
 		default:
 			return false
 		}
-	case 0x6624: // \Segment\Tracks\TrackEntry\TrackTranslate
+	case TrackTranslateElement: // \Segment\Tracks\TrackEntry\TrackTranslate
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x66FC: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateEditionUID
+		case TrackTranslateEditionUIDElement: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateEditionUID
 			return true
-		case 0x66BF: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateCodec
+		case TrackTranslateCodecElement: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateCodec
 			return true
-		case 0x66A5: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateTrackID
+		case TrackTranslateTrackIDElement: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateTrackID
 			return true
 		default:
 			return false
 		}
-	case 0x1654AE6B: // \Segment\Tracks
+	case TracksElement: // \Segment\Tracks
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0xAE: // \Segment\Tracks\TrackEntry
+		case TrackEntryElement: // \Segment\Tracks\TrackEntry
 			return true
-		case 0xD7: // \Segment\Tracks\TrackEntry\TrackNumber
+		case TrackNumberElement: // \Segment\Tracks\TrackEntry\TrackNumber
 			return true
-		case 0x73C5: // \Segment\Tracks\TrackEntry\TrackUID
+		case TrackUIDElement: // \Segment\Tracks\TrackEntry\TrackUID
 			return true
-		case 0x83: // \Segment\Tracks\TrackEntry\TrackType
+		case TrackTypeElement: // \Segment\Tracks\TrackEntry\TrackType
 			return true
-		case 0xB9: // \Segment\Tracks\TrackEntry\FlagEnabled
+		case FlagEnabledElement: // \Segment\Tracks\TrackEntry\FlagEnabled
 			return true
-		case 0x88: // \Segment\Tracks\TrackEntry\FlagDefault
+		case FlagDefaultElement: // \Segment\Tracks\TrackEntry\FlagDefault
 			return true
-		case 0x55AA: // \Segment\Tracks\TrackEntry\FlagForced
+		case FlagForcedElement: // \Segment\Tracks\TrackEntry\FlagForced
 			return true
-		case 0x9C: // \Segment\Tracks\TrackEntry\FlagLacing
+		case FlagLacingElement: // \Segment\Tracks\TrackEntry\FlagLacing
 			return true
-		case 0x6DE7: // \Segment\Tracks\TrackEntry\MinCache
+		case MinCacheElement: // \Segment\Tracks\TrackEntry\MinCache
 			return true
-		case 0x6DF8: // \Segment\Tracks\TrackEntry\MaxCache
+		case MaxCacheElement: // \Segment\Tracks\TrackEntry\MaxCache
 			return true
-		case 0x23E383: // \Segment\Tracks\TrackEntry\DefaultDuration
+		case DefaultDurationElement: // \Segment\Tracks\TrackEntry\DefaultDuration
 			return true
-		case 0x234E7A: // \Segment\Tracks\TrackEntry\DefaultDecodedFieldDuration
+		case DefaultDecodedFieldDurationElement: // \Segment\Tracks\TrackEntry\DefaultDecodedFieldDuration
 			return true
-		case 0x23314F: // \Segment\Tracks\TrackEntry\TrackTimecodeScale
+		case TrackTimecodeScaleElement: // \Segment\Tracks\TrackEntry\TrackTimecodeScale
 			return true
-		case 0x537F: // \Segment\Tracks\TrackEntry\TrackOffset
+		case TrackOffsetElement: // \Segment\Tracks\TrackEntry\TrackOffset
 			return true
-		case 0x55EE: // \Segment\Tracks\TrackEntry\MaxBlockAdditionID
+		case MaxBlockAdditionIDElement: // \Segment\Tracks\TrackEntry\MaxBlockAdditionID
 			return true
-		case 0x536E: // \Segment\Tracks\TrackEntry\Name
+		case NameElement: // \Segment\Tracks\TrackEntry\Name
 			return true
-		case 0x22B59C: // \Segment\Tracks\TrackEntry\Language
+		case LanguageElement: // \Segment\Tracks\TrackEntry\Language
 			return true
-		case 0x22B59D: // \Segment\Tracks\TrackEntry\LanguageIETF
+		case LanguageIETFElement: // \Segment\Tracks\TrackEntry\LanguageIETF
 			return true
-		case 0x86: // \Segment\Tracks\TrackEntry\CodecID
+		case CodecIDElement: // \Segment\Tracks\TrackEntry\CodecID
 			return true
-		case 0x63A2: // \Segment\Tracks\TrackEntry\CodecPrivate
+		case CodecPrivateElement: // \Segment\Tracks\TrackEntry\CodecPrivate
 			return true
-		case 0x258688: // \Segment\Tracks\TrackEntry\CodecName
+		case CodecNameElement: // \Segment\Tracks\TrackEntry\CodecName
 			return true
-		case 0x7446: // \Segment\Tracks\TrackEntry\AttachmentLink
+		case AttachmentLinkElement: // \Segment\Tracks\TrackEntry\AttachmentLink
 			return true
-		case 0x3A9697: // \Segment\Tracks\TrackEntry\CodecSettings
+		case CodecSettingsElement: // \Segment\Tracks\TrackEntry\CodecSettings
 			return true
-		case 0x3B4040: // \Segment\Tracks\TrackEntry\CodecInfoURL
+		case CodecInfoURLElement: // \Segment\Tracks\TrackEntry\CodecInfoURL
 			return true
-		case 0x26B240: // \Segment\Tracks\TrackEntry\CodecDownloadURL
+		case CodecDownloadURLElement: // \Segment\Tracks\TrackEntry\CodecDownloadURL
 			return true
-		case 0xAA: // \Segment\Tracks\TrackEntry\CodecDecodeAll
+		case CodecDecodeAllElement: // \Segment\Tracks\TrackEntry\CodecDecodeAll
 			return true
-		case 0x6FAB: // \Segment\Tracks\TrackEntry\TrackOverlay
+		case TrackOverlayElement: // \Segment\Tracks\TrackEntry\TrackOverlay
 			return true
-		case 0x56AA: // \Segment\Tracks\TrackEntry\CodecDelay
+		case CodecDelayElement: // \Segment\Tracks\TrackEntry\CodecDelay
 			return true
-		case 0x56BB: // \Segment\Tracks\TrackEntry\SeekPreRoll
+		case SeekPreRollElement: // \Segment\Tracks\TrackEntry\SeekPreRoll
 			return true
-		case 0x6624: // \Segment\Tracks\TrackEntry\TrackTranslate
+		case TrackTranslateElement: // \Segment\Tracks\TrackEntry\TrackTranslate
 			return true
-		case 0x66FC: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateEditionUID
+		case TrackTranslateEditionUIDElement: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateEditionUID
 			return true
-		case 0x66BF: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateCodec
+		case TrackTranslateCodecElement: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateCodec
 			return true
-		case 0x66A5: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateTrackID
+		case TrackTranslateTrackIDElement: // \Segment\Tracks\TrackEntry\TrackTranslate\TrackTranslateTrackID
 			return true
-		case 0xE0: // \Segment\Tracks\TrackEntry\Video
+		case VideoElement: // \Segment\Tracks\TrackEntry\Video
 			return true
-		case 0x9A: // \Segment\Tracks\TrackEntry\Video\FlagInterlaced
+		case FlagInterlacedElement: // \Segment\Tracks\TrackEntry\Video\FlagInterlaced
 			return true
-		case 0x9D: // \Segment\Tracks\TrackEntry\Video\FieldOrder
+		case FieldOrderElement: // \Segment\Tracks\TrackEntry\Video\FieldOrder
 			return true
-		case 0x53B8: // \Segment\Tracks\TrackEntry\Video\StereoMode
+		case StereoModeElement: // \Segment\Tracks\TrackEntry\Video\StereoMode
 			return true
-		case 0x53C0: // \Segment\Tracks\TrackEntry\Video\AlphaMode
+		case AlphaModeElement: // \Segment\Tracks\TrackEntry\Video\AlphaMode
 			return true
-		case 0x53B9: // \Segment\Tracks\TrackEntry\Video\OldStereoMode
+		case OldStereoModeElement: // \Segment\Tracks\TrackEntry\Video\OldStereoMode
 			return true
-		case 0xB0: // \Segment\Tracks\TrackEntry\Video\PixelWidth
+		case PixelWidthElement: // \Segment\Tracks\TrackEntry\Video\PixelWidth
 			return true
-		case 0xBA: // \Segment\Tracks\TrackEntry\Video\PixelHeight
+		case PixelHeightElement: // \Segment\Tracks\TrackEntry\Video\PixelHeight
 			return true
-		case 0x54AA: // \Segment\Tracks\TrackEntry\Video\PixelCropBottom
+		case PixelCropBottomElement: // \Segment\Tracks\TrackEntry\Video\PixelCropBottom
 			return true
-		case 0x54BB: // \Segment\Tracks\TrackEntry\Video\PixelCropTop
+		case PixelCropTopElement: // \Segment\Tracks\TrackEntry\Video\PixelCropTop
 			return true
-		case 0x54CC: // \Segment\Tracks\TrackEntry\Video\PixelCropLeft
+		case PixelCropLeftElement: // \Segment\Tracks\TrackEntry\Video\PixelCropLeft
 			return true
-		case 0x54DD: // \Segment\Tracks\TrackEntry\Video\PixelCropRight
+		case PixelCropRightElement: // \Segment\Tracks\TrackEntry\Video\PixelCropRight
 			return true
-		case 0x54B0: // \Segment\Tracks\TrackEntry\Video\DisplayWidth
+		case DisplayWidthElement: // \Segment\Tracks\TrackEntry\Video\DisplayWidth
 			return true
-		case 0x54BA: // \Segment\Tracks\TrackEntry\Video\DisplayHeight
+		case DisplayHeightElement: // \Segment\Tracks\TrackEntry\Video\DisplayHeight
 			return true
-		case 0x54B2: // \Segment\Tracks\TrackEntry\Video\DisplayUnit
+		case DisplayUnitElement: // \Segment\Tracks\TrackEntry\Video\DisplayUnit
 			return true
-		case 0x54B3: // \Segment\Tracks\TrackEntry\Video\AspectRatioType
+		case AspectRatioTypeElement: // \Segment\Tracks\TrackEntry\Video\AspectRatioType
 			return true
-		case 0x2EB524: // \Segment\Tracks\TrackEntry\Video\ColourSpace
+		case ColourSpaceElement: // \Segment\Tracks\TrackEntry\Video\ColourSpace
 			return true
-		case 0x2FB523: // \Segment\Tracks\TrackEntry\Video\GammaValue
+		case GammaValueElement: // \Segment\Tracks\TrackEntry\Video\GammaValue
 			return true
-		case 0x2383E3: // \Segment\Tracks\TrackEntry\Video\FrameRate
+		case FrameRateElement: // \Segment\Tracks\TrackEntry\Video\FrameRate
 			return true
-		case 0x55B0: // \Segment\Tracks\TrackEntry\Video\Colour
+		case ColourElement: // \Segment\Tracks\TrackEntry\Video\Colour
 			return true
-		case 0x55B1: // \Segment\Tracks\TrackEntry\Video\Colour\MatrixCoefficients
+		case MatrixCoefficientsElement: // \Segment\Tracks\TrackEntry\Video\Colour\MatrixCoefficients
 			return true
-		case 0x55B2: // \Segment\Tracks\TrackEntry\Video\Colour\BitsPerChannel
+		case BitsPerChannelElement: // \Segment\Tracks\TrackEntry\Video\Colour\BitsPerChannel
 			return true
-		case 0x55B3: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingHorz
+		case ChromaSubsamplingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingHorz
 			return true
-		case 0x55B4: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingVert
+		case ChromaSubsamplingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingVert
 			return true
-		case 0x55B5: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingHorz
+		case CbSubsamplingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingHorz
 			return true
-		case 0x55B6: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingVert
+		case CbSubsamplingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingVert
 			return true
-		case 0x55B7: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingHorz
+		case ChromaSitingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingHorz
 			return true
-		case 0x55B8: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingVert
+		case ChromaSitingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingVert
 			return true
-		case 0x55B9: // \Segment\Tracks\TrackEntry\Video\Colour\Range
+		case RangeElement: // \Segment\Tracks\TrackEntry\Video\Colour\Range
 			return true
-		case 0x55BA: // \Segment\Tracks\TrackEntry\Video\Colour\TransferCharacteristics
+		case TransferCharacteristicsElement: // \Segment\Tracks\TrackEntry\Video\Colour\TransferCharacteristics
 			return true
-		case 0x55BB: // \Segment\Tracks\TrackEntry\Video\Colour\Primaries
+		case PrimariesElement: // \Segment\Tracks\TrackEntry\Video\Colour\Primaries
 			return true
-		case 0x55BC: // \Segment\Tracks\TrackEntry\Video\Colour\MaxCLL
+		case MaxCLLElement: // \Segment\Tracks\TrackEntry\Video\Colour\MaxCLL
 			return true
-		case 0x55BD: // \Segment\Tracks\TrackEntry\Video\Colour\MaxFALL
+		case MaxFALLElement: // \Segment\Tracks\TrackEntry\Video\Colour\MaxFALL
 			return true
-		case 0x55D0: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata
+		case MasteringMetadataElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata
 			return true
-		case 0x55D1: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityX
+		case PrimaryRChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityX
 			return true
-		case 0x55D2: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityY
+		case PrimaryRChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityY
 			return true
-		case 0x55D3: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityX
+		case PrimaryGChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityX
 			return true
-		case 0x55D4: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityY
+		case PrimaryGChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityY
 			return true
-		case 0x55D5: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityX
+		case PrimaryBChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityX
 			return true
-		case 0x55D6: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityY
+		case PrimaryBChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityY
 			return true
-		case 0x55D7: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityX
+		case WhitePointChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityX
 			return true
-		case 0x55D8: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityY
+		case WhitePointChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityY
 			return true
-		case 0x55D9: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMax
+		case LuminanceMaxElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMax
 			return true
-		case 0x55DA: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMin
+		case LuminanceMinElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMin
 			return true
-		case 0x7670: // \Segment\Tracks\TrackEntry\Video\Projection
+		case ProjectionElement: // \Segment\Tracks\TrackEntry\Video\Projection
 			return true
-		case 0x7671: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionType
+		case ProjectionTypeElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionType
 			return true
-		case 0x7672: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPrivate
+		case ProjectionPrivateElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPrivate
 			return true
-		case 0x7673: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseYaw
+		case ProjectionPoseYawElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseYaw
 			return true
-		case 0x7674: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPosePitch
+		case ProjectionPosePitchElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPosePitch
 			return true
-		case 0x7675: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseRoll
+		case ProjectionPoseRollElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseRoll
 			return true
-		case 0xE1: // \Segment\Tracks\TrackEntry\Audio
+		case AudioElement: // \Segment\Tracks\TrackEntry\Audio
 			return true
-		case 0xB5: // \Segment\Tracks\TrackEntry\Audio\SamplingFrequency
+		case SamplingFrequencyElement: // \Segment\Tracks\TrackEntry\Audio\SamplingFrequency
 			return true
-		case 0x78B5: // \Segment\Tracks\TrackEntry\Audio\OutputSamplingFrequency
+		case OutputSamplingFrequencyElement: // \Segment\Tracks\TrackEntry\Audio\OutputSamplingFrequency
 			return true
-		case 0x9F: // \Segment\Tracks\TrackEntry\Audio\Channels
+		case ChannelsElement: // \Segment\Tracks\TrackEntry\Audio\Channels
 			return true
-		case 0x7D7B: // \Segment\Tracks\TrackEntry\Audio\ChannelPositions
+		case ChannelPositionsElement: // \Segment\Tracks\TrackEntry\Audio\ChannelPositions
 			return true
-		case 0x6264: // \Segment\Tracks\TrackEntry\Audio\BitDepth
+		case BitDepthElement: // \Segment\Tracks\TrackEntry\Audio\BitDepth
 			return true
-		case 0xE2: // \Segment\Tracks\TrackEntry\TrackOperation
+		case TrackOperationElement: // \Segment\Tracks\TrackEntry\TrackOperation
 			return true
-		case 0xE3: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes
+		case TrackCombinePlanesElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes
 			return true
-		case 0xE4: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane
+		case TrackPlaneElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane
 			return true
-		case 0xE5: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneUID
+		case TrackPlaneUIDElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneUID
 			return true
-		case 0xE6: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneType
+		case TrackPlaneTypeElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackCombinePlanes\TrackPlane\TrackPlaneType
 			return true
-		case 0xE9: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks
+		case TrackJoinBlocksElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks
 			return true
-		case 0xED: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks\TrackJoinUID
+		case TrackJoinUIDElement: // \Segment\Tracks\TrackEntry\TrackOperation\TrackJoinBlocks\TrackJoinUID
 			return true
-		case 0xC0: // \Segment\Tracks\TrackEntry\TrickTrackUID
+		case TrickTrackUIDElement: // \Segment\Tracks\TrackEntry\TrickTrackUID
 			return true
-		case 0xC1: // \Segment\Tracks\TrackEntry\TrickTrackSegmentUID
+		case TrickTrackSegmentUIDElement: // \Segment\Tracks\TrackEntry\TrickTrackSegmentUID
 			return true
-		case 0xC6: // \Segment\Tracks\TrackEntry\TrickTrackFlag
+		case TrickTrackFlagElement: // \Segment\Tracks\TrackEntry\TrickTrackFlag
 			return true
-		case 0xC7: // \Segment\Tracks\TrackEntry\TrickMasterTrackUID
+		case TrickMasterTrackUIDElement: // \Segment\Tracks\TrackEntry\TrickMasterTrackUID
 			return true
-		case 0xC4: // \Segment\Tracks\TrackEntry\TrickMasterTrackSegmentUID
+		case TrickMasterTrackSegmentUIDElement: // \Segment\Tracks\TrackEntry\TrickMasterTrackSegmentUID
 			return true
-		case 0x6D80: // \Segment\Tracks\TrackEntry\ContentEncodings
+		case ContentEncodingsElement: // \Segment\Tracks\TrackEntry\ContentEncodings
 			return true
-		case 0x6240: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding
+		case ContentEncodingElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding
 			return true
-		case 0x5031: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingOrder
+		case ContentEncodingOrderElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingOrder
 			return true
-		case 0x5032: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingScope
+		case ContentEncodingScopeElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingScope
 			return true
-		case 0x5033: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingType
+		case ContentEncodingTypeElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncodingType
 			return true
-		case 0x5034: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression
+		case ContentCompressionElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression
 			return true
-		case 0x4254: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompAlgo
+		case ContentCompAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompAlgo
 			return true
-		case 0x4255: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompSettings
+		case ContentCompSettingsElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentCompression\ContentCompSettings
 			return true
-		case 0x5035: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption
+		case ContentEncryptionElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption
 			return true
-		case 0x47E1: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncAlgo
+		case ContentEncAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncAlgo
 			return true
-		case 0x47E2: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncKeyID
+		case ContentEncKeyIDElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentEncKeyID
 			return true
-		case 0x47E3: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSignature
+		case ContentSignatureElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSignature
 			return true
-		case 0x47E4: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigKeyID
+		case ContentSigKeyIDElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigKeyID
 			return true
-		case 0x47E5: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigAlgo
+		case ContentSigAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigAlgo
 			return true
-		case 0x47E6: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigHashAlgo
+		case ContentSigHashAlgoElement: // \Segment\Tracks\TrackEntry\ContentEncodings\ContentEncoding\ContentEncryption\ContentSigHashAlgo
 			return true
 		default:
 			return false
 		}
-	case 0xE0: // \Segment\Tracks\TrackEntry\Video
+	case VideoElement: // \Segment\Tracks\TrackEntry\Video
 		switch p1 {
-		case 0xEC: // \(-\)Void
+		case VoidElement: // \(-\)Void
 			return true
-		case 0xBF: // \(1-\)CRC-32
+		case CRC32Element: // \(1-\)CRC-32
 			return true
-		case 0x9A: // \Segment\Tracks\TrackEntry\Video\FlagInterlaced
+		case FlagInterlacedElement: // \Segment\Tracks\TrackEntry\Video\FlagInterlaced
 			return true
-		case 0x9D: // \Segment\Tracks\TrackEntry\Video\FieldOrder
+		case FieldOrderElement: // \Segment\Tracks\TrackEntry\Video\FieldOrder
 			return true
-		case 0x53B8: // \Segment\Tracks\TrackEntry\Video\StereoMode
+		case StereoModeElement: // \Segment\Tracks\TrackEntry\Video\StereoMode
 			return true
-		case 0x53C0: // \Segment\Tracks\TrackEntry\Video\AlphaMode
+		case AlphaModeElement: // \Segment\Tracks\TrackEntry\Video\AlphaMode
 			return true
-		case 0x53B9: // \Segment\Tracks\TrackEntry\Video\OldStereoMode
+		case OldStereoModeElement: // \Segment\Tracks\TrackEntry\Video\OldStereoMode
 			return true
-		case 0xB0: // \Segment\Tracks\TrackEntry\Video\PixelWidth
+		case PixelWidthElement: // \Segment\Tracks\TrackEntry\Video\PixelWidth
 			return true
-		case 0xBA: // \Segment\Tracks\TrackEntry\Video\PixelHeight
+		case PixelHeightElement: // \Segment\Tracks\TrackEntry\Video\PixelHeight
 			return true
-		case 0x54AA: // \Segment\Tracks\TrackEntry\Video\PixelCropBottom
+		case PixelCropBottomElement: // \Segment\Tracks\TrackEntry\Video\PixelCropBottom
 			return true
-		case 0x54BB: // \Segment\Tracks\TrackEntry\Video\PixelCropTop
+		case PixelCropTopElement: // \Segment\Tracks\TrackEntry\Video\PixelCropTop
 			return true
-		case 0x54CC: // \Segment\Tracks\TrackEntry\Video\PixelCropLeft
+		case PixelCropLeftElement: // \Segment\Tracks\TrackEntry\Video\PixelCropLeft
 			return true
-		case 0x54DD: // \Segment\Tracks\TrackEntry\Video\PixelCropRight
+		case PixelCropRightElement: // \Segment\Tracks\TrackEntry\Video\PixelCropRight
 			return true
-		case 0x54B0: // \Segment\Tracks\TrackEntry\Video\DisplayWidth
+		case DisplayWidthElement: // \Segment\Tracks\TrackEntry\Video\DisplayWidth
 			return true
-		case 0x54BA: // \Segment\Tracks\TrackEntry\Video\DisplayHeight
+		case DisplayHeightElement: // \Segment\Tracks\TrackEntry\Video\DisplayHeight
 			return true
-		case 0x54B2: // \Segment\Tracks\TrackEntry\Video\DisplayUnit
+		case DisplayUnitElement: // \Segment\Tracks\TrackEntry\Video\DisplayUnit
 			return true
-		case 0x54B3: // \Segment\Tracks\TrackEntry\Video\AspectRatioType
+		case AspectRatioTypeElement: // \Segment\Tracks\TrackEntry\Video\AspectRatioType
 			return true
-		case 0x2EB524: // \Segment\Tracks\TrackEntry\Video\ColourSpace
+		case ColourSpaceElement: // \Segment\Tracks\TrackEntry\Video\ColourSpace
 			return true
-		case 0x2FB523: // \Segment\Tracks\TrackEntry\Video\GammaValue
+		case GammaValueElement: // \Segment\Tracks\TrackEntry\Video\GammaValue
 			return true
-		case 0x2383E3: // \Segment\Tracks\TrackEntry\Video\FrameRate
+		case FrameRateElement: // \Segment\Tracks\TrackEntry\Video\FrameRate
 			return true
-		case 0x55B0: // \Segment\Tracks\TrackEntry\Video\Colour
+		case ColourElement: // \Segment\Tracks\TrackEntry\Video\Colour
 			return true
-		case 0x55B1: // \Segment\Tracks\TrackEntry\Video\Colour\MatrixCoefficients
+		case MatrixCoefficientsElement: // \Segment\Tracks\TrackEntry\Video\Colour\MatrixCoefficients
 			return true
-		case 0x55B2: // \Segment\Tracks\TrackEntry\Video\Colour\BitsPerChannel
+		case BitsPerChannelElement: // \Segment\Tracks\TrackEntry\Video\Colour\BitsPerChannel
 			return true
-		case 0x55B3: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingHorz
+		case ChromaSubsamplingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingHorz
 			return true
-		case 0x55B4: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingVert
+		case ChromaSubsamplingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSubsamplingVert
 			return true
-		case 0x55B5: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingHorz
+		case CbSubsamplingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingHorz
 			return true
-		case 0x55B6: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingVert
+		case CbSubsamplingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\CbSubsamplingVert
 			return true
-		case 0x55B7: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingHorz
+		case ChromaSitingHorzElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingHorz
 			return true
-		case 0x55B8: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingVert
+		case ChromaSitingVertElement: // \Segment\Tracks\TrackEntry\Video\Colour\ChromaSitingVert
 			return true
-		case 0x55B9: // \Segment\Tracks\TrackEntry\Video\Colour\Range
+		case RangeElement: // \Segment\Tracks\TrackEntry\Video\Colour\Range
 			return true
-		case 0x55BA: // \Segment\Tracks\TrackEntry\Video\Colour\TransferCharacteristics
+		case TransferCharacteristicsElement: // \Segment\Tracks\TrackEntry\Video\Colour\TransferCharacteristics
 			return true
-		case 0x55BB: // \Segment\Tracks\TrackEntry\Video\Colour\Primaries
+		case PrimariesElement: // \Segment\Tracks\TrackEntry\Video\Colour\Primaries
 			return true
-		case 0x55BC: // \Segment\Tracks\TrackEntry\Video\Colour\MaxCLL
+		case MaxCLLElement: // \Segment\Tracks\TrackEntry\Video\Colour\MaxCLL
 			return true
-		case 0x55BD: // \Segment\Tracks\TrackEntry\Video\Colour\MaxFALL
+		case MaxFALLElement: // \Segment\Tracks\TrackEntry\Video\Colour\MaxFALL
 			return true
-		case 0x55D0: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata
+		case MasteringMetadataElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata
 			return true
-		case 0x55D1: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityX
+		case PrimaryRChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityX
 			return true
-		case 0x55D2: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityY
+		case PrimaryRChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryRChromaticityY
 			return true
-		case 0x55D3: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityX
+		case PrimaryGChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityX
 			return true
-		case 0x55D4: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityY
+		case PrimaryGChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryGChromaticityY
 			return true
-		case 0x55D5: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityX
+		case PrimaryBChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityX
 			return true
-		case 0x55D6: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityY
+		case PrimaryBChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\PrimaryBChromaticityY
 			return true
-		case 0x55D7: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityX
+		case WhitePointChromaticityXElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityX
 			return true
-		case 0x55D8: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityY
+		case WhitePointChromaticityYElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\WhitePointChromaticityY
 			return true
-		case 0x55D9: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMax
+		case LuminanceMaxElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMax
 			return true
-		case 0x55DA: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMin
+		case LuminanceMinElement: // \Segment\Tracks\TrackEntry\Video\Colour\MasteringMetadata\LuminanceMin
 			return true
-		case 0x7670: // \Segment\Tracks\TrackEntry\Video\Projection
+		case ProjectionElement: // \Segment\Tracks\TrackEntry\Video\Projection
 			return true
-		case 0x7671: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionType
+		case ProjectionTypeElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionType
 			return true
-		case 0x7672: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPrivate
+		case ProjectionPrivateElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPrivate
 			return true
-		case 0x7673: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseYaw
+		case ProjectionPoseYawElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseYaw
 			return true
-		case 0x7674: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPosePitch
+		case ProjectionPosePitchElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPosePitch
 			return true
-		case 0x7675: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseRoll
+		case ProjectionPoseRollElement: // \Segment\Tracks\TrackEntry\Video\Projection\ProjectionPoseRoll
 			return true
 		default:
 			return false
@@ -3296,9 +3297,9 @@ func isDescendantElement(p1, p2 ElementID) bool {
 
 func isRootElement(el ElementID) bool {
 	switch el {
-	case 0x1A45DFA3: // \EBML
+	case EBMLElement: // \EBML
 		return true
-	case 0x18538067: // \Segment
+	case SegmentElement: // \Segment
 		return true
 	default:
 		return false

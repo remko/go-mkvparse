@@ -131,7 +131,7 @@ func ParseSections(file io.ReadSeeker, handler Handler, sections ...ElementID) e
 				if _, err := file.Seek(sectionOffset, io.SeekStart); err != nil {
 					return err
 				}
-				if _, err = parseElement(file, sectionOffset, 1, handler); err != nil {
+				if _, _, _, err = parseElement(file, sectionOffset, 1, -1, handler); err != nil {
 					return err
 				}
 				sectionsHandler.seenSections[sectionOffset] = true

@@ -83,7 +83,7 @@ func Parse(reader io.Reader, handler Handler) error {
 // have been read (or until EOF)
 func parseElements(reader io.Reader, currentOffset int64, size int64, level int, handler Handler) (count int64, err error) {
 	for size < 0 || count < size {
-		elementCount, err := parseElement(reader, currentOffset+count, level, handler)
+		elementCount, _, _, err := parseElement(reader, currentOffset+count, level, -1, handler)
 		if err != nil {
 			return -1, err
 		}
@@ -92,21 +92,69 @@ func parseElements(reader io.Reader, currentOffset int64, size int64, level int,
 	return count, nil
 }
 
-// Parse one complete element.
-// Recursively descends master elements.
-func parseElement(reader io.Reader, currentOffset int64, level int, handler Handler) (count int64, err error) {
-	id, idCount, err := readElementID(reader)
-	if err != nil {
-		return -1, err
+// Parse all sibling elements on one level until 'size' bytes
+// have been read (or until EOF)
+func parseUnknownSizeElements(reader io.Reader, currentOffset int64, unknownSizeParent ElementID, level int, handler Handler) (count int64, nextID ElementID, nextIDCount int64, err error) {
+	for {
+		elementCount, nextID, nextIDCount, err := parseElement(reader, currentOffset+count, level, unknownSizeParent, handler)
+		if err != nil {
+			return -1, -1, -1, err
+		}
+		count = count + elementCount
+		if nextID != -1 {
+			return count, nextID, nextIDCount, nil
+		}
 	}
-	count, err = parseElementAfterID(reader, id, currentOffset+idCount, level, handler)
-	if err != nil {
-		return -1, err
-	}
-	return count + idCount, nil
+	// return count, -1, -1, nil
 }
 
-func parseElementAfterID(reader io.Reader, id ElementID, currentOffset int64, level int, handler Handler) (count int64, err error) {
+func skipUnknownSizeElements(reader io.Reader, unknownSizeParent ElementID) (count int64, nextID ElementID, nextIDCount int64, err error) {
+	for {
+		id, idCount, err := readElementID(reader)
+		if err != nil {
+			return -1, -1, -1, err
+		}
+		if isFinishUnknownSizeBlock(id, unknownSizeParent) {
+			return count, id, idCount, nil
+		}
+		size, sizeCount, all1, err := readVarInt(reader)
+		if err != nil {
+			return -1, -1, -1, err
+		}
+		if all1 {
+			return -1, -1, -1, fmt.Errorf("nested unknown size not supported")
+		}
+		if err := skipData(reader, size); err != nil {
+			return -1, -1, -1, err
+		}
+		count = count + idCount + sizeCount + size
+	}
+}
+
+func isFinishUnknownSizeBlock(id, parentID ElementID) bool {
+	// TODO: Known size + End of file
+	return isDescendantElement(parentID, id) || !isDescendantElement(id, parentID) || isRootElement(id)
+}
+
+// Parse one complete element.
+// Recursively descends master elements.
+// If unknownSizeParent is set, returns nextID and nextIDCount if it was read
+func parseElement(reader io.Reader, currentOffset int64, level int, unknownSizeParent ElementID, handler Handler) (count int64, nextID ElementID, nextIDCount int64, err error) {
+	id, idCount, err := readElementID(reader)
+	if err != nil {
+		return -1, -1, -1, err
+	}
+	if unknownSizeParent != -1 && isFinishUnknownSizeBlock(id, unknownSizeParent) {
+		return 0, id, idCount, nil
+	}
+	count, err = parseElementAfterID(reader, id, currentOffset+idCount, level, unknownSizeParent, handler)
+	if err != nil {
+		return -1, -1, -1, err
+	}
+	return count + idCount, -1, -1, nil
+}
+
+func parseElementAfterID(reader io.Reader, id ElementID, currentOffset int64, level int, unknownSizeParent ElementID, handler Handler) (count int64, err error) {
 	size, sizeCount, all1, err := readVarInt(reader)
 	if err != nil {
 		return -1, err
@@ -129,7 +177,30 @@ func parseElementAfterID(reader io.Reader, id ElementID, currentOffset int64, le
 			return -1, err
 		}
 		if all1 {
-			return -1, fmt.Errorf("unknown size elements not supported")
+			var ucount int64
+			var nextID ElementID
+			var nextIDCount int64
+			if descend {
+				ucount, nextID, nextIDCount, err = parseUnknownSizeElements(reader, elementOffset, id, level+1, handler)
+			} else {
+				ucount, nextID, nextIDCount, err = skipUnknownSizeElements(reader, id)
+			}
+			if err != nil {
+				return -1, err
+			}
+			err = handler.HandleMasterEnd(id, info)
+			if err != nil {
+				return -1, err
+			}
+			count = sizeCount + ucount
+			if nextID == -1 {
+				return count, nil
+			}
+			nextcount, err := parseElementAfterID(reader, nextID, elementOffset+count+nextIDCount, level, unknownSizeParent, handler)
+			if err != nil {
+				return -1, err
+			}
+			return count + nextcount + nextIDCount, nil
 		} else {
 			if descend {
 				_, err := parseElements(reader, elementOffset, size, level+1, handler)
@@ -141,10 +212,10 @@ func parseElementAfterID(reader io.Reader, id ElementID, currentOffset int64, le
 					return -1, err
 				}
 			}
-		}
-		err = handler.HandleMasterEnd(id, info)
-		if err != nil {
-			return -1, err
+			err = handler.HandleMasterEnd(id, info)
+			if err != nil {
+				return -1, err
+			}
 		}
 		return count, nil
 	} else {

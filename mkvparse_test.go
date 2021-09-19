@@ -2,6 +2,7 @@ package mkvparse
 
 import (
 	"bytes"
+	"fmt"
 	"io"
 	"reflect"
 	"testing"
@@ -154,6 +155,93 @@ func TestParseElement(t *testing.T) {
 			fail:   true,
 		},
 
+		"master (unknown size)": {
+			data: []byte{
+				0x1F, 0x43, 0xB6, 0x75, 0xFF,
+				0xE7, 0x80 | 0x1, 0x3,
+				0xE7, 0x80 | 0x1, 0x3,
+				0xE7, 0x80 | 0x1, 0x3,
+				0x1F, 0x43, 0xB6, 0x75, 0x80 | 0x3,
+				0xE7, 0x80 | 0x1, 0x3,
+			},
+			events: []ParseEvent{
+				{
+					ClusterElement,
+					ElementInfo{
+						Offset: 5,
+						Size:   -1,
+						Level:  0,
+					},
+					MasterBeginEvent{},
+				},
+				{
+					TimecodeElement,
+					ElementInfo{
+						Offset: 7,
+						Size:   1,
+						Level:  1,
+					},
+					int64(0x3),
+				},
+				{
+					TimecodeElement,
+					ElementInfo{
+						Offset: 10,
+						Size:   1,
+						Level:  1,
+					},
+					int64(0x3),
+				},
+				{
+					TimecodeElement,
+					ElementInfo{
+						Offset: 13,
+						Size:   1,
+						Level:  1,
+					},
+					int64(0x3),
+				},
+				{
+					ClusterElement,
+					ElementInfo{
+						Offset: 5,
+						Size:   -1,
+						Level:  0,
+					},
+					MasterEndEvent{},
+				},
+				{
+					ClusterElement,
+					ElementInfo{
+						Offset: 20,
+						Size:   3,
+						Level:  0,
+					},
+					MasterBeginEvent{},
+				},
+				{
+					TimecodeElement,
+					ElementInfo{
+						Offset: 22,
+						Size:   1,
+						Level:  1,
+					},
+					int64(0x3),
+				},
+				{
+					ClusterElement,
+					ElementInfo{
+						Offset: 20,
+						Size:   3,
+						Level:  0,
+					},
+					MasterEndEvent{},
+				},
+			},
+
+			// TODO: Test unknown size in unknown size (e.g.  \Segment\Cluster(unknown)\BlockGroup(unknown)\BlockDuration)
+		},
+
 		// Avoid panicking with a too-large slice allocation when an element claims a
 		// very large size: https://github.com/remko/go-mkvparse/issues/4
 		"excessive size": {
@@ -163,74 +251,145 @@ func TestParseElement(t *testing.T) {
 		},
 	}
 	for name, test := range tests {
-		reader := bytes.NewReader(test.data)
-		handler := ParseHandler{}
-		count, err := parseElement(reader, 0, 0, &handler)
-		if test.fail {
-			if err == nil {
-				t.Errorf("%s: Unexpectedly succeeded", name)
+		name := name
+		test := test
+		t.Run(name, func(t *testing.T) {
+			reader := bytes.NewReader(test.data)
+			handler := ParseHandler{}
+			count, nextID, _, err := parseElement(reader, 0, 0, -1, &handler)
+			if nextID != -1 {
+				t.Fatalf("unexpected next ID")
 			}
-		} else {
-			if err != nil {
-				t.Errorf("%s: %v", name, err)
-				continue
+			if test.fail {
+				if err == nil {
+					t.Fatal("Unexpectedly succeeded")
+				}
+			} else {
+				if err != nil {
+					t.Fatal(err)
+				}
+				if count != int64(len(test.data)) {
+					t.Fatalf("Invalid #bytes read: %d != %d. Data: %v", count, len(test.data), test.data)
+				}
+				if !reflect.DeepEqual(test.events, handler.events) {
+					t.Fatalf("Invalid events: %#v != %#v", test.events, handler.events)
+				}
 			}
-			if count != int64(len(test.data)) {
-				t.Errorf("%s: Invalid #bytes read: %d != %d. Data: %v", name, count, len(test.data), test.data)
-				continue
-			}
-			if !reflect.DeepEqual(test.events, handler.events) {
-				t.Errorf("%s: Invalid events: %#v != %#v", name, test.events, handler.events)
-				continue
-			}
-		}
+		})
 	}
 }
 
 func TestParseMaster_Skips(t *testing.T) {
-	data := []byte{
-		0x1F, 0x43, 0xB6, 0x75, 0x80 | 0x3,
-		0xE7, 0x80 | 0x1, 0x3,
-	}
-	expectedEvents := []ParseEvent{
+	tests := []struct {
+		data           []byte
+		expectedEvents []ParseEvent
+	}{
 		{
-			ClusterElement,
-			ElementInfo{
-				Offset: 5,
-				Size:   3,
-				Level:  0,
+			data: []byte{
+				0x1F, 0x43, 0xB6, 0x75, 0x80 | 0x3,
+				0xE7, 0x80 | 0x1, 0x3,
 			},
-			MasterBeginEvent{},
-		},
-		{
-			ClusterElement,
-			ElementInfo{
-				Offset: 5,
-				Size:   3,
-				Level:  0,
+			expectedEvents: []ParseEvent{
+				{
+					ClusterElement,
+					ElementInfo{
+						Offset: 5,
+						Size:   3,
+						Level:  0,
+					},
+					MasterBeginEvent{},
+				},
+				{
+					ClusterElement,
+					ElementInfo{
+						Offset: 5,
+						Size:   3,
+						Level:  0,
+					},
+					MasterEndEvent{},
+				},
 			},
-			MasterEndEvent{},
 		},
-	}
-	readers := [](func([]byte) io.Reader){
-		func(b []byte) io.Reader { return bytes.NewReader(b) },
-		func(b []byte) io.Reader { return bytes.NewBuffer(b) },
-	}
 
-	for _, reader := range readers {
-		reader := reader(data)
-		handler := ParseHandler{skipDescend: true}
-		count, err := parseElement(reader, 0, 0, &handler)
-		if err != nil {
-			t.Errorf("%v", err)
-			continue
-		}
-		if count != int64(len(data)) {
-			t.Errorf("Invalid #bytes read: %d != %d. Data: %v", count, len(data), data)
-		}
-		if !reflect.DeepEqual(expectedEvents, handler.events) {
-			t.Errorf("Invalid events: %#v != %#v", expectedEvents, handler.events)
-		}
+		// Unknown size
+		{
+			data: []byte{
+				0x1F, 0x43, 0xB6, 0x75, 0xFF,
+				0xE7, 0x80 | 0x1, 0x3,
+				0xE7, 0x80 | 0x1, 0x3,
+				0xE7, 0x80 | 0x1, 0x3,
+				0x1F, 0x43, 0xB6, 0x75, 0x80 | 0x3,
+				0xE7, 0x80 | 0x1, 0x3,
+			},
+			expectedEvents: []ParseEvent{
+				{
+					ClusterElement,
+					ElementInfo{
+						Offset: 5,
+						Size:   -1,
+						Level:  0,
+					},
+					MasterBeginEvent{},
+				},
+				{
+					ClusterElement,
+					ElementInfo{
+						Offset: 5,
+						Size:   -1,
+						Level:  0,
+					},
+					MasterEndEvent{},
+				},
+				{
+					ClusterElement,
+					ElementInfo{
+						Offset: 20,
+						Size:   3,
+						Level:  0,
+					},
+					MasterBeginEvent{},
+				},
+				{
+					ClusterElement,
+					ElementInfo{
+						Offset: 20,
+						Size:   3,
+						Level:  0,
+					},
+					MasterEndEvent{},
+				},
+			},
+
+			// TODO: Test unknown size in unknown size (e.g.  \Segment\Cluster(unknown)\BlockGroup(unknown)\BlockDuration)
+		},
+	}
+	for _, test := range tests {
+		test := test
+		t.Run(fmt.Sprintf("%v", test.data), func(t *testing.T) {
+			readers := [](func([]byte) io.Reader){
+				func(b []byte) io.Reader { return bytes.NewReader(b) },
+				func(b []byte) io.Reader { return bytes.NewBuffer(b) },
+			}
+
+			for _, reader := range readers {
+				reader := reader(test.data)
+				handler := ParseHandler{skipDescend: true}
+				count, nextID, _, err := parseElement(reader, 0, 0, -1, &handler)
+				if nextID != -1 {
+					t.Fatalf("unexpected next ID")
+				}
+				if err != nil {
+					t.Errorf("%v", err)
+					continue
+				}
+				if count != int64(len(test.data)) {
+					t.Errorf("Invalid #bytes read: %d != %d. Data: %v", count, len(test.data), test.data)
+				}
+				if !reflect.DeepEqual(test.expectedEvents, handler.events) {
+					t.Errorf("Invalid events: %#v != %#v", test.expectedEvents, handler.events)
+				}
+			}
+		})
 	}
 }
 
@@ -238,8 +397,11 @@ func TestParseMaster_SkipsWithInsufficientData(t *testing.T) {
 	data := []byte{0x1F, 0x43, 0xB6, 0x75, 0x80 | 0x3, 0xE7}
 	reader := bytes.NewBuffer(data)
 	handler := ParseHandler{skipDescend: true}
-	_, err := parseElement(reader, 0, 0, &handler)
+	_, nextID, _, err := parseElement(reader, 0, 0, -1, &handler)
 	if err == nil {
 		t.Errorf("unexpected success")
+	}
+	if nextID != -1 {
+		t.Fatalf("unexpected next ID")
 	}
 }

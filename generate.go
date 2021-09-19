@@ -39,7 +39,7 @@ type EBMLSchemaElement struct {
 	IsRoot      bool   `xml:"-"`
 	Descendants []struct {
 		Path string
-		ID   string
+		Name string
 	} `xml:"-"`
 }
 
@@ -102,7 +102,7 @@ func generateElements() error {
 	log.Printf("Generating elements.go ...")
 
 	for _, v := range elements {
-		v.Name = strings.Replace(v.Name, "-", "", -1)
+		v.Name = elementName(v.Name)
 		for _, del := range elements {
 			if strings.Count(v.Path, "\\") == 1 {
 				v.IsRoot = true
@@ -110,8 +110,8 @@ func generateElements() error {
 			if isDescendantPath(del.Path, v.Path) {
 				v.Descendants = append(v.Descendants, struct {
 					Path string
-					ID   string
-				}{del.Path, del.ID})
+					Name string
+				}{del.Path, elementName(del.Name)})
 			}
 		}
 	}
@@ -131,6 +131,10 @@ func generateElements() error {
 	}
 
 	return os.WriteFile("elements.go", formatted, 0644)
+}
+
+func elementName(n string) string {
+	return strings.Replace(n, "-", "", -1)
 }
 
 func isDescendantPath(p1, p2 string) bool {
@@ -197,17 +201,17 @@ var elementNames = map[ElementID]string {
 	{{- if not .Deprecated }}
 	{{ .Name }}Element: {{ printf "%q" .Name }},
 	{{- end -}}
-	{{- end -}}
+	{{- end }}
 }
 
 func isDescendantElement(p1, p2 ElementID) bool {
 	switch (p2) {
 		{{ range . -}}
 		{{ if eq .Type "master" -}}
-		case {{ .ID }}: // {{ .Path }}
+		case {{ .Name }}Element: // {{ .Path }}
 			switch(p1) {
 				{{ range .Descendants -}}
-				case {{ .ID }}: // {{ .Path }}
+				case {{ .Name }}Element: // {{ .Path }}
 					return true
 				{{ end -}}
 				default:
@@ -224,7 +228,7 @@ func isRootElement(el ElementID) bool {
 	switch (el) {
 		{{ range . -}}
 		{{ if .IsRoot -}}
-			case {{ .ID }}: // {{ .Path }}
+			case {{ .Name }}Element: // {{ .Path }}
 					return true
 		{{ end -}}
 		{{ end -}}
