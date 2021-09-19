@@ -353,8 +353,11 @@ func readElementID(reader io.Reader) (ElementID, int64, error) {
 
 ////////////////////////////////////////////////////////////////////////////////
 
+// A handler that does nothing (but recurses into master elements).
+// Can be embedded into other handler struct to avoid implementing all callbacks.
 type DefaultHandler struct{}
 
+// Returns `true` (recurses into the master element)
 func (h DefaultHandler) HandleMasterBegin(id ElementID, info ElementInfo) (bool, error) {
 	return true, nil
 }
