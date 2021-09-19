@@ -169,6 +169,14 @@ func TestParseElement(t *testing.T) {
 				},
 			},
 		},
+		"unknown type": {
+			data: []byte{
+				0x1A, 0x45, 0xDF, 0xA4, 0x80 | 0x6,
+				0xE7, 0x80 | 0x1, 0x3,
+				0xE7, 0x80 | 0x1, 0x3,
+			},
+			events: nil,
+		},
 		// Avoid panicking with a too-large slice allocation when an element claims a
 		// very large size: https://github.com/remko/go-mkvparse/issues/4
 		"excessive size": {
