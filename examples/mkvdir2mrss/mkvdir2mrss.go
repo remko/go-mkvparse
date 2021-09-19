@@ -14,7 +14,6 @@ import (
 	"encoding/xml"
 	"flag"
 	"fmt"
-	"github.com/remko/go-mkvparse"
 	"io/ioutil"
 	"net/url"
 	"os"
@@ -22,6 +21,8 @@ import (
 	"regexp"
 	"strings"
 	"time"
+
+	"github.com/remko/go-mkvparse"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -85,7 +86,7 @@ func (p *MediaParser) HandleString(id mkvparse.ElementID, value string, info mkv
 func (p *MediaParser) HandleInteger(id mkvparse.ElementID, value int64, info mkvparse.ElementInfo) error {
 	if (id == mkvparse.TagTrackUIDElement || id == mkvparse.TagEditionUIDElement || id == mkvparse.TagChapterUIDElement || id == mkvparse.TagAttachmentUIDElement) && value != 0 {
 		p.currentTagGlobal = false
-	} else if id == mkvparse.TimecodeScaleElement {
+	} else if id == mkvparse.TimestampScaleElement {
 		p.timecodeScale = value
 	}
 	return nil
