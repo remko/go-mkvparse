@@ -177,6 +177,14 @@ func TestParseElement(t *testing.T) {
 			},
 			events: nil,
 		},
+		"invalid integer size": {
+			data: []byte{
+				0xE7, 0x80 | 0xa, 0x10, 0x00, 0x00, 0x02, 0x10, 0x00, 0x00, 0x02, 0x40, 0x02,
+			},
+			events: nil,
+			fail:   true,
+		},
+
 		// Avoid panicking with a too-large slice allocation when an element claims a
 		// very large size: https://github.com/remko/go-mkvparse/issues/4
 		"excessive size": {
