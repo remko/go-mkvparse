@@ -1,4 +1,4 @@
-//go:generate go run internal/cmd/generate/generate.go
+//go:generate go run generate.go
 
 // Package mkvparse provides push-style parser functions for parsing Matroska
 // (`.mkv`, `.mka`, `.webm`) files.
