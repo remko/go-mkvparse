@@ -163,29 +163,33 @@ const (
 	{{end }}
 )
 
-var elementTypes = map[ElementID]elementType {
-	{{- range . -}}
-	{{- if not .Deprecated }}
-	{{ .Name }}Element: 
-		{{- if eq .Type "master" -}}
-			masterType
-		{{- else if eq .Type "uinteger" -}}
-			uintegerType
-		{{- else if eq .Type "integer" -}}
-			integerType
-		{{- else if eq .Type "binary" -}}
-			binaryType
-		{{- else if eq .Type "utf-8" -}}
-			utf8Type
-		{{- else if eq .Type "string" -}}
-			stringType
-		{{- else if eq .Type "float" -}}
-			floatType
-		{{- else if eq .Type "date" -}}
-			dateType
-		{{- end -}},
-	{{- end -}}
-	{{- end -}}
+func getElementType(el ElementID) elementType {
+	switch (el) {
+		{{- range . -}}
+		{{- if not .Deprecated }}
+		case {{ .Name }}Element:
+		{{- if eq .Type "master" }}
+			return masterType
+		{{- else if eq .Type "uinteger" }}
+			return uintegerType
+		{{- else if eq .Type "integer" }}
+			return integerType
+		{{- else if eq .Type "binary" }}
+			return binaryType
+		{{- else if eq .Type "utf-8" }}
+			return utf8Type
+		{{- else if eq .Type "string" }}
+			return stringType
+		{{- else if eq .Type "float" }}
+			return floatType
+		{{- else if eq .Type "date" }}
+			return dateType
+		{{- end -}}
+		{{ end -}}
+		{{ end }}
+		default:
+			return elementType(0)
+	}
 }
 
 var elementNames = map[ElementID]string {

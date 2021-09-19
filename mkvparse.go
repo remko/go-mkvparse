@@ -103,7 +103,7 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 	if err != nil {
 		return -1, err
 	}
-	typ := elementTypes[id]
+	typ := getElementType(id)
 	// fmt.Printf("@%x %d %s %x %x\n", currentOffset, level, NameForElementID(id), size, typ)
 	elementOffset := currentOffset + idCount + sizeCount
 	count = idCount + sizeCount + size
