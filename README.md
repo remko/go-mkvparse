@@ -1,6 +1,6 @@
-# `go-mkvparse`: Matroska parser in Go
+# `mkvparse`: Matroska parser in Go
 
-Fast [Matroska](https://www.matroska.org) (`.mkv`, `.mka`) parser, written in Go.
+Fast [Matroska](https://www.matroska.org) (`.mkv`, `.mka`, `.webm`) parser, written in Go.
 
 Features:
 
