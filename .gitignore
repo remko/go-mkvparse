@@ -1,5 +1,5 @@
 .DS_Store
-specdata.xml
+bin/
 coverage.out
 examples/mkvinfo/mkvinfo
 examples/mkvcover/mkvcover

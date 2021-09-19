@@ -11,7 +11,8 @@ all: check examples
 
 .PHONY: examples
 examples:
-	go build ./examples/...
+	mkdir -p bin
+	go build -o bin/ ./examples/...
 
 .PHONY: check
 check: 

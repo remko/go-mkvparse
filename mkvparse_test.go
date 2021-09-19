@@ -8,37 +8,6 @@ import (
 	"time"
 )
 
-func TestReadVarInt_2Encodings(t *testing.T) {
-	testEncodings := [][]byte{
-		{0x82},
-		{0x40, 0x02},
-		{0x20, 0x00, 0x02},
-		{0x10, 0x00, 0x00, 0x02},
-	}
-	for _, encoding := range testEncodings {
-		encoding = append(encoding, 0xde, 0xad, 0xbe, 0xef)
-		reader := bytes.NewReader(encoding)
-		result, count, err := readVarInt(reader)
-		if err != nil {
-			t.Errorf("%x: %v", encoding, err)
-		}
-		if count != int64(len(encoding))-4 {
-			t.Errorf("%x: %d != %d", encoding, count, len(encoding)-4)
-		}
-		if result != 0x2 {
-			t.Errorf("%x: %d != %d", encoding, result, 10)
-		}
-	}
-}
-
-func TestReadVarInt_ZeroLength(t *testing.T) {
-	reader := bytes.NewReader([]byte{0x0})
-	_, _, err := readVarInt(reader)
-	if err == nil {
-		t.Fatalf("unexpected success")
-	}
-}
-
 func TestReadElementID(t *testing.T) {
 	testIDs := map[ElementID][]byte{
 		TimecodeElement:        {0xE7},

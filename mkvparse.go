@@ -99,7 +99,7 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 	if err != nil {
 		return -1, err
 	}
-	size, sizeCount, err := readVarInt(reader)
+	size, sizeCount, all1, err := readVarInt(reader)
 	if err != nil {
 		return -1, err
 	}
@@ -113,18 +113,25 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 		Level:  level,
 	}
 	if typ == masterType {
+		if all1 {
+			info.Size = -1
+		}
 		descend, err := handler.HandleMasterBegin(id, info)
 		if err != nil {
 			return -1, err
 		}
-		if descend {
-			_, err := parseElements(reader, elementOffset, size, level+1, handler)
-			if err != nil {
-				return -1, err
-			}
+		if all1 {
+			return -1, fmt.Errorf("unknown size elements not supported")
 		} else {
-			if err := skipData(reader, size); err != nil {
-				return -1, err
+			if descend {
+				_, err := parseElements(reader, elementOffset, size, level+1, handler)
+				if err != nil {
+					return -1, err
+				}
+			} else {
+				if err := skipData(reader, size); err != nil {
+					return -1, err
+				}
 			}
 		}
 		err = handler.HandleMasterEnd(id, info)
@@ -260,61 +267,7 @@ func unpadString(b []byte) []byte {
 	return b[0:0]
 }
 
-func readVarInt(reader io.Reader) (int64, int64, error) {
-	return readVarIntRaw(reader, true)
-}
-
 func readElementID(reader io.Reader) (ElementID, int64, error) {
-	rawID, count, err := readVarIntRaw(reader, false)
+	rawID, count, _, err := readVarIntRaw(reader, false)
 	return ElementID(rawID), count, err
-}
-
-func readVarIntRaw(reader io.Reader, doMask bool) (int64, int64, error) {
-	b := make([]byte, 1)
-	_, err := reader.Read(b)
-	if err != nil {
-		return -1, -1, err
-	}
-
-	var mask byte
-	var length int
-	if ((b[0] & 0x80) >> 7) == 1 {
-		length = 1
-		mask = 0x7f
-	} else if ((b[0] & 0x40) >> 6) == 1 {
-		length = 2
-		mask = 0x3f
-	} else if ((b[0] & 0x20) >> 5) == 1 {
-		length = 3
-		mask = 0x1f
-	} else if ((b[0] & 0x10) >> 4) == 1 {
-		length = 4
-		mask = 0xf
-	} else if ((b[0] & 0x08) >> 3) == 1 {
-		length = 5
-		mask = 0x7
-	} else if ((b[0] & 0x04) >> 2) == 1 {
-		length = 6
-		mask = 0x3
-	} else if ((b[0] & 0x02) >> 1) == 1 {
-		length = 7
-		mask = 0x1
-	} else if ((b[0] & 0x01) >> 0) == 1 {
-		length = 8
-		mask = 0x0
-	} else {
-		return -1, -1, fmt.Errorf("invalid varint length")
-	}
-
-	result := make([]byte, 8)
-	if doMask {
-		result[8-length] = b[0] & mask
-	} else {
-		result[8-length] = b[0]
-	}
-	_, err = reader.Read(result[8-length+1:])
-	if err != nil {
-		return -1, -1, err
-	}
-	return int64(binary.BigEndian.Uint64(result)), int64(length), nil
 }
