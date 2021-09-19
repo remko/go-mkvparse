@@ -59,7 +59,7 @@ func (p *MediaParser) HandleMasterBegin(id mkvparse.ElementID, info mkvparse.Ele
 
 func (p *MediaParser) HandleMasterEnd(id mkvparse.ElementID, info mkvparse.ElementInfo) error {
 	if id == mkvparse.SimpleTagElement && p.currentTagGlobal && p.currentTagName != nil && p.currentTagValue != nil {
-		if strings.ToLower(*p.currentTagName) == "artist" {
+		if *p.currentTagName == mkvparse.TagArtist {
 			p.mediaFile.artist = *p.currentTagValue
 		}
 	} else if id == mkvparse.AttachedFileElement {
