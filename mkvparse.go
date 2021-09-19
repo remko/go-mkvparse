@@ -99,14 +99,22 @@ func parseElement(reader io.Reader, currentOffset int64, level int, handler Hand
 	if err != nil {
 		return -1, err
 	}
+	count, err = parseElementAfterID(reader, id, currentOffset+idCount, level, handler)
+	if err != nil {
+		return -1, err
+	}
+	return count + idCount, nil
+}
+
+func parseElementAfterID(reader io.Reader, id ElementID, currentOffset int64, level int, handler Handler) (count int64, err error) {
 	size, sizeCount, all1, err := readVarInt(reader)
 	if err != nil {
 		return -1, err
 	}
 	typ := getElementType(id)
 	// fmt.Printf("@%x %d %s %x %x\n", currentOffset, level, NameForElementID(id), size, typ)
-	elementOffset := currentOffset + idCount + sizeCount
-	count = idCount + sizeCount + size
+	elementOffset := currentOffset + sizeCount
+	count = sizeCount + size
 	info := ElementInfo{
 		Offset: elementOffset,
 		Size:   size,
