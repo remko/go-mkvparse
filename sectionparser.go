@@ -4,7 +4,6 @@ import (
 	"encoding/binary"
 	"errors"
 	"io"
-	"os"
 	"time"
 )
 
@@ -112,7 +111,7 @@ func (p *sectionsHandler) HandleBinary(id ElementID, value []byte, info ElementI
 // Parses only the given sections of `file`.
 //
 // When present, uses the seek index to avoid having to parse the entire file
-func ParseSections(file *os.File, handler Handler, sections ...ElementID) error {
+func ParseSections(file io.ReadSeeker, handler Handler, sections ...ElementID) error {
 	sectionsHandler := sectionsHandler{
 		sections:        make(map[ElementID]bool),
 		seenSections:    make(map[int64]bool),
