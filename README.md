@@ -9,6 +9,7 @@ Features:
 read specific data (e.g. title, author) without reading the
 entire file (see the `mkvtags` example)
 - Also works with [WebM](https://www.webmproject.org) (`.webm`) files
+- Supports streaming
 - Event-based push API
 - No dependencies
 
