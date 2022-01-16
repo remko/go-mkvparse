@@ -7,7 +7,26 @@ import (
 	"image/jpeg"
 	"image/png"
 	"log"
+	"os"
 )
+
+func ExampleCoverHandler() {
+	file, err := os.Open("example-cover.mkv")
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	handler := CoverHandler{}
+	err = ParseSections(file, &handler, AttachmentsElement)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("parsed cover: %s (%d bytes)\n", handler.MIMEType, len(handler.Data))
+
+	// Output:
+	// parsed cover: image/jpeg (41363 bytes)
+}
 
 func ExampleParseCover() {
 	data, typ, err := ParseCover("example-cover.mkv")
