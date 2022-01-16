@@ -20,7 +20,7 @@ func ExampleParseCover() {
 	// parsed cover: image/jpeg (41363 bytes)
 }
 
-func ExampleParseCover_Image() {
+func ExampleParseCover_image() {
 	data, typ, err := ParseCover("example-cover.mkv")
 	if err != nil {
 		log.Panic(err)
