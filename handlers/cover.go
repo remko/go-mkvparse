@@ -1,6 +1,8 @@
 package mkvparse
 
 import (
+	"os"
+
 	"github.com/remko/go-mkvparse"
 )
 
@@ -42,6 +44,22 @@ func (p *CoverHandler) HandleBinary(id mkvparse.ElementID, value []byte, info mk
 		p.currentAttachmentData = value
 	}
 	return nil
+}
+
+func ParseCover(path string) ([]byte, string, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, "", err
+	}
+	defer file.Close()
+
+	handler := CoverHandler{}
+	err = mkvparse.ParseSections(file, &handler, mkvparse.AttachmentsElement)
+	if err != nil {
+		return nil, "", err
+	}
+
+	return handler.Data, handler.MIMEType, nil
 }
 
 func main() {}
