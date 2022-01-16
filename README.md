@@ -27,4 +27,3 @@ there are some larger examples in the `examples/` dir:
 - `examples/mkvinfo`: Example using basic parser API to print all elements
 - `examples/mkvtags`: Example using the optimized 'sections' API to print all tags without
 	parsing the entire file.
-- `examples/mkvcover`: Example using the optimized 'sections' API to extract cover images without parsing the entire file
