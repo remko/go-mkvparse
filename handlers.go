@@ -2,8 +2,6 @@ package mkvparse
 
 import (
 	"os"
-
-	"github.com/remko/go-mkvparse"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -12,7 +10,7 @@ import (
 //
 // Needs the section parser to handle `AttachmentsElement`
 type CoverHandler struct {
-	mkvparse.DefaultHandler
+	DefaultHandler
 
 	currentAttachmentData     []byte
 	currentAttachmentFileName string
@@ -22,25 +20,25 @@ type CoverHandler struct {
 	MIMEType string
 }
 
-func (p *CoverHandler) HandleMasterEnd(id mkvparse.ElementID, info mkvparse.ElementInfo) error {
-	if id == mkvparse.AttachedFileElement && (p.currentAttachmentFileName == "cover.jpg" || p.currentAttachmentFileName == "cover.png") {
+func (p *CoverHandler) HandleMasterEnd(id ElementID, info ElementInfo) error {
+	if id == AttachedFileElement && (p.currentAttachmentFileName == "cover.jpg" || p.currentAttachmentFileName == "cover.png") {
 		p.Data = p.currentAttachmentData
 		p.MIMEType = p.currentAttachmentMIMEType
 	}
 	return nil
 }
 
-func (p *CoverHandler) HandleString(id mkvparse.ElementID, value string, info mkvparse.ElementInfo) error {
-	if id == mkvparse.FileNameElement {
+func (p *CoverHandler) HandleString(id ElementID, value string, info ElementInfo) error {
+	if id == FileNameElement {
 		p.currentAttachmentFileName = value
-	} else if id == mkvparse.FileMimeTypeElement {
+	} else if id == FileMimeTypeElement {
 		p.currentAttachmentMIMEType = value
 	}
 	return nil
 }
 
-func (p *CoverHandler) HandleBinary(id mkvparse.ElementID, value []byte, info mkvparse.ElementInfo) error {
-	if id == mkvparse.FileDataElement {
+func (p *CoverHandler) HandleBinary(id ElementID, value []byte, info ElementInfo) error {
+	if id == FileDataElement {
 		p.currentAttachmentData = value
 	}
 	return nil
@@ -54,7 +52,7 @@ func ParseCover(path string) ([]byte, string, error) {
 	defer file.Close()
 
 	handler := CoverHandler{}
-	err = mkvparse.ParseSections(file, &handler, mkvparse.AttachmentsElement)
+	err = ParseSections(file, &handler, AttachmentsElement)
 	if err != nil {
 		return nil, "", err
 	}

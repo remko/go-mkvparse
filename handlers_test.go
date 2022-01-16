@@ -10,7 +10,7 @@ import (
 )
 
 func ExampleParseCover() {
-	data, typ, err := ParseCover("../example-cover.mkv")
+	data, typ, err := ParseCover("example-cover.mkv")
 	if err != nil {
 		panic(err)
 	}
@@ -21,7 +21,7 @@ func ExampleParseCover() {
 }
 
 func ExampleParseCover_Image() {
-	data, typ, err := ParseCover("../example-cover.mkv")
+	data, typ, err := ParseCover("example-cover.mkv")
 	if err != nil {
 		log.Panic(err)
 	}

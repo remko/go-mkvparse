@@ -16,7 +16,7 @@ examples:
 
 .PHONY: check
 check: 
-	go test $(GO_TEST_FLAGS) . ./handlers
+	go test $(GO_TEST_FLAGS) . 
 ifeq ($(COVERAGE),1)
 	go tool cover -html=coverage.out
 endif
