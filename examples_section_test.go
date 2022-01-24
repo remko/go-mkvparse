@@ -6,18 +6,6 @@ import (
 	"os"
 )
 
-type myTitleHandler struct {
-	DefaultHandler
-}
-
-func (p *myTitleHandler) HandleString(id ElementID, value string, info ElementInfo) error {
-	switch id {
-	case TitleElement:
-		fmt.Printf("%s: %v\n", NameForElementID(id), value)
-	}
-	return nil
-}
-
 func ExampleParseSections() {
 	handler := myTitleHandler{}
 	file, err := os.Open("testdata/example.mkv")
@@ -30,4 +18,16 @@ func ExampleParseSections() {
 	}
 	// Output:
 	// Title: Awesome Movie
+}
+
+type myTitleHandler struct {
+	DefaultHandler
+}
+
+func (p *myTitleHandler) HandleString(id ElementID, value string, info ElementInfo) error {
+	switch id {
+	case TitleElement:
+		fmt.Printf("%s: %v\n", NameForElementID(id), value)
+	}
+	return nil
 }

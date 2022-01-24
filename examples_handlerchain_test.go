@@ -5,18 +5,6 @@ import (
 	"os"
 )
 
-type TitleHandler struct {
-	DefaultHandler
-}
-
-func (p *TitleHandler) HandleString(id ElementID, value string, info ElementInfo) error {
-	switch id {
-	case TitleElement:
-		fmt.Printf("%s: %v\n", NameForElementID(id), value)
-	}
-	return nil
-}
-
 func ExampleHandlerChain() {
 	file, err := os.Open("testdata/example-cover.mkv")
 	if err != nil {
@@ -35,4 +23,16 @@ func ExampleHandlerChain() {
 	// Output:
 	// Title: Awesome Movie
 	// parsed cover: image/jpeg (41363 bytes)
+}
+
+type TitleHandler struct {
+	DefaultHandler
+}
+
+func (p *TitleHandler) HandleString(id ElementID, value string, info ElementInfo) error {
+	switch id {
+	case TitleElement:
+		fmt.Printf("%s: %v\n", NameForElementID(id), value)
+	}
+	return nil
 }
