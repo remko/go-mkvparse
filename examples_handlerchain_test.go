@@ -14,8 +14,7 @@ func ExampleHandlerChain() {
 
 	coverh := CoverHandler{}
 	titleh := TitleHandler{}
-	err = ParseSections(file, NewHandlerChain(&coverh, &titleh), InfoElement, AttachmentsElement)
-	if err != nil {
+	if err := ParseSections(file, NewHandlerChain(&coverh, &titleh), InfoElement, AttachmentsElement); err != nil {
 		panic(err)
 	}
 	fmt.Printf("parsed cover: %s (%d bytes)\n", coverh.MIMEType, len(coverh.Data))

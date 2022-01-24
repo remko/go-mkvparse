@@ -24,10 +24,10 @@ func ExampleCoverHandler() {
 	defer file.Close()
 
 	handler := CoverHandler{}
-	err = ParseSections(file, &handler, AttachmentsElement)
-	if err != nil {
+	if err := ParseSections(file, &handler, AttachmentsElement); err != nil {
 		panic(err)
 	}
+
 	fmt.Printf("parsed cover: %s (%d bytes)\n", handler.MIMEType, len(handler.Data))
 
 	// Output:
@@ -39,6 +39,7 @@ func ExampleParseCover() {
 	if err != nil {
 		panic(err)
 	}
+
 	fmt.Printf("parsed cover: %s (%d bytes)\n", typ, len(data))
 
 	// Output:
@@ -66,8 +67,27 @@ func ExampleParseCover_image() {
 	if err != nil {
 		log.Panic(err)
 	}
+
 	fmt.Printf("parsed cover image: %dx%d\n", img.Bounds().Dx(), img.Bounds().Dy())
 
 	// Output:
 	// parsed cover image: 265x377
+}
+
+func ExampleTagsHandler() {
+	file, err := os.Open("testdata/example.mkv")
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	handler := NewTagsHandler()
+	if err := ParseSections(file, handler, TagsElement); err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Artist: %s\n", handler.Tags()[TagArtist])
+
+	// Output:
+	// Artist: John Doe
 }
