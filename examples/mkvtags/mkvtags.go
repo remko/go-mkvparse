@@ -1,7 +1,4 @@
-////////////////////////////////////////////////////////////
 // Prints tags of an MKV file
-////////////////////////////////////////////////////////////
-
 package main
 
 import (
@@ -23,9 +20,10 @@ type MyParser struct {
 }
 
 func (p *MyParser) HandleMasterBegin(id mkvparse.ElementID, info mkvparse.ElementInfo) (bool, error) {
-	if id == mkvparse.TagElement {
+	switch id {
+	case mkvparse.TagElement:
 		p.currentTagGlobal = true
-	} else if id == mkvparse.SimpleTagElement {
+	case mkvparse.SimpleTagElement:
 		p.currentTagName = nil
 		p.currentTagValue = nil
 	}
@@ -33,26 +31,33 @@ func (p *MyParser) HandleMasterBegin(id mkvparse.ElementID, info mkvparse.Elemen
 }
 
 func (p *MyParser) HandleMasterEnd(id mkvparse.ElementID, info mkvparse.ElementInfo) error {
-	if id == mkvparse.SimpleTagElement && p.currentTagGlobal && p.currentTagName != nil && p.currentTagValue != nil {
-		p.tags[*p.currentTagName] = *p.currentTagValue
+	switch id {
+	case mkvparse.SimpleTagElement:
+		if p.currentTagGlobal && p.currentTagName != nil && p.currentTagValue != nil {
+			p.tags[*p.currentTagName] = *p.currentTagValue
+		}
 	}
 	return nil
 }
 
 func (p *MyParser) HandleString(id mkvparse.ElementID, value string, info mkvparse.ElementInfo) error {
-	if id == mkvparse.TagNameElement {
+	switch id {
+	case mkvparse.TagNameElement:
 		p.currentTagName = &value
-	} else if id == mkvparse.TagStringElement {
+	case mkvparse.TagStringElement:
 		p.currentTagValue = &value
-	} else if id == mkvparse.TitleElement {
+	case mkvparse.TitleElement:
 		p.title = &value
 	}
 	return nil
 }
 
 func (p *MyParser) HandleInteger(id mkvparse.ElementID, value int64, info mkvparse.ElementInfo) error {
-	if (id == mkvparse.TagTrackUIDElement || id == mkvparse.TagEditionUIDElement || id == mkvparse.TagChapterUIDElement || id == mkvparse.TagAttachmentUIDElement) && value != 0 {
-		p.currentTagGlobal = false
+	switch id {
+	case mkvparse.TagTrackUIDElement, mkvparse.TagEditionUIDElement, mkvparse.TagChapterUIDElement, mkvparse.TagAttachmentUIDElement:
+		if value != 0 {
+			p.currentTagGlobal = false
+		}
 	}
 	return nil
 }

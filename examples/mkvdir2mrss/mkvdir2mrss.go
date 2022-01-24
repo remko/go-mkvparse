@@ -1,14 +1,11 @@
 package main
 
 ////////////////////////////////////////////////////////////////////////////////
-// This example parses all MKV files in a dir, and generates a (Media) RSS feed
+// Parses all MKV files in a dir, and generates a (Media) RSS feed
 // for them. Cover art is extracted, and put in the same dir as the output feed.
 //
 // Usage:
 //     ./mkvdir2mrss --baseURL http://localhost --out=feeds/feed.xml Movies/
-
-////////////////////////////////////////////////////////////////////////////////
-
 import (
 	"crypto/sha1"
 	"encoding/xml"
@@ -50,9 +47,10 @@ type MediaParser struct {
 }
 
 func (p *MediaParser) HandleMasterBegin(id mkvparse.ElementID, info mkvparse.ElementInfo) (bool, error) {
-	if id == mkvparse.TagElement {
+	switch id {
+	case mkvparse.TagElement:
 		p.currentTagGlobal = true
-	} else if id == mkvparse.SimpleTagElement {
+	case mkvparse.SimpleTagElement:
 		p.currentTagName = nil
 		p.currentTagValue = nil
 	}
@@ -60,11 +58,14 @@ func (p *MediaParser) HandleMasterBegin(id mkvparse.ElementID, info mkvparse.Ele
 }
 
 func (p *MediaParser) HandleMasterEnd(id mkvparse.ElementID, info mkvparse.ElementInfo) error {
-	if id == mkvparse.SimpleTagElement && p.currentTagGlobal && p.currentTagName != nil && p.currentTagValue != nil {
-		if *p.currentTagName == mkvparse.TagArtist {
-			p.mediaFile.artist = *p.currentTagValue
+	switch id {
+	case mkvparse.SimpleTagElement:
+		if p.currentTagGlobal && p.currentTagName != nil && p.currentTagValue != nil {
+			if *p.currentTagName == mkvparse.TagArtist {
+				p.mediaFile.artist = *p.currentTagValue
+			}
 		}
-	} else if id == mkvparse.AttachedFileElement {
+	case mkvparse.AttachedFileElement:
 		if p.currentAttachmentFileName == "cover.jpg" {
 			p.mediaFile.cover = p.currentAttachmentData
 		}
@@ -73,36 +74,42 @@ func (p *MediaParser) HandleMasterEnd(id mkvparse.ElementID, info mkvparse.Eleme
 }
 
 func (p *MediaParser) HandleString(id mkvparse.ElementID, value string, info mkvparse.ElementInfo) error {
-	if id == mkvparse.TagNameElement {
+	switch id {
+	case mkvparse.TagNameElement:
 		p.currentTagName = &value
-	} else if id == mkvparse.TagStringElement {
+	case mkvparse.TagStringElement:
 		p.currentTagValue = &value
-	} else if id == mkvparse.TitleElement {
+	case mkvparse.TitleElement:
 		p.mediaFile.title = value
-	} else if id == mkvparse.FileNameElement {
+	case mkvparse.FileNameElement:
 		p.currentAttachmentFileName = value
 	}
 	return nil
 }
 
 func (p *MediaParser) HandleInteger(id mkvparse.ElementID, value int64, info mkvparse.ElementInfo) error {
-	if (id == mkvparse.TagTrackUIDElement || id == mkvparse.TagEditionUIDElement || id == mkvparse.TagChapterUIDElement || id == mkvparse.TagAttachmentUIDElement) && value != 0 {
-		p.currentTagGlobal = false
-	} else if id == mkvparse.TimecodeScaleElement {
+	switch id {
+	case mkvparse.TagTrackUIDElement, mkvparse.TagEditionUIDElement, mkvparse.TagChapterUIDElement, mkvparse.TagAttachmentUIDElement:
+		if value != 0 {
+			p.currentTagGlobal = false
+		}
+	case mkvparse.TimecodeScaleElement:
 		p.timecodeScale = value
 	}
 	return nil
 }
 
 func (p *MediaParser) HandleFloat(id mkvparse.ElementID, value float64, info mkvparse.ElementInfo) error {
-	if id == mkvparse.DurationElement {
+	switch id {
+	case mkvparse.DurationElement:
 		p.duration = value
 	}
 	return nil
 }
 
 func (p *MediaParser) HandleBinary(id mkvparse.ElementID, value []byte, info mkvparse.ElementInfo) error {
-	if id == mkvparse.FileDataElement {
+	switch id {
+	case mkvparse.FileDataElement:
 		p.currentAttachmentData = value
 	}
 	return nil
@@ -214,7 +221,7 @@ func run() error {
 	dirs := flag.Args()
 
 	if baseURL == nil || outFile == nil || len(dirs) < 1 {
-		return fmt.Errorf("Missing parameters")
+		return fmt.Errorf("missing parameters")
 	}
 
 	baseDir, _ := os.Getwd()
@@ -242,7 +249,7 @@ func run() error {
 		}
 		err = filepath.Walk(absDir, func(path string, info os.FileInfo, err error) error {
 			if err != nil {
-				return fmt.Errorf("Error walking %s: %v", path, err)
+				return fmt.Errorf("error walking %s: %v", path, err)
 			}
 			if !info.Mode().IsRegular() {
 				return nil
@@ -266,7 +273,7 @@ func run() error {
 			if supportedMediaFileRE.MatchString(path) {
 				file, err := parseFile(path)
 				if err != nil {
-					return fmt.Errorf("Error loading %s: %v", path, err)
+					return fmt.Errorf("error loading %s: %v", path, err)
 				} else {
 					item := &RSSItem{
 						Title:          name,

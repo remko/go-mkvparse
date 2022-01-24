@@ -1,15 +1,13 @@
-////////////////////////////////////////////////////////////
 // Prints all information of an MKV file
-////////////////////////////////////////////////////////////
-
 package main
 
 import (
 	"fmt"
-	"github.com/remko/go-mkvparse"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/remko/go-mkvparse"
 )
 
 type MyParser struct {
@@ -17,16 +15,17 @@ type MyParser struct {
 }
 
 func (p *MyParser) HandleMasterBegin(id mkvparse.ElementID, info mkvparse.ElementInfo) (bool, error) {
-	if id == mkvparse.CuesElement {
+	switch id {
+	case mkvparse.CuesElement:
 		fmt.Printf("%s- %s: <Skipping>\n", indent(info.Level), mkvparse.NameForElementID(id))
 		return false, nil
-	} else if id == mkvparse.ClusterElement {
+	case mkvparse.ClusterElement:
 		if !p.sawCluster {
 			p.sawCluster = true
 			fmt.Printf("%s- %s: <Skipping>\n", indent(info.Level), mkvparse.NameForElementID(id))
 		}
 		return false, nil
-	} else {
+	default:
 		fmt.Printf("%s- %s:\n", indent(info.Level), mkvparse.NameForElementID(id))
 		return true, nil
 	}
@@ -57,9 +56,10 @@ func (p *MyParser) HandleDate(id mkvparse.ElementID, value time.Time, info mkvpa
 }
 
 func (p *MyParser) HandleBinary(id mkvparse.ElementID, value []byte, info mkvparse.ElementInfo) error {
-	if id == mkvparse.SeekIDElement {
+	switch id {
+	case mkvparse.SeekIDElement:
 		fmt.Printf("%s- %v: %x\n", indent(info.Level), mkvparse.NameForElementID(id), value)
-	} else {
+	default:
 		fmt.Printf("%s- %v: <binary>\n", indent(info.Level), mkvparse.NameForElementID(id))
 	}
 	return nil
