@@ -1,16 +1,18 @@
-package main
-
-////////////////////////////////////////////////////////////////////////////////
-// Parses all MKV files in a dir, and generates a (Media) RSS feed
+// mkvdir2mrss parses all MKV files in a dir, and generates a (Media) RSS feed
 // for them. Cover art is extracted, and put in the same dir as the output feed.
 //
 // Usage:
 //     ./mkvdir2mrss --baseURL http://localhost --out=feeds/feed.xml Movies/
+package main
+
 import (
+	"bytes"
 	"crypto/sha1"
 	"encoding/xml"
 	"flag"
 	"fmt"
+	"image"
+	"image/jpeg"
 	"io/ioutil"
 	"net/url"
 	"os"
@@ -20,6 +22,7 @@ import (
 	"time"
 
 	"github.com/remko/go-mkvparse"
+	"golang.org/x/image/draw"
 )
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -301,8 +304,11 @@ func run() error {
 					if len(file.cover) > 0 {
 						thumbFile := filepath.Join(outDir, fmt.Sprintf("%x.jpg", sha1.Sum(file.cover)))
 						if _, err := os.Stat(thumbFile); os.IsNotExist(err) {
-							err := ioutil.WriteFile(thumbFile, file.cover, 0644)
+							img, err := scale(file.cover, 512)
 							if err != nil {
+								return err
+							}
+							if err := ioutil.WriteFile(thumbFile, img, 0644); err != nil {
 								return err
 							}
 						}
@@ -341,6 +347,26 @@ func run() error {
 		return err
 	}
 	return ioutil.WriteFile(*outFile, output, 0644)
+}
+
+func scale(data []byte, size int) ([]byte, error) {
+	img, _, err := image.Decode(bytes.NewReader(data))
+	if err != nil {
+		return nil, err
+	}
+	width := size
+	height := size
+	aspect := float64(img.Bounds().Dx()) / float64(img.Bounds().Dy())
+	if aspect > float64(width)/float64(height) {
+		height = int(float64(height) / aspect)
+	} else {
+		width = int(float64(width) * aspect)
+	}
+	dst := image.NewRGBA(image.Rect(0, 0, width, height))
+	draw.CatmullRom.Scale(dst, dst.Rect, img, img.Bounds(), draw.Over, nil)
+	out := bytes.Buffer{}
+	err = jpeg.Encode(&out, dst, &jpeg.Options{Quality: 75})
+	return out.Bytes(), err
 }
 
 func main() {
