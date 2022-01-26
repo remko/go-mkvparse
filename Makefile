@@ -14,6 +14,10 @@ examples:
 	mkdir -p bin
 	go build -o bin/ ./examples/...
 
+.PHONY: matroska-test-files
+matroska-test-files:
+	git clone https://github.com/ietf-wg-cellar/matroska-test-files.git testdata/matroska-test-files
+
 .PHONY: check
 check: 
 	go test $(GO_TEST_FLAGS) . 
