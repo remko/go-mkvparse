@@ -18,6 +18,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"strconv"
 	"strings"
 	"time"
 
@@ -30,74 +31,51 @@ import (
 ////////////////////////////////////////////////////////////////////////////////
 
 type MediaFile struct {
-	title    string
-	artist   string
-	duration time.Duration
-	cover    []byte
+	Title             string
+	Artist            string
+	Duration          time.Duration
+	Cover             []byte
+	Channels          int64
+	HasVideo          bool
+	HasAudio          bool
+	SamplingFrequency float64
 }
 
 type MediaParser struct {
 	mkvparse.DefaultHandler
 
-	duration                  float64
-	timecodeScale             int64
-	currentTagGlobal          bool
-	currentTagName            *string
-	currentTagValue           *string
-	currentAttachmentData     []byte
-	currentAttachmentFileName string
-	mediaFile                 *MediaFile
-}
-
-func (p *MediaParser) HandleMasterBegin(id mkvparse.ElementID, info mkvparse.ElementInfo) (bool, error) {
-	switch id {
-	case mkvparse.TagElement:
-		p.currentTagGlobal = true
-	case mkvparse.SimpleTagElement:
-		p.currentTagName = nil
-		p.currentTagValue = nil
-	}
-	return true, nil
-}
-
-func (p *MediaParser) HandleMasterEnd(id mkvparse.ElementID, info mkvparse.ElementInfo) error {
-	switch id {
-	case mkvparse.SimpleTagElement:
-		if p.currentTagGlobal && p.currentTagName != nil && p.currentTagValue != nil {
-			if *p.currentTagName == mkvparse.TagArtist {
-				p.mediaFile.artist = *p.currentTagValue
-			}
-		}
-	case mkvparse.AttachedFileElement:
-		if p.currentAttachmentFileName == "cover.jpg" {
-			p.mediaFile.cover = p.currentAttachmentData
-		}
-	}
-	return nil
+	duration          float64
+	timecodeScale     int64
+	title             string
+	channels          int64
+	hasVideo          bool
+	hasAudio          bool
+	samplingFrequency float64
 }
 
 func (p *MediaParser) HandleString(id mkvparse.ElementID, value string, info mkvparse.ElementInfo) error {
 	switch id {
-	case mkvparse.TagNameElement:
-		p.currentTagName = &value
-	case mkvparse.TagStringElement:
-		p.currentTagValue = &value
 	case mkvparse.TitleElement:
-		p.mediaFile.title = value
-	case mkvparse.FileNameElement:
-		p.currentAttachmentFileName = value
+		p.title = value
 	}
 	return nil
 }
 
 func (p *MediaParser) HandleInteger(id mkvparse.ElementID, value int64, info mkvparse.ElementInfo) error {
 	switch id {
-	case mkvparse.TagTrackUIDElement, mkvparse.TagEditionUIDElement, mkvparse.TagChapterUIDElement, mkvparse.TagAttachmentUIDElement:
-		if value != 0 {
-			p.currentTagGlobal = false
-		}
 	case mkvparse.TimecodeScaleElement:
 		p.timecodeScale = value
+	case mkvparse.ChannelsElement:
+		if value > p.channels {
+			p.channels = value
+		}
+	case mkvparse.TrackTypeElement:
+		switch value {
+		case mkvparse.TrackTypeVideo:
+			p.hasVideo = true
+		case mkvparse.TrackTypeAudio:
+			p.hasAudio = true
+		}
 	}
 	return nil
 }
@@ -106,20 +84,13 @@ func (p *MediaParser) HandleFloat(id mkvparse.ElementID, value float64, info mkv
 	switch id {
 	case mkvparse.DurationElement:
 		p.duration = value
+	case mkvparse.SamplingFrequencyElement:
+		if value > p.samplingFrequency {
+			p.samplingFrequency = value
+		}
 	}
 	return nil
 }
-
-func (p *MediaParser) HandleBinary(id mkvparse.ElementID, value []byte, info mkvparse.ElementInfo) error {
-	switch id {
-	case mkvparse.FileDataElement:
-		p.currentAttachmentData = value
-	}
-	return nil
-}
-
-var supportedMediaFileRE = regexp.MustCompile(`(?i)\.mk[av]$`)
-var unsupportedMediaFileRE = regexp.MustCompile(`(?i)\.(mp4|m4v|avi|mpg)$`)
 
 func parseFile(path string) (*MediaFile, error) {
 	file, err := os.Open(path)
@@ -129,22 +100,31 @@ func parseFile(path string) (*MediaFile, error) {
 	defer file.Close()
 	handler := MediaParser{
 		duration:      -1.0,
+		channels:      0,
 		timecodeScale: 1000000,
-		mediaFile: &MediaFile{
-			duration: -1,
-		},
 	}
-	err = mkvparse.ParseSections(file, &handler, mkvparse.InfoElement, mkvparse.TagsElement, mkvparse.TracksElement, mkvparse.AttachmentsElement)
+	tagsh := mkvparse.NewTagsHandler()
+	coverh := mkvparse.CoverHandler{}
+	err = mkvparse.ParseSections(file, mkvparse.NewHandlerChain(tagsh, &coverh, &handler), mkvparse.InfoElement, mkvparse.TagsElement, mkvparse.TracksElement, mkvparse.AttachmentsElement)
 	if err != nil {
 		return nil, err
 	}
 
-	if handler.duration >= 0 {
-		handler.mediaFile.duration = time.Duration(int64(handler.duration * float64(handler.timecodeScale)))
-	} else {
-		handler.mediaFile.duration = -1
+	mf := MediaFile{
+		Title:             handler.title,
+		Artist:            tagsh.Tags()[mkvparse.TagArtist],
+		Cover:             coverh.Data,
+		Channels:          handler.channels,
+		HasAudio:          handler.hasAudio,
+		HasVideo:          handler.hasVideo,
+		SamplingFrequency: handler.samplingFrequency,
 	}
-	return handler.mediaFile, nil
+	if handler.duration >= 0 {
+		mf.Duration = time.Duration(int64(handler.duration * float64(handler.timecodeScale)))
+	} else {
+		mf.Duration = -1
+	}
+	return &mf, nil
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -152,11 +132,14 @@ func parseFile(path string) (*MediaFile, error) {
 ////////////////////////////////////////////////////////////////////////////////
 
 type RSSMediaContent struct {
-	XMLName  xml.Name `xml:"media:content"`
-	URL      string   `xml:"url,attr"`
-	FileSize int64    `xml:"fileSize,attr"`
-	Duration int      `xml:"duration,attr"`
-	Type     string   `xml:"type,attr"`
+	XMLName      xml.Name `xml:"media:content"`
+	URL          string   `xml:"url,attr"`
+	FileSize     int64    `xml:"fileSize,attr"`
+	Duration     int      `xml:"duration,attr"`
+	Channels     int64    `xml:"channels,attr,omitempty"`
+	Type         string   `xml:"type,attr,omitempty"`
+	Medium       string   `xml:"medium,attr,omitempty"`
+	SamplingRate string   `xml:"samplingrate,attr,omitempty"`
 }
 
 type RSSEnclosure struct {
@@ -164,6 +147,12 @@ type RSSEnclosure struct {
 	URL     string   `xml:"url,attr"`
 	Length  int64    `xml:"length,attr"`
 	Type    string   `xml:"type,attr"`
+}
+
+type RSSMediaTitle struct {
+	XMLName xml.Name `xml:"media:title"`
+	Type    string   `xml:"type,attr"`
+	Value   string   `xml:",chardata"`
 }
 
 type RSSMediaCredit struct {
@@ -186,6 +175,7 @@ type RSSItem struct {
 
 	MediaContent   *RSSMediaContent
 	MediaCredit    *RSSMediaCredit
+	MediaTitle     *RSSMediaTitle
 	MediaThumbnail *RSSMediaThumbnail
 
 	ITunesDuration string `xml:"itunes:duration"`
@@ -214,6 +204,9 @@ func formatDuration(d time.Duration) string {
 	s := d / time.Second
 	return fmt.Sprintf("%02d:%02d:%02d", h, m, s)
 }
+
+var supportedMediaFileRE = regexp.MustCompile(`(?i)\.mk[av]$`)
+var unsupportedMediaFileRE = regexp.MustCompile(`(?i)\.(mp4|m4v|avi|mpg)$`)
 
 func run() error {
 	var noDirs bool
@@ -275,19 +268,25 @@ func run() error {
 
 			if supportedMediaFileRE.MatchString(path) {
 				file, err := parseFile(path)
+				if len(file.Title) == 0 {
+					file.Title = name
+				}
 				if err != nil {
 					return fmt.Errorf("error loading %s: %v", path, err)
 				} else {
 					item := &RSSItem{
-						Title:          name,
+						Title:          file.Title,
 						PubDate:        info.ModTime().Format(time.RFC822),
-						ITunesDuration: formatDuration(file.duration),
-						Author:         file.artist,
+						ITunesDuration: formatDuration(file.Duration),
+						Author:         file.Artist,
 						MediaContent: &RSSMediaContent{
 							FileSize: info.Size(),
-							Duration: int(file.duration / time.Second),
+							Duration: int(file.Duration / time.Second),
 							URL:      mediaURL,
-							Type:     "video/x-matroska",
+						},
+						MediaTitle: &RSSMediaTitle{
+							Type:  "plain",
+							Value: file.Title,
 						},
 					}
 					item.Enclosure = &RSSEnclosure{
@@ -295,16 +294,16 @@ func run() error {
 						Length: item.MediaContent.FileSize,
 						Type:   item.MediaContent.Type,
 					}
-					if len(file.artist) > 0 {
+					if len(file.Artist) > 0 {
 						item.MediaCredit = &RSSMediaCredit{
 							Role:  "author",
-							Value: file.artist,
+							Value: file.Artist,
 						}
 					}
-					if len(file.cover) > 0 {
-						thumbFile := filepath.Join(outDir, fmt.Sprintf("%x.jpg", sha1.Sum(file.cover)))
+					if len(file.Cover) > 0 {
+						thumbFile := filepath.Join(outDir, fmt.Sprintf("%x.jpg", sha1.Sum(file.Cover)))
 						if _, err := os.Stat(thumbFile); os.IsNotExist(err) {
-							img, err := scale(file.cover, 512)
+							img, err := scale(file.Cover, 512)
 							if err != nil {
 								return err
 							}
@@ -319,6 +318,19 @@ func run() error {
 						item.MediaThumbnail = &RSSMediaThumbnail{
 							URL: fmt.Sprintf("%s/%s", *baseURL, strings.Replace(url.PathEscape(publicThumbFile), "%2F", "/", -1)),
 						}
+					}
+					if file.Channels > 0 {
+						item.MediaContent.Channels = file.Channels
+					}
+					if file.HasVideo {
+						item.MediaContent.Medium = "video"
+						item.MediaContent.Type = "video/x-matroska"
+					} else if file.HasAudio {
+						item.MediaContent.Medium = "audio"
+						item.MediaContent.Type = "audio/x-matroska"
+					}
+					if file.SamplingFrequency > 0 {
+						item.MediaContent.SamplingRate = strconv.FormatFloat(float64(file.SamplingFrequency)/1000, 'f', -1, 64)
 					}
 					feed.Channel.Items = append(feed.Channel.Items, item)
 				}
@@ -342,7 +354,7 @@ func run() error {
 		}
 	}
 
-	output, err := xml.MarshalIndent(feed, "  ", "    ")
+	output, err := xml.Marshal(feed)
 	if err != nil {
 		return err
 	}
