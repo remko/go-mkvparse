@@ -38,6 +38,18 @@ const (
 	masterType
 )
 
+// Possible values of TrackTypeElement
+const (
+	TrackTypeVideo    int64 = 1
+	TrackTypeAudio    int64 = 2
+	TrackTypeComplex  int64 = 3
+	TrackTypeLogo     int64 = 16
+	TrackTypeSubtitle int64 = 17
+	TrackTypeButtons  int64 = 18
+	TrackTypeControl  int64 = 32
+	TrackTypeMetadata int64 = 33
+)
+
 // ElementInfo contains information about an element encountered in
 // the stream, and is passed to the handler by the parser on parse events.
 type ElementInfo struct {
