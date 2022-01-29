@@ -270,9 +270,8 @@ func isRootElement(el ElementID) bool {
 // Possible {{ .Name}}Element values
 const (
 	{{- $prefix := .Name -}}
-	{{- range .Restriction.Enums }}
-	// {{.Label}}
-	{{$prefix}}_{{.Name}} {{.Type}} = {{.Value}}
+	{{- range .Restriction.Enums -}}
+	{{$prefix}}_{{.Name}} {{.Type}} = {{.Value}} // {{.Label}}
 	{{ end -}}
 )
 {{ end -}}

@@ -3308,471 +3308,217 @@ func isRootElement(el ElementID) bool {
 
 // Possible AspectRatioTypeElement values
 const (
-	// free resizing
-	AspectRatioType_FreeResizing int64 = 0
-
-	// keep aspect ratio
-	AspectRatioType_KeepAspectRatio int64 = 1
-
-	// fixed
-	AspectRatioType_Fixed int64 = 2
+	AspectRatioType_FreeResizing    int64 = 0 // free resizing
+	AspectRatioType_KeepAspectRatio int64 = 1 // keep aspect ratio
+	AspectRatioType_Fixed           int64 = 2 // fixed
 )
 
 // Possible ChapProcessTimeElement values
 const (
-	// during the whole chapter
-	ChapProcessTime_DuringTheWholeChapter int64 = 0
-
-	// before starting playback
-	ChapProcessTime_BeforeStartingPlayback int64 = 1
-
-	// after playback of the chapter
-	ChapProcessTime_AfterPlaybackOfTheChapter int64 = 2
+	ChapProcessTime_DuringTheWholeChapter     int64 = 0 // during the whole chapter
+	ChapProcessTime_BeforeStartingPlayback    int64 = 1 // before starting playback
+	ChapProcessTime_AfterPlaybackOfTheChapter int64 = 2 // after playback of the chapter
 )
 
 // Possible ChapterTranslateCodecElement values
 const (
-	// Matroska Script
-	ChapterTranslateCodec_MatroskaScript int64 = 0
-
-	// DVD-menu
-	ChapterTranslateCodec_DVDMenu int64 = 1
+	ChapterTranslateCodec_MatroskaScript int64 = 0 // Matroska Script
+	ChapterTranslateCodec_DVDMenu        int64 = 1 // DVD-menu
 )
 
 // Possible ChromaSitingHorzElement values
 const (
-	// unspecified
-	ChromaSitingHorz_Unspecified int64 = 0
-
-	// left collocated
-	ChromaSitingHorz_LeftCollocated int64 = 1
-
-	// half
-	ChromaSitingHorz_Half int64 = 2
+	ChromaSitingHorz_Unspecified    int64 = 0 // unspecified
+	ChromaSitingHorz_LeftCollocated int64 = 1 // left collocated
+	ChromaSitingHorz_Half           int64 = 2 // half
 )
 
 // Possible ChromaSitingVertElement values
 const (
-	// unspecified
-	ChromaSitingVert_Unspecified int64 = 0
-
-	// top collocated
-	ChromaSitingVert_TopCollocated int64 = 1
-
-	// half
-	ChromaSitingVert_Half int64 = 2
+	ChromaSitingVert_Unspecified   int64 = 0 // unspecified
+	ChromaSitingVert_TopCollocated int64 = 1 // top collocated
+	ChromaSitingVert_Half          int64 = 2 // half
 )
 
 // Possible DisplayUnitElement values
 const (
-	// pixels
-	DisplayUnit_Pixels int64 = 0
-
-	// centimeters
-	DisplayUnit_Centimeters int64 = 1
-
-	// inches
-	DisplayUnit_Inches int64 = 2
-
-	// display aspect ratio
-	DisplayUnit_DisplayAspectRatio int64 = 3
-
-	// unknown
-	DisplayUnit_Unknown int64 = 4
+	DisplayUnit_Pixels             int64 = 0 // pixels
+	DisplayUnit_Centimeters        int64 = 1 // centimeters
+	DisplayUnit_Inches             int64 = 2 // inches
+	DisplayUnit_DisplayAspectRatio int64 = 3 // display aspect ratio
+	DisplayUnit_Unknown            int64 = 4 // unknown
 )
 
 // Possible FieldOrderElement values
 const (
-	// progressive
-	FieldOrder_Progressive int64 = 0
-
-	// tff
-	FieldOrder_Tff int64 = 1
-
-	// undetermined
-	FieldOrder_Undetermined int64 = 2
-
-	// bff
-	FieldOrder_Bff int64 = 6
-
-	// bff(swapped)
-	FieldOrder_BffSwapped int64 = 9
-
-	// tff(swapped)
-	FieldOrder_TffSwapped int64 = 14
+	FieldOrder_Progressive  int64 = 0  // progressive
+	FieldOrder_Tff          int64 = 1  // tff
+	FieldOrder_Undetermined int64 = 2  // undetermined
+	FieldOrder_Bff          int64 = 6  // bff
+	FieldOrder_BffSwapped   int64 = 9  // bff(swapped)
+	FieldOrder_TffSwapped   int64 = 14 // tff(swapped)
 )
 
 // Possible FlagInterlacedElement values
 const (
-	// undetermined
-	FlagInterlaced_Undetermined int64 = 0
-
-	// interlaced
-	FlagInterlaced_Interlaced int64 = 1
-
-	// progressive
-	FlagInterlaced_Progressive int64 = 2
+	FlagInterlaced_Undetermined int64 = 0 // undetermined
+	FlagInterlaced_Interlaced   int64 = 1 // interlaced
+	FlagInterlaced_Progressive  int64 = 2 // progressive
 )
 
 // Possible MatrixCoefficientsElement values
 const (
-	// GBR
-	MatrixCoefficients_GBR int64 = 0
-
-	// BT709
-	MatrixCoefficients_BT709 int64 = 1
-
-	// unspecified
-	MatrixCoefficients_Unspecified int64 = 2
-
-	// reserved
-	MatrixCoefficients_Reserved3 int64 = 3
-
-	// FCC
-	MatrixCoefficients_FCC int64 = 4
-
-	// BT470BG
-	MatrixCoefficients_BT470BG int64 = 5
-
-	// SMPTE 170M
-	MatrixCoefficients_SMPTE170M int64 = 6
-
-	// SMPTE 240M
-	MatrixCoefficients_SMPTE240M int64 = 7
-
-	// YCoCg
-	MatrixCoefficients_Ycocg int64 = 8
-
-	// BT2020 Non-constant Luminance
-	MatrixCoefficients_BT2020NonConstantLuminance int64 = 9
-
-	// BT2020 Constant Luminance
-	MatrixCoefficients_BT2020ConstantLuminance int64 = 10
+	MatrixCoefficients_GBR                        int64 = 0  // GBR
+	MatrixCoefficients_BT709                      int64 = 1  // BT709
+	MatrixCoefficients_Unspecified                int64 = 2  // unspecified
+	MatrixCoefficients_Reserved3                  int64 = 3  // reserved
+	MatrixCoefficients_FCC                        int64 = 4  // FCC
+	MatrixCoefficients_BT470BG                    int64 = 5  // BT470BG
+	MatrixCoefficients_SMPTE170M                  int64 = 6  // SMPTE 170M
+	MatrixCoefficients_SMPTE240M                  int64 = 7  // SMPTE 240M
+	MatrixCoefficients_Ycocg                      int64 = 8  // YCoCg
+	MatrixCoefficients_BT2020NonConstantLuminance int64 = 9  // BT2020 Non-constant Luminance
+	MatrixCoefficients_BT2020ConstantLuminance    int64 = 10 // BT2020 Constant Luminance
 )
 
 // Possible OldStereoModeElement values
 const (
-	// mono
-	OldStereoMode_Mono int64 = 0
-
-	// right eye
-	OldStereoMode_RightEye int64 = 1
-
-	// left eye
-	OldStereoMode_LeftEye int64 = 2
-
-	// both eyes
-	OldStereoMode_BothEyes int64 = 3
+	OldStereoMode_Mono     int64 = 0 // mono
+	OldStereoMode_RightEye int64 = 1 // right eye
+	OldStereoMode_LeftEye  int64 = 2 // left eye
+	OldStereoMode_BothEyes int64 = 3 // both eyes
 )
 
 // Possible PrimariesElement values
 const (
-	// reserved
-	Primaries_Reserved0 int64 = 0
-
-	// ITU-R BT.709
-	Primaries_ITURBT709 int64 = 1
-
-	// unspecified
-	Primaries_Unspecified int64 = 2
-
-	// reserved
-	Primaries_Reserved3 int64 = 3
-
-	// ITU-R BT.470M
-	Primaries_ITURBT470M int64 = 4
-
-	// ITU-R BT.470BG
-	Primaries_ITURBT470BG int64 = 5
-
-	// SMPTE 170M
-	Primaries_SMPTE170M int64 = 6
-
-	// SMPTE 240M
-	Primaries_SMPTE240M int64 = 7
-
-	// FILM
-	Primaries_FILM int64 = 8
-
-	// ITU-R BT.2020
-	Primaries_ITURBT2020 int64 = 9
-
-	// SMPTE ST 428-1
-	Primaries_SMPTEST4281 int64 = 10
-
-	// JEDEC P22 phosphors
-	Primaries_JEDECP22Phosphors int64 = 22
+	Primaries_Reserved0         int64 = 0  // reserved
+	Primaries_ITURBT709         int64 = 1  // ITU-R BT.709
+	Primaries_Unspecified       int64 = 2  // unspecified
+	Primaries_Reserved3         int64 = 3  // reserved
+	Primaries_ITURBT470M        int64 = 4  // ITU-R BT.470M
+	Primaries_ITURBT470BG       int64 = 5  // ITU-R BT.470BG
+	Primaries_SMPTE170M         int64 = 6  // SMPTE 170M
+	Primaries_SMPTE240M         int64 = 7  // SMPTE 240M
+	Primaries_FILM              int64 = 8  // FILM
+	Primaries_ITURBT2020        int64 = 9  // ITU-R BT.2020
+	Primaries_SMPTEST4281       int64 = 10 // SMPTE ST 428-1
+	Primaries_JEDECP22Phosphors int64 = 22 // JEDEC P22 phosphors
 )
 
 // Possible ProjectionTypeElement values
 const (
-	// rectangular
-	ProjectionType_Rectangular int64 = 0
-
-	// equirectangular
-	ProjectionType_Equirectangular int64 = 1
-
-	// cubemap
-	ProjectionType_Cubemap int64 = 2
-
-	// mesh
-	ProjectionType_Mesh int64 = 3
+	ProjectionType_Rectangular     int64 = 0 // rectangular
+	ProjectionType_Equirectangular int64 = 1 // equirectangular
+	ProjectionType_Cubemap         int64 = 2 // cubemap
+	ProjectionType_Mesh            int64 = 3 // mesh
 )
 
 // Possible RangeElement values
 const (
-	// unspecified
-	Range_Unspecified int64 = 0
-
-	// broadcast range
-	Range_BroadcastRange int64 = 1
-
-	// full range (no clipping)
-	Range_FullRangeNoClipping int64 = 2
-
-	// defined by MatrixCoefficients/TransferCharacteristics
-	Range_DefinedByMatrixcoefficientsTransfercharacteristics int64 = 3
+	Range_Unspecified                                        int64 = 0 // unspecified
+	Range_BroadcastRange                                     int64 = 1 // broadcast range
+	Range_FullRangeNoClipping                                int64 = 2 // full range (no clipping)
+	Range_DefinedByMatrixcoefficientsTransfercharacteristics int64 = 3 // defined by MatrixCoefficients/TransferCharacteristics
 )
 
 // Possible StereoModeElement values
 const (
-	// mono
-	StereoMode_Mono int64 = 0
-
-	// side by side (left eye first)
-	StereoMode_SideBySideLeftEyeFirst int64 = 1
-
-	// top - bottom (right eye is first)
-	StereoMode_TopBottomRightEyeIsFirst int64 = 2
-
-	// top - bottom (left eye is first)
-	StereoMode_TopBottomLeftEyeIsFirst int64 = 3
-
-	// checkboard (right eye is first)
-	StereoMode_CheckboardRightEyeIsFirst int64 = 4
-
-	// checkboard (left eye is first)
-	StereoMode_CheckboardLeftEyeIsFirst int64 = 5
-
-	// row interleaved (right eye is first)
-	StereoMode_RowInterleavedRightEyeIsFirst int64 = 6
-
-	// row interleaved (left eye is first)
-	StereoMode_RowInterleavedLeftEyeIsFirst int64 = 7
-
-	// column interleaved (right eye is first)
-	StereoMode_ColumnInterleavedRightEyeIsFirst int64 = 8
-
-	// column interleaved (left eye is first)
-	StereoMode_ColumnInterleavedLeftEyeIsFirst int64 = 9
-
-	// anaglyph (cyan/red)
-	StereoMode_AnaglyphCyanRed int64 = 10
-
-	// side by side (right eye first)
-	StereoMode_SideBySideRightEyeFirst int64 = 11
-
-	// anaglyph (green/magenta)
-	StereoMode_AnaglyphGreenMagenta int64 = 12
-
-	// both eyes laced in one Block (left eye is first)
-	StereoMode_BothEyesLacedInOneBlockLeftEyeIsFirst int64 = 13
-
-	// both eyes laced in one Block (right eye is first)
-	StereoMode_BothEyesLacedInOneBlockRightEyeIsFirst int64 = 14
+	StereoMode_Mono                                   int64 = 0  // mono
+	StereoMode_SideBySideLeftEyeFirst                 int64 = 1  // side by side (left eye first)
+	StereoMode_TopBottomRightEyeIsFirst               int64 = 2  // top - bottom (right eye is first)
+	StereoMode_TopBottomLeftEyeIsFirst                int64 = 3  // top - bottom (left eye is first)
+	StereoMode_CheckboardRightEyeIsFirst              int64 = 4  // checkboard (right eye is first)
+	StereoMode_CheckboardLeftEyeIsFirst               int64 = 5  // checkboard (left eye is first)
+	StereoMode_RowInterleavedRightEyeIsFirst          int64 = 6  // row interleaved (right eye is first)
+	StereoMode_RowInterleavedLeftEyeIsFirst           int64 = 7  // row interleaved (left eye is first)
+	StereoMode_ColumnInterleavedRightEyeIsFirst       int64 = 8  // column interleaved (right eye is first)
+	StereoMode_ColumnInterleavedLeftEyeIsFirst        int64 = 9  // column interleaved (left eye is first)
+	StereoMode_AnaglyphCyanRed                        int64 = 10 // anaglyph (cyan/red)
+	StereoMode_SideBySideRightEyeFirst                int64 = 11 // side by side (right eye first)
+	StereoMode_AnaglyphGreenMagenta                   int64 = 12 // anaglyph (green/magenta)
+	StereoMode_BothEyesLacedInOneBlockLeftEyeIsFirst  int64 = 13 // both eyes laced in one Block (left eye is first)
+	StereoMode_BothEyesLacedInOneBlockRightEyeIsFirst int64 = 14 // both eyes laced in one Block (right eye is first)
 )
 
 // Possible TargetTypeElement values
 const (
-	// COLLECTION
-	TargetType_COLLECTION string = "COLLECTION"
-
-	// EDITION
-	TargetType_EDITION string = "EDITION"
-
-	// ISSUE
-	TargetType_ISSUE string = "ISSUE"
-
-	// VOLUME
-	TargetType_VOLUME string = "VOLUME"
-
-	// OPUS
-	TargetType_OPUS string = "OPUS"
-
-	// SEASON
-	TargetType_SEASON string = "SEASON"
-
-	// SEQUEL
-	TargetType_SEQUEL string = "SEQUEL"
-
-	// ALBUM
-	TargetType_ALBUM string = "ALBUM"
-
-	// OPERA
-	TargetType_OPERA string = "OPERA"
-
-	// CONCERT
-	TargetType_CONCERT string = "CONCERT"
-
-	// MOVIE
-	TargetType_MOVIE string = "MOVIE"
-
-	// EPISODE
-	TargetType_EPISODE string = "EPISODE"
-
-	// PART
-	TargetType_PART string = "PART"
-
-	// SESSION
-	TargetType_SESSION string = "SESSION"
-
-	// TRACK
-	TargetType_TRACK string = "TRACK"
-
-	// SONG
-	TargetType_SONG string = "SONG"
-
-	// CHAPTER
-	TargetType_CHAPTER string = "CHAPTER"
-
-	// SUBTRACK
-	TargetType_SUBTRACK string = "SUBTRACK"
-
-	// MOVEMENT
-	TargetType_MOVEMENT string = "MOVEMENT"
-
-	// SCENE
-	TargetType_SCENE string = "SCENE"
-
-	// SHOT
-	TargetType_SHOT string = "SHOT"
+	TargetType_COLLECTION string = "COLLECTION" // COLLECTION
+	TargetType_EDITION    string = "EDITION"    // EDITION
+	TargetType_ISSUE      string = "ISSUE"      // ISSUE
+	TargetType_VOLUME     string = "VOLUME"     // VOLUME
+	TargetType_OPUS       string = "OPUS"       // OPUS
+	TargetType_SEASON     string = "SEASON"     // SEASON
+	TargetType_SEQUEL     string = "SEQUEL"     // SEQUEL
+	TargetType_ALBUM      string = "ALBUM"      // ALBUM
+	TargetType_OPERA      string = "OPERA"      // OPERA
+	TargetType_CONCERT    string = "CONCERT"    // CONCERT
+	TargetType_MOVIE      string = "MOVIE"      // MOVIE
+	TargetType_EPISODE    string = "EPISODE"    // EPISODE
+	TargetType_PART       string = "PART"       // PART
+	TargetType_SESSION    string = "SESSION"    // SESSION
+	TargetType_TRACK      string = "TRACK"      // TRACK
+	TargetType_SONG       string = "SONG"       // SONG
+	TargetType_CHAPTER    string = "CHAPTER"    // CHAPTER
+	TargetType_SUBTRACK   string = "SUBTRACK"   // SUBTRACK
+	TargetType_MOVEMENT   string = "MOVEMENT"   // MOVEMENT
+	TargetType_SCENE      string = "SCENE"      // SCENE
+	TargetType_SHOT       string = "SHOT"       // SHOT
 )
 
 // Possible TargetTypeValueElement values
 const (
-	// COLLECTION
-	TargetTypeValue_COLLECTION int64 = 70
-
-	// EDITION / ISSUE / VOLUME / OPUS / SEASON / SEQUEL
-	TargetTypeValue_EDITIONISSUEVOLUMEOPUSSEASONSEQUEL int64 = 60
-
-	// ALBUM / OPERA / CONCERT / MOVIE / EPISODE / CONCERT
-	TargetTypeValue_ALBUMOPERACONCERTMOVIEEPISODECONCERT int64 = 50
-
-	// PART / SESSION
-	TargetTypeValue_PARTSESSION int64 = 40
-
-	// TRACK / SONG / CHAPTER
-	TargetTypeValue_TRACKSONGCHAPTER int64 = 30
-
-	// SUBTRACK / PART / MOVEMENT / SCENE
-	TargetTypeValue_SUBTRACKPARTMOVEMENTSCENE int64 = 20
-
-	// SHOT
-	TargetTypeValue_SHOT int64 = 10
+	TargetTypeValue_COLLECTION                           int64 = 70 // COLLECTION
+	TargetTypeValue_EDITIONISSUEVOLUMEOPUSSEASONSEQUEL   int64 = 60 // EDITION / ISSUE / VOLUME / OPUS / SEASON / SEQUEL
+	TargetTypeValue_ALBUMOPERACONCERTMOVIEEPISODECONCERT int64 = 50 // ALBUM / OPERA / CONCERT / MOVIE / EPISODE / CONCERT
+	TargetTypeValue_PARTSESSION                          int64 = 40 // PART / SESSION
+	TargetTypeValue_TRACKSONGCHAPTER                     int64 = 30 // TRACK / SONG / CHAPTER
+	TargetTypeValue_SUBTRACKPARTMOVEMENTSCENE            int64 = 20 // SUBTRACK / PART / MOVEMENT / SCENE
+	TargetTypeValue_SHOT                                 int64 = 10 // SHOT
 )
 
 // Possible TrackPlaneTypeElement values
 const (
-	// left eye
-	TrackPlaneType_LeftEye int64 = 0
-
-	// right eye
-	TrackPlaneType_RightEye int64 = 1
-
-	// background
-	TrackPlaneType_Background int64 = 2
+	TrackPlaneType_LeftEye    int64 = 0 // left eye
+	TrackPlaneType_RightEye   int64 = 1 // right eye
+	TrackPlaneType_Background int64 = 2 // background
 )
 
 // Possible TrackTranslateCodecElement values
 const (
-	// Matroska Script
-	TrackTranslateCodec_MatroskaScript int64 = 0
-
-	// DVD-menu
-	TrackTranslateCodec_DVDMenu int64 = 1
+	TrackTranslateCodec_MatroskaScript int64 = 0 // Matroska Script
+	TrackTranslateCodec_DVDMenu        int64 = 1 // DVD-menu
 )
 
 // Possible TrackTypeElement values
 const (
-	// video
-	TrackType_Video int64 = 1
-
-	// audio
-	TrackType_Audio int64 = 2
-
-	// complex
-	TrackType_Complex int64 = 3
-
-	// logo
-	TrackType_Logo int64 = 16
-
-	// subtitle
-	TrackType_Subtitle int64 = 17
-
-	// buttons
-	TrackType_Buttons int64 = 18
-
-	// control
-	TrackType_Control int64 = 32
+	TrackType_Video    int64 = 1  // video
+	TrackType_Audio    int64 = 2  // audio
+	TrackType_Complex  int64 = 3  // complex
+	TrackType_Logo     int64 = 16 // logo
+	TrackType_Subtitle int64 = 17 // subtitle
+	TrackType_Buttons  int64 = 18 // buttons
+	TrackType_Control  int64 = 32 // control
 )
 
 // Possible TransferCharacteristicsElement values
 const (
-	// reserved
-	TransferCharacteristics_Reserved0 int64 = 0
-
-	// ITU-R BT.709
-	TransferCharacteristics_ITURBT709 int64 = 1
-
-	// unspecified
-	TransferCharacteristics_Unspecified int64 = 2
-
-	// reserved
-	TransferCharacteristics_Reserved3 int64 = 3
-
-	// Gamma 2.2 curve
-	TransferCharacteristics_Gamma22Curve int64 = 4
-
-	// Gamma 2.8 curve
-	TransferCharacteristics_Gamma28Curve int64 = 5
-
-	// SMPTE 170M
-	TransferCharacteristics_SMPTE170M int64 = 6
-
-	// SMPTE 240M
-	TransferCharacteristics_SMPTE240M int64 = 7
-
-	// Linear
-	TransferCharacteristics_Linear int64 = 8
-
-	// Log
-	TransferCharacteristics_Log int64 = 9
-
-	// Log Sqrt
-	TransferCharacteristics_LogSqrt int64 = 10
-
-	// IEC 61966-2-4
-	TransferCharacteristics_IEC6196624 int64 = 11
-
-	// ITU-R BT.1361 Extended Colour Gamut
-	TransferCharacteristics_ITURBT1361ExtendedColourGamut int64 = 12
-
-	// IEC 61966-2-1
-	TransferCharacteristics_IEC6196621 int64 = 13
-
-	// ITU-R BT.2020 10 bit
-	TransferCharacteristics_ITURBT202010Bit int64 = 14
-
-	// ITU-R BT.2020 12 bit
-	TransferCharacteristics_ITURBT202012Bit int64 = 15
-
-	// SMPTE ST 2084
-	TransferCharacteristics_SMPTEST2084 int64 = 16
-
-	// SMPTE ST 428-1
-	TransferCharacteristics_SMPTEST4281 int64 = 17
-
-	// ARIB STD-B67 (HLG)
-	TransferCharacteristics_ARIBSTDB67HLG int64 = 18
+	TransferCharacteristics_Reserved0                     int64 = 0  // reserved
+	TransferCharacteristics_ITURBT709                     int64 = 1  // ITU-R BT.709
+	TransferCharacteristics_Unspecified                   int64 = 2  // unspecified
+	TransferCharacteristics_Reserved3                     int64 = 3  // reserved
+	TransferCharacteristics_Gamma22Curve                  int64 = 4  // Gamma 2.2 curve
+	TransferCharacteristics_Gamma28Curve                  int64 = 5  // Gamma 2.8 curve
+	TransferCharacteristics_SMPTE170M                     int64 = 6  // SMPTE 170M
+	TransferCharacteristics_SMPTE240M                     int64 = 7  // SMPTE 240M
+	TransferCharacteristics_Linear                        int64 = 8  // Linear
+	TransferCharacteristics_Log                           int64 = 9  // Log
+	TransferCharacteristics_LogSqrt                       int64 = 10 // Log Sqrt
+	TransferCharacteristics_IEC6196624                    int64 = 11 // IEC 61966-2-4
+	TransferCharacteristics_ITURBT1361ExtendedColourGamut int64 = 12 // ITU-R BT.1361 Extended Colour Gamut
+	TransferCharacteristics_IEC6196621                    int64 = 13 // IEC 61966-2-1
+	TransferCharacteristics_ITURBT202010Bit               int64 = 14 // ITU-R BT.2020 10 bit
+	TransferCharacteristics_ITURBT202012Bit               int64 = 15 // ITU-R BT.2020 12 bit
+	TransferCharacteristics_SMPTEST2084                   int64 = 16 // SMPTE ST 2084
+	TransferCharacteristics_SMPTEST4281                   int64 = 17 // SMPTE ST 428-1
+	TransferCharacteristics_ARIBSTDB67HLG                 int64 = 18 // ARIB STD-B67 (HLG)
 )
