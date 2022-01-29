@@ -6,3 +6,6 @@ examples/mkvcover/mkvcover
 examples/mkvtags/mkvtags
 examples/mkvdir2mrss/mkvdir2mrss
 testdata/matroska-test-files
+ebml.xml
+ebml_matroska.xml
+matroska_tags.xml
