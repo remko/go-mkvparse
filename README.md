@@ -6,7 +6,7 @@ Fast [Matroska](https://www.matroska.org) (`.mkv`, `.mka`, `.webm`) parser, writ
 
 Features:
 
-- Supports [all Matroska tags](https://www.matroska.org/technical/specs/index.html)
+- Supports [all Matroska elements](https://www.matroska.org/technical/specs/index.html)
 - Supports short-circuiting the parser, making it possible to 
 read specific data (e.g. title, author) without reading the
 entire file (see the `mkvtags` example)
