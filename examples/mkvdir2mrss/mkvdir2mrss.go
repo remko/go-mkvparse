@@ -112,7 +112,7 @@ func parseFile(path string) (*MediaFile, error) {
 
 	mf := MediaFile{
 		Title:             handler.title,
-		Artist:            tagsh.Tags()[mkvparse.TagArtist],
+		Artist:            tagsh.Tags()[mkvparse.Tag_Artist],
 		Cover:             coverh.Data,
 		Channels:          handler.channels,
 		HasAudio:          handler.hasAudio,

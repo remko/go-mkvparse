@@ -347,7 +347,7 @@ package mkvparse
 // Official tags. See https://www.matroska.org/technical/tagging.html
 const (
 	{{- range .Tags.Tags }}
-	Tag{{ .GoName }} string = "{{ .Name }}"
+	Tag_{{ .GoName }} string = "{{ .Name }}"
 	{{- end }}
 )
 `))

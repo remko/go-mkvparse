@@ -86,7 +86,7 @@ func ExampleTagsHandler() {
 		panic(err)
 	}
 
-	fmt.Printf("Artist: %s\n", handler.Tags()[TagArtist])
+	fmt.Printf("Artist: %s\n", handler.Tags()[Tag_Artist])
 
 	// Output:
 	// Artist: John Doe
