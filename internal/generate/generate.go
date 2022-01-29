@@ -15,6 +15,7 @@ import (
 	"sort"
 	"strings"
 	"text/template"
+	"unicode"
 )
 
 func main() {
@@ -30,6 +31,11 @@ func main() {
 // Elements
 ////////////////////////////////////////////////////////////////////////////////
 
+type ElementsTable struct {
+	XMLName  xml.Name             `xml:"EBMLSchema"`
+	Elements []*EBMLSchemaElement `xml:"element"`
+}
+
 type EBMLSchemaElement struct {
 	Name        string `xml:"name,attr"`
 	ID          string `xml:"id,attr"`
@@ -37,15 +43,20 @@ type EBMLSchemaElement struct {
 	Path        string `xml:"path,attr"`
 	Deprecated  bool   `xml:"-"`
 	IsRoot      bool   `xml:"-"`
+	Restriction struct {
+		Enums []*EBMLSchemaEnum `xml:"enum"`
+	} `xml:"restriction"`
 	Descendants []struct {
 		Path string
 		Name string
 	} `xml:"-"`
 }
 
-type ElementsTable struct {
-	XMLName  xml.Name             `xml:"EBMLSchema"`
-	Elements []*EBMLSchemaElement `xml:"element"`
+type EBMLSchemaEnum struct {
+	Value string `xml:"value,attr"`
+	Label string `xml:"label,attr"`
+	Name  string
+	Type  string
 }
 
 var pathCountCleanRE = regexp.MustCompile(`\d*\*\d*\(|\(|\)`)
@@ -79,10 +90,31 @@ func generateElements() error {
 				continue
 			}
 			haveElement[el.Name] = true
-
 			if isLegacySchema {
 				el.Path = pathCountCleanRE.ReplaceAllString(el.Path, "")
 			}
+
+			var enums []*EBMLSchemaEnum
+			enumNames := map[string]struct{}{}
+			for i, e := range el.Restriction.Enums {
+				e.Name = camelCase(e.Label)
+				if e.Name == "Reserved" {
+					e.Name = fmt.Sprintf("Reserved%d", i)
+				}
+				if _, ok := enumNames[e.Name]; ok {
+					continue
+				}
+				if el.Type == "string" {
+					e.Type = "string"
+					e.Value = fmt.Sprintf("\"%s\"", e.Value)
+				} else {
+					e.Type = "int64"
+				}
+				enums = append(enums, e)
+				enumNames[e.Name] = struct{}{}
+			}
+			el.Restriction.Enums = enums
+
 			elements = append(elements, el)
 		}
 	}
@@ -233,6 +265,18 @@ func isRootElement(el ElementID) bool {
 			return false
 	}
 }
+{{- range . -}}
+{{- if .Restriction.Enums }}
+// Possible {{ .Name}}Element values
+const (
+	{{- $prefix := .Name -}}
+	{{- range .Restriction.Enums }}
+	// {{.Label}}
+	{{$prefix}}_{{.Name}} {{.Type}} = {{.Value}}
+	{{ end -}}
+)
+{{ end -}}
+{{ end -}}
 `))
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -323,4 +367,27 @@ func loadSchema(schema string) (io.ReadCloser, error) {
 		return nil, err
 	}
 	return resp.Body, nil
+}
+
+var space = regexp.MustCompile(`[-./()]`)
+
+func camelCase(text string) string {
+	text = space.ReplaceAllString(text, " ")
+	var gs []string
+	for _, f := range strings.Fields(text) {
+		if !isUpper(f) {
+			f = strings.ToLower(f)
+		}
+		gs = append(gs, strings.Title(f))
+	}
+	return strings.Join(gs, "")
+}
+
+func isUpper(s string) bool {
+	for _, r := range s {
+		if !unicode.IsUpper(r) && unicode.IsLetter(r) {
+			return false
+		}
+	}
+	return true
 }

@@ -71,9 +71,9 @@ func (p *MediaParser) HandleInteger(id mkvparse.ElementID, value int64, info mkv
 		}
 	case mkvparse.TrackTypeElement:
 		switch value {
-		case mkvparse.TrackTypeVideo:
+		case mkvparse.TrackType_Video:
 			p.hasVideo = true
-		case mkvparse.TrackTypeAudio:
+		case mkvparse.TrackType_Audio:
 			p.hasAudio = true
 		}
 	}
