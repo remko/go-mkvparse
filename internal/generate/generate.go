@@ -368,13 +368,21 @@ func loadSchema(schema string) (io.ReadCloser, error) {
 	return resp.Body, nil
 }
 
-var space = regexp.MustCompile(`[-./()]`)
+var space = regexp.MustCompile(`([-.)]|the|\bis\b)`)
+var underscore = regexp.MustCompile(`[/(]`)
 
 func camelCase(text string) string {
 	text = space.ReplaceAllString(text, " ")
+	text = underscore.ReplaceAllString(text, " _")
 	var gs []string
 	for _, f := range strings.Fields(text) {
-		if !isUpper(f) {
+		if strings.HasPrefix(f, "_") {
+			gs = append(gs, "_")
+			f = f[1:]
+		}
+		if f == "tff" || f == "bff" {
+			f = strings.ToUpper(f)
+		} else if !isUpper(f) && !isMixed(f) {
 			f = strings.ToLower(f)
 		}
 		gs = append(gs, strings.Title(f))
@@ -389,4 +397,18 @@ func isUpper(s string) bool {
 		}
 	}
 	return true
+}
+
+func isMixed(s string) bool {
+	haveUpper := false
+	haveLower := false
+	for _, r := range s {
+		if !unicode.IsUpper(r) && unicode.IsLetter(r) {
+			haveUpper = true
+		}
+		if !unicode.IsLower(r) && unicode.IsLetter(r) {
+			haveLower = true
+		}
+	}
+	return haveUpper && haveLower
 }

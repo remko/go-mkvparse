@@ -3315,9 +3315,9 @@ const (
 
 // Possible ChapProcessTimeElement values
 const (
-	ChapProcessTime_DuringTheWholeChapter     int64 = 0 // during the whole chapter
-	ChapProcessTime_BeforeStartingPlayback    int64 = 1 // before starting playback
-	ChapProcessTime_AfterPlaybackOfTheChapter int64 = 2 // after playback of the chapter
+	ChapProcessTime_DuringWholeChapter     int64 = 0 // during the whole chapter
+	ChapProcessTime_BeforeStartingPlayback int64 = 1 // before starting playback
+	ChapProcessTime_AfterPlaybackOfChapter int64 = 2 // after playback of the chapter
 )
 
 // Possible ChapterTranslateCodecElement values
@@ -3352,11 +3352,11 @@ const (
 // Possible FieldOrderElement values
 const (
 	FieldOrder_Progressive  int64 = 0  // progressive
-	FieldOrder_Tff          int64 = 1  // tff
+	FieldOrder_TFF          int64 = 1  // tff
 	FieldOrder_Undetermined int64 = 2  // undetermined
-	FieldOrder_Bff          int64 = 6  // bff
-	FieldOrder_BffSwapped   int64 = 9  // bff(swapped)
-	FieldOrder_TffSwapped   int64 = 14 // tff(swapped)
+	FieldOrder_BFF          int64 = 6  // bff
+	FieldOrder_BFF_Swapped  int64 = 9  // bff(swapped)
+	FieldOrder_TFF_Swapped  int64 = 14 // tff(swapped)
 )
 
 // Possible FlagInterlacedElement values
@@ -3376,7 +3376,7 @@ const (
 	MatrixCoefficients_BT470BG                    int64 = 5  // BT470BG
 	MatrixCoefficients_SMPTE170M                  int64 = 6  // SMPTE 170M
 	MatrixCoefficients_SMPTE240M                  int64 = 7  // SMPTE 240M
-	MatrixCoefficients_Ycocg                      int64 = 8  // YCoCg
+	MatrixCoefficients_YCoCg                      int64 = 8  // YCoCg
 	MatrixCoefficients_BT2020NonConstantLuminance int64 = 9  // BT2020 Non-constant Luminance
 	MatrixCoefficients_BT2020ConstantLuminance    int64 = 10 // BT2020 Constant Luminance
 )
@@ -3415,29 +3415,29 @@ const (
 
 // Possible RangeElement values
 const (
-	Range_Unspecified                                        int64 = 0 // unspecified
-	Range_BroadcastRange                                     int64 = 1 // broadcast range
-	Range_FullRangeNoClipping                                int64 = 2 // full range (no clipping)
-	Range_DefinedByMatrixcoefficientsTransfercharacteristics int64 = 3 // defined by MatrixCoefficients/TransferCharacteristics
+	Range_Unspecified                                         int64 = 0 // unspecified
+	Range_BroadcastRange                                      int64 = 1 // broadcast range
+	Range_FullRange_NoClipping                                int64 = 2 // full range (no clipping)
+	Range_DefinedByMatrixCoefficients_TransferCharacteristics int64 = 3 // defined by MatrixCoefficients/TransferCharacteristics
 )
 
 // Possible StereoModeElement values
 const (
-	StereoMode_Mono                                   int64 = 0  // mono
-	StereoMode_SideBySideLeftEyeFirst                 int64 = 1  // side by side (left eye first)
-	StereoMode_TopBottomRightEyeIsFirst               int64 = 2  // top - bottom (right eye is first)
-	StereoMode_TopBottomLeftEyeIsFirst                int64 = 3  // top - bottom (left eye is first)
-	StereoMode_CheckboardRightEyeIsFirst              int64 = 4  // checkboard (right eye is first)
-	StereoMode_CheckboardLeftEyeIsFirst               int64 = 5  // checkboard (left eye is first)
-	StereoMode_RowInterleavedRightEyeIsFirst          int64 = 6  // row interleaved (right eye is first)
-	StereoMode_RowInterleavedLeftEyeIsFirst           int64 = 7  // row interleaved (left eye is first)
-	StereoMode_ColumnInterleavedRightEyeIsFirst       int64 = 8  // column interleaved (right eye is first)
-	StereoMode_ColumnInterleavedLeftEyeIsFirst        int64 = 9  // column interleaved (left eye is first)
-	StereoMode_AnaglyphCyanRed                        int64 = 10 // anaglyph (cyan/red)
-	StereoMode_SideBySideRightEyeFirst                int64 = 11 // side by side (right eye first)
-	StereoMode_AnaglyphGreenMagenta                   int64 = 12 // anaglyph (green/magenta)
-	StereoMode_BothEyesLacedInOneBlockLeftEyeIsFirst  int64 = 13 // both eyes laced in one Block (left eye is first)
-	StereoMode_BothEyesLacedInOneBlockRightEyeIsFirst int64 = 14 // both eyes laced in one Block (right eye is first)
+	StereoMode_Mono                                  int64 = 0  // mono
+	StereoMode_SideBySide_LeftEyeFirst               int64 = 1  // side by side (left eye first)
+	StereoMode_TopBottom_RightEyeFirst               int64 = 2  // top - bottom (right eye is first)
+	StereoMode_TopBottom_LeftEyeFirst                int64 = 3  // top - bottom (left eye is first)
+	StereoMode_Checkboard_RightEyeFirst              int64 = 4  // checkboard (right eye is first)
+	StereoMode_Checkboard_LeftEyeFirst               int64 = 5  // checkboard (left eye is first)
+	StereoMode_RowInterleaved_RightEyeFirst          int64 = 6  // row interleaved (right eye is first)
+	StereoMode_RowInterleaved_LeftEyeFirst           int64 = 7  // row interleaved (left eye is first)
+	StereoMode_ColumnInterleaved_RightEyeFirst       int64 = 8  // column interleaved (right eye is first)
+	StereoMode_ColumnInterleaved_LeftEyeFirst        int64 = 9  // column interleaved (left eye is first)
+	StereoMode_Anaglyph_Cyan_Red                     int64 = 10 // anaglyph (cyan/red)
+	StereoMode_SideBySide_RightEyeFirst              int64 = 11 // side by side (right eye first)
+	StereoMode_Anaglyph_Green_Magenta                int64 = 12 // anaglyph (green/magenta)
+	StereoMode_BothEyesLacedInOneBlock_LeftEyeFirst  int64 = 13 // both eyes laced in one Block (left eye is first)
+	StereoMode_BothEyesLacedInOneBlock_RightEyeFirst int64 = 14 // both eyes laced in one Block (right eye is first)
 )
 
 // Possible TargetTypeElement values
@@ -3467,13 +3467,13 @@ const (
 
 // Possible TargetTypeValueElement values
 const (
-	TargetTypeValue_COLLECTION                           int64 = 70 // COLLECTION
-	TargetTypeValue_EDITIONISSUEVOLUMEOPUSSEASONSEQUEL   int64 = 60 // EDITION / ISSUE / VOLUME / OPUS / SEASON / SEQUEL
-	TargetTypeValue_ALBUMOPERACONCERTMOVIEEPISODECONCERT int64 = 50 // ALBUM / OPERA / CONCERT / MOVIE / EPISODE / CONCERT
-	TargetTypeValue_PARTSESSION                          int64 = 40 // PART / SESSION
-	TargetTypeValue_TRACKSONGCHAPTER                     int64 = 30 // TRACK / SONG / CHAPTER
-	TargetTypeValue_SUBTRACKPARTMOVEMENTSCENE            int64 = 20 // SUBTRACK / PART / MOVEMENT / SCENE
-	TargetTypeValue_SHOT                                 int64 = 10 // SHOT
+	TargetTypeValue_COLLECTION                                int64 = 70 // COLLECTION
+	TargetTypeValue_EDITION_ISSUE_VOLUME_OPUS_SEASON_SEQUEL   int64 = 60 // EDITION / ISSUE / VOLUME / OPUS / SEASON / SEQUEL
+	TargetTypeValue_ALBUM_OPERA_CONCERT_MOVIE_EPISODE_CONCERT int64 = 50 // ALBUM / OPERA / CONCERT / MOVIE / EPISODE / CONCERT
+	TargetTypeValue_PART_SESSION                              int64 = 40 // PART / SESSION
+	TargetTypeValue_TRACK_SONG_CHAPTER                        int64 = 30 // TRACK / SONG / CHAPTER
+	TargetTypeValue_SUBTRACK_PART_MOVEMENT_SCENE              int64 = 20 // SUBTRACK / PART / MOVEMENT / SCENE
+	TargetTypeValue_SHOT                                      int64 = 10 // SHOT
 )
 
 // Possible TrackPlaneTypeElement values
@@ -3520,5 +3520,5 @@ const (
 	TransferCharacteristics_ITURBT202012Bit               int64 = 15 // ITU-R BT.2020 12 bit
 	TransferCharacteristics_SMPTEST2084                   int64 = 16 // SMPTE ST 2084
 	TransferCharacteristics_SMPTEST4281                   int64 = 17 // SMPTE ST 428-1
-	TransferCharacteristics_ARIBSTDB67HLG                 int64 = 18 // ARIB STD-B67 (HLG)
+	TransferCharacteristics_ARIBSTDB67_HLG                int64 = 18 // ARIB STD-B67 (HLG)
 )
