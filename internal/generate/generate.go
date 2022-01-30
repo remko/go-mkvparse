@@ -189,7 +189,7 @@ var elementsTemplate = template.Must(template.New("").Parse(`// Code generated b
 
 package mkvparse
 
-// Supported ElementIDs
+// Supported ElementIDs. See https://www.matroska.org/technical/elements.html
 const (
 	{{- range . }}
 	{{ .Name }}Element ElementID = {{ .ID -}} {{- if .Deprecated -}}// Deprecated. Do not use.{{- end -}}
