@@ -225,13 +225,19 @@ func parseElementAfterID(reader io.Reader, id ElementID, currentOffset int64, le
 			if err != nil {
 				return -1, err
 			}
-			handler.HandleInteger(id, int64(binary.BigEndian.Uint64(pad(data, 8))), info)
+			err = handler.HandleInteger(id, int64(binary.BigEndian.Uint64(pad(data, 8))), info)
+			if err != nil {
+				return -1, err
+			}
 		case integerType:
 			data, err := readDataN(reader, size, 8)
 			if err != nil {
 				return -1, err
 			}
-			handler.HandleInteger(id, convertBytesToSignedInt(data), info)
+			err = handler.HandleInteger(id, convertBytesToSignedInt(data), info)
+			if err != nil {
+				return -1, err
+			}
 		case floatType:
 			data, err := readDataN(reader, size, 8)
 			if err != nil {
@@ -245,25 +251,37 @@ func parseElementAfterID(reader io.Reader, id ElementID, currentOffset int64, le
 			} else {
 				return -1, fmt.Errorf("unexpected float size: %d", size)
 			}
-			handler.HandleFloat(id, value, info)
+			err = handler.HandleFloat(id, value, info)
+			if err != nil {
+				return -1, err
+			}
 		case dateType:
 			data, err := readDataN(reader, size, 8)
 			if err != nil {
 				return -1, err
 			}
-			handler.HandleDate(id, baseDate.Add(time.Duration(convertBytesToSignedInt(data))), info)
+			err = handler.HandleDate(id, baseDate.Add(time.Duration(convertBytesToSignedInt(data))), info)
+			if err != nil {
+				return -1, err
+			}
 		case binaryType:
 			data, err := readData(reader, size)
 			if err != nil {
 				return -1, err
 			}
-			handler.HandleBinary(id, data, info)
+			err = handler.HandleBinary(id, data, info)
+			if err != nil {
+				return -1, err
+			}
 		case stringType, utf8Type:
 			data, err := readData(reader, size)
 			if err != nil {
 				return -1, err
 			}
-			handler.HandleString(id, string(unpadString(data)), info)
+			err = handler.HandleString(id, string(unpadString(data)), info)
+			if err != nil {
+				return -1, err
+			}
 		}
 		return count, nil
 	}
