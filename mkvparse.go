@@ -161,10 +161,10 @@ func parseElementAfterID(reader io.Reader, id ElementID, currentOffset int64, le
 	}
 	typ := getElementType(id)
 	// fmt.Printf("@%x %d %s %x %x\n", currentOffset, level, NameForElementID(id), size, typ)
-	elementOffset := currentOffset + sizeCount
+	dataOffset := currentOffset + sizeCount
 	count = sizeCount + size
 	info := ElementInfo{
-		Offset: elementOffset,
+		Offset: dataOffset,
 		Size:   size,
 		Level:  level,
 	}
@@ -181,7 +181,7 @@ func parseElementAfterID(reader io.Reader, id ElementID, currentOffset int64, le
 			var nextID ElementID
 			var nextIDCount int64
 			if descend {
-				ucount, nextID, nextIDCount, err = parseUnknownSizeElements(reader, elementOffset, id, level+1, handler)
+				ucount, nextID, nextIDCount, err = parseUnknownSizeElements(reader, dataOffset, id, level+1, handler)
 			} else {
 				ucount, nextID, nextIDCount, err = skipUnknownSizeElements(reader, id)
 			}
@@ -196,14 +196,14 @@ func parseElementAfterID(reader io.Reader, id ElementID, currentOffset int64, le
 			if nextID == -1 {
 				return count, nil
 			}
-			nextcount, err := parseElementAfterID(reader, nextID, elementOffset+count+nextIDCount, level, unknownSizeParent, handler)
+			nextcount, err := parseElementAfterID(reader, nextID, dataOffset+count+nextIDCount, level, unknownSizeParent, handler)
 			if err != nil {
 				return -1, err
 			}
 			return count + nextcount + nextIDCount, nil
 		} else {
 			if descend {
-				_, err := parseElements(reader, elementOffset, size, level+1, handler)
+				_, err := parseElements(reader, dataOffset, size, level+1, handler)
 				if err != nil {
 					return -1, err
 				}
