@@ -41,9 +41,10 @@ const (
 // ElementInfo contains information about an element encountered in
 // the stream, and is passed to the handler by the parser on parse events.
 type ElementInfo struct {
-	Offset int64
-	Size   int64
-	Level  int
+	ElementOffset int64
+	Offset        int64 // Data offset
+	Size          int64
+	Level         int
 }
 
 // Handler declares an interface for handling parse events
@@ -147,14 +148,14 @@ func parseElement(reader io.Reader, currentOffset int64, level int, unknownSizeP
 	if unknownSizeParent != -1 && isFinishUnknownSizeBlock(id, unknownSizeParent) {
 		return 0, id, idCount, nil
 	}
-	count, err = parseElementAfterID(reader, id, currentOffset+idCount, level, unknownSizeParent, handler)
+	count, err = parseElementAfterID(reader, id, currentOffset, currentOffset+idCount, level, unknownSizeParent, handler)
 	if err != nil {
 		return -1, -1, -1, err
 	}
 	return count + idCount, -1, -1, nil
 }
 
-func parseElementAfterID(reader io.Reader, id ElementID, currentOffset int64, level int, unknownSizeParent ElementID, handler Handler) (count int64, err error) {
+func parseElementAfterID(reader io.Reader, id ElementID, elementOffset int64, currentOffset int64, level int, unknownSizeParent ElementID, handler Handler) (count int64, err error) {
 	size, sizeCount, all1, err := readVarInt(reader)
 	if err != nil {
 		return -1, err
@@ -164,9 +165,10 @@ func parseElementAfterID(reader io.Reader, id ElementID, currentOffset int64, le
 	dataOffset := currentOffset + sizeCount
 	count = sizeCount + size
 	info := ElementInfo{
-		Offset: dataOffset,
-		Size:   size,
-		Level:  level,
+		ElementOffset: elementOffset,
+		Offset:        dataOffset,
+		Size:          size,
+		Level:         level,
 	}
 	if typ == masterType {
 		if all1 {
@@ -196,7 +198,7 @@ func parseElementAfterID(reader io.Reader, id ElementID, currentOffset int64, le
 			if nextID == -1 {
 				return count, nil
 			}
-			nextcount, err := parseElementAfterID(reader, nextID, dataOffset+count+nextIDCount, level, unknownSizeParent, handler)
+			nextcount, err := parseElementAfterID(reader, nextID, dataOffset+count, dataOffset+count+nextIDCount, level, unknownSizeParent, handler)
 			if err != nil {
 				return -1, err
 			}
