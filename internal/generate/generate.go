@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"go/format"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -76,7 +75,7 @@ func generateElements() error {
 			return err
 		}
 		defer sb.Close()
-		data, err := ioutil.ReadAll(sb)
+		data, err := io.ReadAll(sb)
 		if err != nil {
 			return err
 		}
@@ -296,8 +295,11 @@ type TagRegistry struct {
 
 func generateTags() error {
 	sb, err := loadSchema("https://raw.githubusercontent.com/ietf-wg-cellar/matroska-specification/master/matroska_tags.xml")
+	if err != nil {
+		return err
+	}
 	defer sb.Close()
-	data, err := ioutil.ReadAll(sb)
+	data, err := io.ReadAll(sb)
 	// data, err := ioutil.ReadFile("specdata.xml")
 	if err != nil {
 		return err

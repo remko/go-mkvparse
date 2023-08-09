@@ -11,20 +11,10 @@ import (
 )
 
 type MyParser struct {
-	sawCluster bool
 }
 
 func (p *MyParser) HandleMasterBegin(id mkvparse.ElementID, info mkvparse.ElementInfo) (bool, error) {
 	switch id {
-	case mkvparse.CuesElement:
-		fmt.Printf("%s- %s: <Skipping>\n", indent(info.Level), mkvparse.NameForElementID(id))
-		return false, nil
-	case mkvparse.ClusterElement:
-		if !p.sawCluster {
-			p.sawCluster = true
-			fmt.Printf("%s- %s: <Skipping>\n", indent(info.Level), mkvparse.NameForElementID(id))
-		}
-		return false, nil
 	default:
 		fmt.Printf("%s- %s:\n", indent(info.Level), mkvparse.NameForElementID(id))
 		return true, nil
@@ -60,7 +50,7 @@ func (p *MyParser) HandleBinary(id mkvparse.ElementID, value []byte, info mkvpar
 	case mkvparse.SeekIDElement:
 		fmt.Printf("%s- %v: %x\n", indent(info.Level), mkvparse.NameForElementID(id), value)
 	default:
-		fmt.Printf("%s- %v: <binary>\n", indent(info.Level), mkvparse.NameForElementID(id))
+		fmt.Printf("%s- %v: <binary> (%d)\n", indent(info.Level), mkvparse.NameForElementID(id), info.Size)
 	}
 	return nil
 }
